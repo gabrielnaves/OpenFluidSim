@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ActionStack : MonoBehaviour {
 
+    static public ActionStack instance { get; private set; }
+
     private Stack<IAction> actionStack = new Stack<IAction>();
     private Stack<IAction> redoStack = new Stack<IAction>();
 
@@ -19,5 +21,9 @@ public class ActionStack : MonoBehaviour {
     public void RedoAction() {
         redoStack.Peek().RedoAction();
         actionStack.Push(redoStack.Pop());
+    }
+
+    void Awake() {
+        instance = (ActionStack)Singleton.Setup(this, instance);
     }
 }
