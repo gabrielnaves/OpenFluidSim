@@ -6,16 +6,26 @@ public class FloatingComponent : MonoBehaviour {
 
 	void Update () {
         FollowMousePosition();
-        if (Input.GetMouseButtonDown(0)) {
-            CreateObjectOnSimulationPane();
-            FloatingSelection.instance.RemoveCurrentComponent();
-        }
+        CheckForEscapeInput();
+        CheckForMouseInput();
     }
 
     private void FollowMousePosition() {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition = SimulationGrid.FitToGrid(mousePosition);
         transform.position = mousePosition;
+    }
+
+    private void CheckForEscapeInput() {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            FloatingSelection.instance.RemoveCurrentComponent();
+    }
+
+    private void CheckForMouseInput() {
+        if (Input.GetMouseButtonDown(0)) {
+            CreateObjectOnSimulationPane();
+            FloatingSelection.instance.RemoveCurrentComponent();
+        }
     }
 
     private void CreateObjectOnSimulationPane() {

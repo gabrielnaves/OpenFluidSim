@@ -5,6 +5,9 @@ public class ComponentRef : MonoBehaviour {
     public GameObject floatingComponent;
 
     public void SetFloatingComponent() {
-        FloatingSelection.instance.AddComponent(Instantiate(floatingComponent));
+        var newFloatingComponent = Instantiate(floatingComponent);
+        newFloatingComponent.transform.position =
+            SimulationGrid.FitToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        FloatingSelection.instance.AddComponent(newFloatingComponent);
     }
 }
