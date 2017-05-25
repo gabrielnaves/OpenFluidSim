@@ -2,18 +2,26 @@
 
 public class NewComponentAction : IAction {
 
-    public Transform componentPosition;
-    public GameObject componentCreated;
+    public Vector3 componentPosition;
+    public GameObject componentPrefab;
 
-    public void OnDestroy() {
-        Object.Destroy(componentCreated);
+    private GameObject componentCreated;
+
+    public void DoAction() {
+        componentCreated = Object.Instantiate(componentPrefab);
+        componentCreated.transform.position = componentPosition;
+        SimulationPane.instance.AddNewObject(componentCreated);
+    }
+
+    public void UndoAction() {
+        componentCreated.SetActive(false);
     }
 
     public void RedoAction() {
         componentCreated.SetActive(true);
     }
 
-    public void UndoAction() {
-        componentCreated.SetActive(false);
+    public void OnDestroy() {
+        Object.Destroy(componentCreated);
     }
 }

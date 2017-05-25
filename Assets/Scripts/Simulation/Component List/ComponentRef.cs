@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ComponentRef : MonoBehaviour {
 
     public GameObject floatingComponent;
 
     public void SetFloatingComponent() {
-
+        FloatingSelection.instance.AddComponent(Instantiate(floatingComponent));
     }
 }
