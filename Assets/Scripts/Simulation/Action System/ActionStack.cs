@@ -5,8 +5,8 @@ public class ActionStack : MonoBehaviour {
 
     static public ActionStack instance { get; private set; }
 
-    private Stack<IAction> actionStack = new Stack<IAction>();
-    private Stack<IAction> redoStack = new Stack<IAction>();
+    public Stack<IAction> actionStack { get; private set; }
+    public Stack<IAction> redoStack { get; private set; }
 
     public void PushAction(IAction action) {
         actionStack.Push(action);
@@ -25,6 +25,8 @@ public class ActionStack : MonoBehaviour {
 
     void Awake() {
         instance = (ActionStack)Singleton.Setup(this, instance);
+        actionStack = new Stack<IAction>();
+        redoStack = new Stack<IAction>();
     }
 
     private void ClearRedoStack() {
