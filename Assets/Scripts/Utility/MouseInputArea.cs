@@ -28,7 +28,7 @@ public class MouseInputArea : MonoBehaviour {
 
     private void UpdateMouseButton() {
         if (Input.GetMouseButtonDown(0))
-            mouseButton = GetComponent<BoxCollider2D>().OverlapPoint(clickedPoint);
+            mouseButton = GetComponent<Collider2D>().OverlapPoint(clickedPoint);
         else
             mouseButton = false;
     }
