@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background Dots
+    uniqueID: 2623339901
+    locked: 0
+  - name: Components
+    uniqueID: 432333911
+    locked: 0
+  - name: GUI
+    uniqueID: 1681208753
+    locked: 0

@@ -10,7 +10,7 @@ public class ActionStack : MonoBehaviour {
 
     public void PushAction(IAction action) {
         actionStack.Push(action);
-        redoStack.Clear();
+        ClearRedoStack();
     }
 
     public void UndoAction() {
@@ -25,5 +25,11 @@ public class ActionStack : MonoBehaviour {
 
     void Awake() {
         instance = (ActionStack)Singleton.Setup(this, instance);
+    }
+
+    private void ClearRedoStack() {
+        foreach (var act in redoStack)
+            act.OnDestroy();
+        redoStack.Clear();
     }
 }
