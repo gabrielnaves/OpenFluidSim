@@ -119,7 +119,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleIdentifier: com.Company.ProductName
+  bundleIdentifier: com.GabrielNaves.shp_sim
   bundleVersion: 1.0
   preloadedAssets: []
   metroInputSource: 0

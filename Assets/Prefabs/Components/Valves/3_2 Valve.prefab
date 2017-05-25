@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4051065586076042}
   - component: {fileID: 114252110552492422}
   - component: {fileID: 212511986999688642}
+  - component: {fileID: 61317640030089540}
   m_Layer: 0
   m_Name: 3_2 Valve
   m_TagString: Untagged
@@ -41,6 +42,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &61317640030089540
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1954862927556124}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1.18, y: 0.61}
 --- !u!114 &114252110552492422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,6 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588d1a443e506654184c3d652a99ca18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moving: 0
+  previousPosition: {x: 0, y: 0, z: 0}
 --- !u!212 &212511986999688642
 SpriteRenderer:
   m_ObjectHideFlags: 1
