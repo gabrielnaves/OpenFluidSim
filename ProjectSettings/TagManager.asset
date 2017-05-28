@@ -47,6 +47,9 @@ TagManager:
   - name: Components
     uniqueID: 432333911
     locked: 0
+  - name: Component text
+    uniqueID: 1024958765
+    locked: 0
   - name: GUI
     uniqueID: 1681208753
     locked: 0

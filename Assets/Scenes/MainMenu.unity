@@ -562,7 +562,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dotPooler: {fileID: 1213730433}
-  dotDistance: 0.4
 --- !u!1 &786151395
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,11 +5,12 @@ using UnityEngine;
 public class BackgroundDotGenerator : MonoBehaviour {
 
     public ObjectPooler dotPooler;
-    public float dotDistance = 0.1f;
 
+    private float dotDistance;
     private Stack<GameObject> dotStack = new Stack<GameObject>();
 
 	void Start() {
+        dotDistance = SimulationGrid.cellSize;
         GenerateBackgroundDots();
 	}
 
