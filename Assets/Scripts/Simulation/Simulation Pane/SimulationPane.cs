@@ -4,8 +4,10 @@ public class SimulationPane : MonoBehaviour {
 
     static public SimulationPane instance { get; private set; }
 
+    public Transform componentsContainer;
+
     public void AddNewObject(GameObject obj) {
-        obj.transform.parent = transform.FindChild("Components");
+        obj.transform.parent = componentsContainer;
     }
 
     void Awake() {
