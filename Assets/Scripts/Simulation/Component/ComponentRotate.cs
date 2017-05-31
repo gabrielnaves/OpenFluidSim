@@ -13,8 +13,17 @@ public class ComponentRotate : MonoBehaviour {
 	}
 
     private bool RequestedRotate(int direction) {
-        return SelectedComponent.instance.component == gameObject && Input.GetKeyDown(KeyCode.R) &&
+        if (SelectedComponent.instance.component == gameObject) {
+#if DEVEL
+            return Input.GetKeyDown(KeyCode.R) &&
             (direction == right ? !Input.GetKey(KeyCode.LeftShift) : Input.GetKey(KeyCode.LeftShift));
+#endif
+#if LAUNCH
+            return Input.GetKeyDown(KeyCode.R) && Input.GetKey(KeyCode.LeftControl) &&
+                (direction == right ? !Input.GetKey(KeyCode.LeftShift) : Input.GetKey(KeyCode.LeftShift));
+#endif
+        }
+        return false;
     }
 
     private void NewRotationAction(int direction) {

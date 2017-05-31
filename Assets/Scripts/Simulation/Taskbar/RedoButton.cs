@@ -25,9 +25,14 @@ public class RedoButton : MonoBehaviour {
         GetComponent<Button>().enabled = true;
         active = true;
     }
-
     private void CheckForKeyboardShortcut() {
+#if DEVEL
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Y))
             GetComponent<Button>().onClick.Invoke();
+#endif
+#if LAUNCH
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Y))
+            GetComponent<Button>().onClick.Invoke();
+#endif
     }
 }

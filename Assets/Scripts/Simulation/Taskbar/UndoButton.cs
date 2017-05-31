@@ -27,7 +27,13 @@ public class UndoButton : MonoBehaviour {
     }
 
     private void CheckForKeyboardShortcut() {
+#if DEVEL
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Z))
             GetComponent<Button>().onClick.Invoke();
+#endif
+#if LAUNCH
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Z))
+            GetComponent<Button>().onClick.Invoke();
+#endif
     }
 }
