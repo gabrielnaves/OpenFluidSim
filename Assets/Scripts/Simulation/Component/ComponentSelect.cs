@@ -20,7 +20,7 @@ public class ComponentSelect : MonoBehaviour {
             isSelected = true;
             GetComponent<SpriteRenderer>().color = new Color32(191, 186, 255, 255);
         }
-        if (isSelected && RequestedDeselect()) {
+        if (isSelected && RequestedDeselect() || isSelected && SelectedComponent.instance.component != gameObject) {
             if (SelectedComponent.instance.component == gameObject)
                 SelectedComponent.instance.component = null;
             isSelected = false;
