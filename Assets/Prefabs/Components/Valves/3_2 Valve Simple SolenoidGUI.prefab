@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114469665266483532}
   - component: {fileID: 114772864377610092}
   m_Layer: 5
-  m_Name: 3_2 Valve GUI
+  m_Name: 3_2 Valve Simple SolenoidGUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,9 +49,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: db59a5b8c0960f140a217cd86c20dc21, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 67061c27165a7634faf244300ed37a58, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -144,5 +144,5 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 80, y: 0}
-  m_SizeDelta: {x: 118, y: 61}
+  m_SizeDelta: {x: 181, y: 74}
   m_Pivot: {x: 0.5, y: 0.5}
