@@ -2,7 +2,7 @@
 
 public static class SimulationGrid {
 
-    static public float cellSize = 0.06f;
+    static public float cellSize = 0.12f;
     
     static public Vector2 FitToGrid(Vector2 point) {
         return GridCoordinatesToWorldSpace(PointToGridCoordinates(point));
