@@ -50,6 +50,12 @@ TagManager:
   - name: Component text
     uniqueID: 1024958765
     locked: 0
+  - name: Connectors
+    uniqueID: 3928579849
+    locked: 0
+  - name: Wires
+    uniqueID: 1550013977
+    locked: 0
   - name: GUI
     uniqueID: 1681208753
     locked: 0
