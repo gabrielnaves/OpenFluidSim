@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222310389026230378}
   - component: {fileID: 114477186426515580}
   - component: {fileID: 114157981017342106}
+  - component: {fileID: 114408417625716098}
   - component: {fileID: 114356275160226980}
   m_Layer: 5
   m_Name: Pneumatic Pressure Source GUI
@@ -95,6 +96,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatingComponent: {fileID: 1672499438771838, guid: 299b0e067b4871942a88115537effd31,
     type: 2}
+--- !u!114 &114408417625716098
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1787597573606712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 26
+  m_PreferredHeight: 50
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
 --- !u!114 &114477186426515580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,6 +162,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -13, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 26, y: 50}
   m_Pivot: {x: 0, y: 0.5}

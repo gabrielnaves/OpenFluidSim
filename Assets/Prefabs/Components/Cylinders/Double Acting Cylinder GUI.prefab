@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222932788495491780}
   - component: {fileID: 114611405292260320}
   - component: {fileID: 114526660912232022}
+  - component: {fileID: 114956662087318414}
   - component: {fileID: 114318035131525588}
   m_Layer: 5
   m_Name: Double Acting Cylinder GUI
@@ -122,6 +123,24 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114956662087318414
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1014615677614070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 122
+  m_PreferredHeight: 62
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
 --- !u!222 &222932788495491780
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -143,6 +162,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -61, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 122, y: 62}
   m_Pivot: {x: 0, y: 0.5}

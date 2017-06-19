@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222811927806808986}
   - component: {fileID: 114137026777680020}
   - component: {fileID: 114469665266483532}
+  - component: {fileID: 114749547414225398}
   - component: {fileID: 114772864377610092}
   m_Layer: 5
   m_Name: 3_2 Valve Simple SolenoidGUI
@@ -109,6 +110,24 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114749547414225398
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1077853025112580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 181
+  m_PreferredHeight: 74
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
 --- !u!114 &114772864377610092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,6 +162,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -10.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 181, y: 74}
   m_Pivot: {x: 0, y: 0.5}
