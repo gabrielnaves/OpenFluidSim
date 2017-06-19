@@ -11,15 +11,19 @@ public class ComponentSelect : MonoBehaviour {
     }
 
     void Update() {
-        UpdateSelectionState();
+        CheckForSelect();
+        CheckForDeselect();
     }
 
-    private void UpdateSelectionState() {
+    private void CheckForSelect() {
         if (RequestedSelect()) {
             SelectedComponent.instance.component = gameObject;
             isSelected = true;
             GetComponent<SpriteRenderer>().color = new Color32(191, 186, 255, 255);
         }
+    }
+
+    private void CheckForDeselect() {
         if (isSelected && RequestedDeselect() || isSelected && SelectedComponent.instance.component != gameObject) {
             if (SelectedComponent.instance.component == gameObject)
                 SelectedComponent.instance.component = null;
