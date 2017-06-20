@@ -20,7 +20,7 @@ public class MouseInputArea : MonoBehaviour {
         }
     }
 
-    private Vector2 mousePosition {
+    public Vector2 mousePosition {
         get {
             return Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
@@ -28,5 +28,9 @@ public class MouseInputArea : MonoBehaviour {
 
 	public Vector2 GetMousePosition() {
         return mousePosition;
+    }
+
+    public bool IsMouseInsideInputArea() {
+        return GetComponent<Collider2D>().OverlapPoint(mousePosition);
     }
 }

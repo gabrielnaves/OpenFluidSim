@@ -55,10 +55,11 @@ public class ConnectorSelect : MonoBehaviour {
     }
 
     private void ConnectConnectors() {
-        var thisConnector = GetComponent<PneumaticConnector>();
-        var otherConnector = SelectedComponent.instance.component.GetComponent<PneumaticConnector>();
-        thisConnector.AddConnection(otherConnector);
-        otherConnector.AddConnection(thisConnector);
+        var newConnectionAction = new NewPneumaticConnectionAction();
+        newConnectionAction.connector1 = GetComponent<PneumaticConnector>();
+        newConnectionAction.connector2 = SelectedComponent.instance.component.GetComponent<PneumaticConnector>();
+        newConnectionAction.DoAction();
+        ActionStack.instance.PushAction(newConnectionAction);
     }
 
     private void SelectThisConnector() {

@@ -22,6 +22,10 @@ public class SimulationInput : MonoBehaviour {
         return inputArea.GetMousePosition();
     }
 
+    public bool IsMouseOnInputArea() {
+        return inputArea.IsMouseInsideInputArea();
+    }
+
     void Awake() {
         instance = (SimulationInput)Singleton.Setup(this, instance);
     }
