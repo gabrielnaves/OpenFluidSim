@@ -693,7 +693,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1569,6 +1569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1665058332}
   - component: {fileID: 1665058333}
+  - component: {fileID: 1665058335}
   - component: {fileID: 1665058334}
   m_Layer: 0
   m_Name: Mouse Input Area
@@ -1584,8 +1585,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1665058331}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.27, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.16, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 1852640852}
   m_RootOrder: 0
@@ -1615,6 +1616,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 134c692dbb77cd44db3c14f5133286d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &1665058335
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1665058331}
+  m_BodyType: 0
+  m_Simulated: 0
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1727521260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1759,6 +1780,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1852640852}
   - component: {fileID: 1852640853}
+  - component: {fileID: 1852640854}
   m_Layer: 0
   m_Name: Simulation Input
   m_TagString: Untagged
@@ -1792,6 +1814,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputArea: {fileID: 1665058334}
+--- !u!114 &1852640854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1852640851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f05c9002359d2145aa1ba99198e9039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseInputArea: {fileID: 1665058332}
 --- !u!1001 &1984943113
 Prefab:
   m_ObjectHideFlags: 0

@@ -28,7 +28,7 @@ public class CameraControls : MonoBehaviour {
     }
 
     private void UpdateCameraPosition() {
-        if (Input.GetMouseButtonDown(2)/* && SimulationInput.instance.IsMouseOnInputArea()*/) {
+        if (Input.GetMouseButtonDown(2) && SimulationInput.instance.IsMouseOnInputArea()) {
             movingCamera = true;
             initialMousePos = Input.mousePosition;
             initialTransformPos = transform.position;
