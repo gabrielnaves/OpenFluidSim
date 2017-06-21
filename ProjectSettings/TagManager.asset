@@ -56,6 +56,9 @@ TagManager:
   - name: Wires
     uniqueID: 1550013977
     locked: 0
+  - name: Mechanical Contacts
+    uniqueID: 841699943
+    locked: 0
   - name: GUI
     uniqueID: 1681208753
     locked: 0
