@@ -19,10 +19,11 @@ public class DeleteComponentAction : IAction {
     }
 
     public void OnDestroy() {}
-
+    
     private void DeactivateConnections(ComponentConnectors componentConnectors) {
-        foreach (var connector in componentConnectors.connectorList)
-            RemoveExternalConnections(connector);
+        if (componentConnectors != null)
+            foreach (var connector in componentConnectors.connectorList)
+                RemoveExternalConnections(connector);
     }
 
     private void RemoveExternalConnections(PneumaticConnector connector) {
@@ -31,8 +32,9 @@ public class DeleteComponentAction : IAction {
     }
 
     private void ReactivateConnections(ComponentConnectors componentConnectors) {
-        foreach (var connector in componentConnectors.connectorList)
-            AddExternalConnections(connector);
+        if (componentConnectors != null)
+            foreach (var connector in componentConnectors.connectorList)
+                AddExternalConnections(connector);
     }
 
     private void AddExternalConnections(PneumaticConnector connector) {
