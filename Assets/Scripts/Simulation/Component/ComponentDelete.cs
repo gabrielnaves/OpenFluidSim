@@ -14,7 +14,6 @@ public class ComponentDelete : MonoBehaviour {
     private void CreateDeleteAction() {
         var deleteAction = new DeleteComponentAction();
         deleteAction.referencedObject = gameObject;
-        deleteAction.DoAction();
         ActionStack.instance.PushAction(deleteAction);
     }
 }

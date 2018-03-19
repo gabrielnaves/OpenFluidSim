@@ -30,7 +30,6 @@ public class ComponentRotate : MonoBehaviour {
         var rotationAction = new RotateComponentAction();
         rotationAction.referencedObject = gameObject;
         rotationAction.rotationAmount = 90f * direction;
-        rotationAction.DoAction();
         ActionStack.instance.PushAction(rotationAction);
     }
 }

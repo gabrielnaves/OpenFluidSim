@@ -32,7 +32,6 @@ public class FloatingComponent : MonoBehaviour {
         var action = new NewComponentAction();
         action.componentPosition = transform.position;
         action.componentPrefab = componentPrefab;
-        action.DoAction();
         ActionStack.instance.PushAction(action);
     }
 }

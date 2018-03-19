@@ -4,39 +4,105 @@ using UnityEngine;
 public class PneumaticConnector : MonoBehaviour {
 
     public List<PneumaticConnector> connectedObjects = new List<PneumaticConnector>();
-    public Color openColor = Color.red;
-    public Color selectedColor = Color.green;
-    public Color connectedColor = Color.clear;
+
+    Color openColor = Color.red;
+    Color selectedColor = Color.green;
+    Color connectedColor = Color.clear;
+
+    Collider2D connectorCollider;
+    SpriteRenderer spriteRenderer;
+
+    bool isSelected;
+
+    void Awake() {
+        connectorCollider = GetComponent<Collider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.color = openColor;
+    }
 
     public void AddConnection(PneumaticConnector other) {
-        if (!connectedObjects.Contains(other)) {
+        if (!connectedObjects.Contains(other))
             connectedObjects.Add(other);
-            UpdateColor();
-        }
     }
 
     public void RemoveConnection(PneumaticConnector other) {
-        if (connectedObjects.Contains(other)) {
+        if (connectedObjects.Contains(other))
             connectedObjects.Remove(other);
-            UpdateColor();
-        }
     }
 
-    void Start() {
-        GetComponent<SpriteRenderer>().color = openColor;
+    void UpdateColor() {
+        if (isSelected)
+            spriteRenderer.color = selectedColor;
+        else if (connectedObjects.Count > 0)
+            spriteRenderer.color = connectedColor;
+        else
+            spriteRenderer.color = openColor;
     }
 
     void Update() {
-        if (SelectedComponent.instance.component == gameObject)
-            GetComponent<SpriteRenderer>().color = selectedColor;
-        else
-            UpdateColor();
+        CheckForSelect();
+        CheckForConnect();
+        UpdateColor();
     }
 
-    private void UpdateColor() {
-        if (connectedObjects.Count > 0)
-            GetComponent<SpriteRenderer>().color = connectedColor;
-        else
-            GetComponent<SpriteRenderer>().color = openColor;
+    void CheckForSelect() {
+        if (RequestedSelect())
+            SelectThis();
+    }
+
+    bool RequestedSelect() {
+        return SimulationInput.instance.GetMouseButtonDown() &&
+               connectorCollider.OverlapPoint(SimulationInput.instance.GetMousePosition()) &&
+               !isSelected;
+    }
+
+    void SelectThis() {
+        isSelected = true;
+        SelectedComponent.instance.component = gameObject;
+        WireCreator.instance.StartGeneration(transform.position);
+    }
+
+    void CheckForConnect() {
+        if (RequestedConnect())
+            ConnectConnectors();
+    }
+
+    bool RequestedConnect() {
+        if (SimulationInput.instance.GetMouseButtonUp() &&
+            connectorCollider.OverlapPoint(SimulationInput.instance.GetMousePosition()))
+            return HasOtherConnectorSelected();
+        return false;
+    }
+
+    bool HasOtherConnectorSelected() {
+        if (SelectedComponent.instance.HasComponent() && !SelectedComponent.instance.IsSelected(gameObject))
+            return SelectedComponent.instance.component.GetComponent<PneumaticConnector>();
+        return false;
+    }
+
+    void ConnectConnectors() {
+        var newConnectionAction = new NewPneumaticConnectionAction();
+        newConnectionAction.connector1 = this;
+        newConnectionAction.connector2 = SelectedComponent.instance.component.GetComponent<PneumaticConnector>();
+        newConnectionAction.wire = WireCreator.instance.RetrieveWire(transform.position);
+        ActionStack.instance.PushAction(newConnectionAction);
+        SelectedComponent.instance.component = null;
+        WireCreator.instance.StopGeneration();
+    }
+
+    void LateUpdate() {
+        CheckForDeselect();
+    }
+
+    void CheckForDeselect() {
+        if (RequestedDeselect()) {
+            SelectedComponent.instance.component = null;
+            isSelected = false;
+            WireCreator.instance.StopGeneration();
+        }
+    }
+
+    bool RequestedDeselect() {
+        return isSelected && SimulationInput.instance.GetMouseButtonUp();
     }
 }
