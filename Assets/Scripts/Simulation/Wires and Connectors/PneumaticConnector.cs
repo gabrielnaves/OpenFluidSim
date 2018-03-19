@@ -5,7 +5,8 @@ public class PneumaticConnector : MonoBehaviour {
 
     public List<PneumaticConnector> connectedObjects = new List<PneumaticConnector>();
     public Color openColor = Color.red;
-    public Color connectedColor = Color.blue;
+    public Color selectedColor = Color.green;
+    public Color connectedColor = Color.clear;
 
     public void AddConnection(PneumaticConnector other) {
         if (!connectedObjects.Contains(other)) {
@@ -23,6 +24,13 @@ public class PneumaticConnector : MonoBehaviour {
 
     void Start() {
         GetComponent<SpriteRenderer>().color = openColor;
+    }
+
+    void Update() {
+        if (SelectedComponent.instance.component == gameObject)
+            GetComponent<SpriteRenderer>().color = selectedColor;
+        else
+            UpdateColor();
     }
 
     private void UpdateColor() {

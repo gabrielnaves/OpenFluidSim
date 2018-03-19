@@ -240,7 +240,6 @@ PlayerSettings:
       m_Icon: {fileID: 2800000, guid: e397bde9a5dcbd74a8841ca7a6471c8c, type: 3}
       m_Width: 128
       m_Height: 128
-      m_Kind: 0
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs: []
   m_BuildTargetVRSettings: []
@@ -514,6 +513,9 @@ PlayerSettings:
   webGLCompressionFormat: 1
   scriptingDefineSymbols:
     1: DEVEL
+    7: DEVEL
+    13: DEVEL
+    14: DEVEL
   platformArchitecture: {}
   scriptingBackend: {}
   incrementalIl2cppBuild: {}

@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class ConnectorSelect : MonoBehaviour {
 
+    public GameObject wirePrefab;
+
     public bool isSelected { get; private set; }
 
-    private Collider2D connectorCollider;
+    Collider2D connectorCollider;
 
     void Start() {
         connectorCollider = GetComponent<Collider2D>();
@@ -22,48 +24,60 @@ public class ConnectorSelect : MonoBehaviour {
 
     void CheckForSelect() {
         if (RequestedSelect()) {
-            if (HasOtherConnectorSelected())
-                ConnectConnectors();
+            if (!HasOtherConnectorSelected())
+                SelectThis();
             else
-                SelectThisConnector();
+                ConnectConnectors();
         }
     }
 
-    void CheckForDeselect() {
-        if (isSelected && RequestedDeselect() || isSelected && SelectedComponent.instance.component != gameObject) {
-            if (SelectedComponent.instance.component == gameObject)
-                SelectedComponent.instance.component = null;
-            isSelected = false;
-        }
-    }
-
-    private bool RequestedSelect() {
+    bool RequestedSelect() {
         return SimulationInput.instance.GetMouseButtonDown() &&
-            connectorCollider.OverlapPoint(SimulationInput.instance.GetMousePosition());
+               connectorCollider.OverlapPoint(SimulationInput.instance.GetMousePosition()) &&
+               !isSelected;
     }
 
-    private bool RequestedDeselect() {
-        return SimulationInput.instance.GetMouseButtonDown() &&
-            !connectorCollider.OverlapPoint(SimulationInput.instance.GetMousePosition());
-    }
-
-    private bool HasOtherConnectorSelected() {
-        if (SelectedComponent.instance.component != null)
-            if (SelectedComponent.instance.component != gameObject)
-                return SelectedComponent.instance.component.GetComponent<PneumaticConnector>();
+    bool HasOtherConnectorSelected() {
+        if (SelectedComponent.instance.HasComponent() && !SelectedComponent.instance.IsSelected(gameObject))
+            return SelectedComponent.instance.component.GetComponent<PneumaticConnector>();
         return false;
     }
 
-    private void ConnectConnectors() {
+    void SelectThis() {
+        SelectedComponent.instance.component = gameObject;
+        isSelected = true;
+        WireCreator.instance.StartGeneration(transform.position);
+    }
+
+    void ConnectConnectors() {
         var newConnectionAction = new NewPneumaticConnectionAction();
         newConnectionAction.connector1 = GetComponent<PneumaticConnector>();
         newConnectionAction.connector2 = SelectedComponent.instance.component.GetComponent<PneumaticConnector>();
+        newConnectionAction.wire = WireCreator.instance.RetrieveWire(transform.position);
         newConnectionAction.DoAction();
         ActionStack.instance.PushAction(newConnectionAction);
+        SelectedComponent.instance.component = null;
     }
 
-    private void SelectThisConnector() {
-        SelectedComponent.instance.component = gameObject;
-        isSelected = true;
+    void CheckForDeselect() {
+        if (isSelected) {
+            if (SelectedComponent.instance.component != gameObject) {
+                DeselectThis();
+            }
+            else if (RequestedDeselect()) {
+                SelectedComponent.instance.component = null;
+                DeselectThis();
+            }
+        }
+    }
+
+    bool RequestedDeselect() {
+        return SimulationInput.instance.GetEscapeKeyDown() || SimulationInput.instance.GetRightMouseDown();
+            //    || SimulationInput.instance.GetMouseButtonUp();
+    }
+
+    void DeselectThis() {
+        isSelected = false;
+        WireCreator.instance.StopGeneration();
     }
 }

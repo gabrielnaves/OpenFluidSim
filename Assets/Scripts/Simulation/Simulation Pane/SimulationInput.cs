@@ -18,12 +18,23 @@ public class SimulationInput : MonoBehaviour {
         return inputArea.mouseButtonUp;
     }
 
+    public bool GetRightMouseDown() {
+        return inputArea.rightMouseButtonDown;
+    }
+    
+    /// <summary>
+    /// Returns mouse position as world point
+    /// </summary>
     public Vector2 GetMousePosition() {
         return inputArea.GetMousePosition();
     }
 
     public bool IsMouseOnInputArea() {
         return inputArea.IsMouseInsideInputArea();
+    }
+    
+    public bool GetEscapeKeyDown() {
+        return Input.GetKeyDown(KeyCode.Escape);
     }
 
     void Awake() {
