@@ -8,33 +8,30 @@ public class WireCreator : MonoBehaviour {
 
     public GameObject wirePrefab;
 
-    public bool running;
-    public GameObject currentWire;
-    public List<Vector3> currentPointList = new List<Vector3>();
-    public int currentPoint = 1;
+    bool running;
+    Wire currentWire;
 
     void Awake() {
         instance = (WireCreator)Singleton.Setup(this, instance);
     }
 
     void Start() {
-        currentWire = Instantiate(wirePrefab);
+        currentWire = Instantiate(wirePrefab).GetComponent<Wire>();
         currentWire.transform.parent = transform;
-        currentWire.SetActive(false);
+        currentWire.gameObject.SetActive(false);
     }
 
     public void StartGeneration(Vector3 initialPoint) {
-        currentPointList.Clear();
-        currentPointList.Add(initialPoint);
-        currentPointList.Add(Vector3.zero);
-        currentPoint = 1;
-        currentWire.SetActive(true);
+        currentWire.points.Clear();
+        currentWire.points.Add(initialPoint);
+        currentWire.points.Add(Vector3.zero);
+        currentWire.gameObject.SetActive(true);
         running = true;
     }
 
     public void StopGeneration() {
-        currentPointList.Clear();
-        currentWire.SetActive(false);
+        currentWire.points.Clear();
+        currentWire.gameObject.SetActive(false);
         running = false;
     }
  
@@ -42,17 +39,18 @@ public class WireCreator : MonoBehaviour {
     /// Returns a duplicate of the current wire.
     /// </summary>
     public GameObject RetrieveWire(Vector3 lastPosition) {
-        GameObject result = Instantiate(currentWire);
+        GameObject result = Instantiate(currentWire).gameObject;
         Wire wire = result.GetComponent<Wire>();
         result.transform.parent = transform;
-        wire.points[wire.points.Count-1] = lastPosition;
+        wire.points[1] = lastPosition;
+        wire.wireEnabled = true;
         return result;
     }
 
     void LateUpdate() {
         if (running) {
-            currentPointList[currentPoint] = SimulationGrid.FitToGrid(SimulationInput.instance.GetMousePosition());
-            currentWire.GetComponent<Wire>().points = currentPointList;
+            currentWire.points[1] = SimulationGrid.FitToGrid(SimulationInput.instance.GetMousePosition());
+            currentWire.UpdateLineRenderer();
         }
     }
 }
