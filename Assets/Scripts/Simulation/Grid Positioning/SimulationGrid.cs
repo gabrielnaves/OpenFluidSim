@@ -9,7 +9,7 @@ public static class SimulationGrid {
     }
 
     static public Vector2 PointToGridCoordinates(Vector2 point) {
-        return new Vector2(Mathf.Floor(point.x / cellSize), Mathf.Floor(point.y / cellSize));
+        return new Vector2(Mathf.Round(point.x / cellSize), Mathf.Round(point.y / cellSize));
     }
 
     static public Vector2 GridCoordinatesToWorldSpace(Vector2 gridPoint) {
