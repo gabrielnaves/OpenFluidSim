@@ -17,15 +17,39 @@ public class Wire : MonoBehaviour {
         lineRenderer = GetComponent<LineRenderer>();
     }
 
+    void Update() {
+        if (SimulationInput.instance.GetMouseButtonDown()) {
+            bool clickedOnWire = false;
+            foreach(BoxCollider2D collider in clickColliders) {
+                if (collider.OverlapPoint(SimulationInput.instance.GetMousePosition())) {
+                    SelectedComponent.instance.component = gameObject;
+                    clickedOnWire = true;
+                    break;
+                }
+            }
+            if (!clickedOnWire && SelectedComponent.instance.IsSelected(gameObject))
+                SelectedComponent.instance.component = null;
+        }
+        if (SelectedComponent.instance.IsSelected(gameObject) && Input.GetKeyDown(KeyCode.Delete)) {
+            var deleteAction = new DeleteWireAction();
+            deleteAction.referencedWire = this;
+            ActionStack.instance.PushAction(deleteAction);
+        }
+    }
+
     void LateUpdate() {
         if (wireEnabled) {
-            if (AttachedComponentsEnabled()) {
-                lineRenderer.startColor = Color.black;
-                lineRenderer.endColor = Color.black;
-            }
-            else {
+            if (!AttachedComponentsEnabled()) {
                 lineRenderer.startColor = Color.clear;
                 lineRenderer.endColor = Color.clear;
+            }
+            else if (SelectedComponent.instance.IsSelected(gameObject)) {
+                lineRenderer.startColor = Color.green;
+                lineRenderer.endColor = Color.green;
+            }
+            else {
+                lineRenderer.startColor = Color.black;
+                lineRenderer.endColor = Color.black;
             }
             if (AttachedComponentsMoved()) {
                 points[0] = start.transform.position;
