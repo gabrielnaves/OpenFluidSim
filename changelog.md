@@ -2,6 +2,14 @@
 
 Changelog das alterações relevantes no simulador (e no simulador apenas). Para ver a lista completa de commits entre versões, clique no link da versão desejada.
 
+## [v0.2] - 20-03-2018
+### Adicionado
+
+*Modelagem*
+- Desenho de "fios" (tubulação) entre conectores pneumáticos (linhas retas simples).
+- Fios são selecionáveis e podem ser deletados
+- Fios são atualizados com ações de mover e deletar componentes
+
 ## [v0.1] - 06-07-2017
 ### Adicionado
 
@@ -34,3 +42,4 @@ Changelog das alterações relevantes no simulador (e no simulador apenas). Para
 - Contato normalmente aberto
 
 [v0.1]: https://github.com/gabrielnaves/TG/compare/2adb1b50f7405e099494ee41dddea7cf6715895e...v0.1
+[v0.2]: https://github.com/gabrielnaves/TG/compare/v0.1...v0.2
