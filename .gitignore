@@ -42,6 +42,4 @@ Builds/
 # =============== #
 # Doxygen related #
 # =============== #
-Docs/
-Assets/Editor/Doxygen/
-Assets/Editor/Doxygen.meta
+Docs/*
