@@ -1,19 +1,29 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Component for Handling mouse inputs within an area represented as a Collider2D
+/// </summary>
+[RequireComponent(typeof(Collider2D))]
 public class MouseInputArea : MonoBehaviour {
 
-    private readonly int LeftMouseButton = 0;
-    private readonly int RightMouseButton = 1;
+    const int LeftMouseButton = 0;
+    const int RightMouseButton = 1;
+
+    new Collider2D collider;
+
+    void Awake() {
+        collider = GetComponent<Collider2D>();
+    }
 
     public bool mouseButton {
         get {
-            return Input.GetMouseButton(LeftMouseButton) && GetComponent<Collider2D>().OverlapPoint(mousePosition);
+            return Input.GetMouseButton(LeftMouseButton) && collider.OverlapPoint(mousePosition);
         }
     }
 
     public bool mouseButtonDown {
         get {
-            return Input.GetMouseButtonDown(LeftMouseButton) && GetComponent<Collider2D>().OverlapPoint(mousePosition);
+            return Input.GetMouseButtonDown(LeftMouseButton) && collider.OverlapPoint(mousePosition);
         }
     }
 
@@ -25,13 +35,13 @@ public class MouseInputArea : MonoBehaviour {
 
     public bool rightMouseButton {
         get {
-            return Input.GetMouseButton(RightMouseButton) && GetComponent<Collider2D>().OverlapPoint(mousePosition);
+            return Input.GetMouseButton(RightMouseButton) && collider.OverlapPoint(mousePosition);
         }
     }
 
     public bool rightMouseButtonDown {
         get {
-            return Input.GetMouseButtonDown(RightMouseButton) && GetComponent<Collider2D>().OverlapPoint(mousePosition);
+            return Input.GetMouseButtonDown(RightMouseButton) && collider.OverlapPoint(mousePosition);
         }
     }
 
@@ -41,20 +51,16 @@ public class MouseInputArea : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Mouse position as world point
+    /// </summary>
     public Vector2 mousePosition {
         get {
             return Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
     }
 
-    /// <summary>
-    /// Returns mouse position as world point
-    /// </summary>
-	public Vector2 GetMousePosition() {
-        return mousePosition;
-    }
-
     public bool IsMouseInsideInputArea() {
-        return GetComponent<Collider2D>().OverlapPoint(mousePosition);
+        return collider.OverlapPoint(mousePosition);
     }
 }

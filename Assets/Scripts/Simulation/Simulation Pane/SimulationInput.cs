@@ -26,7 +26,7 @@ public class SimulationInput : MonoBehaviour {
     /// Returns mouse position as world point
     /// </summary>
     public Vector2 GetMousePosition() {
-        return inputArea.GetMousePosition();
+        return inputArea.mousePosition;
     }
 
     public bool IsMouseOnInputArea() {
