@@ -43,4 +43,9 @@ Builds/
 # =============== #
 # Doxygen related #
 # =============== #
-Docs/*
+Docs/**
+
+# ==== #
+# Logs #
+# ==== #
+Logs/**

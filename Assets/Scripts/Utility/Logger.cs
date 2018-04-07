@@ -1,55 +1,39 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 
-public static class Logger {
+public class Logger : MonoBehaviour {
 
-    public static void Log(string msg) {
-#if UNITY_EDITOR
-        Debug.Log(msg);
-#endif
-#if GAME_CONSOLE_IS_ENABLED && !UNITY_EDITOR
-        GameConsole.Instance.AddLogInfoMsg(msg);
-#endif
+    public string logFileName = "program_log_";
+    public string logFileFolder = "Logs/";
+
+    StreamWriter logFile;
+
+    void Awake() {
+        logFileName += System.DateTime.Now;
+        logFileName = logFileName.Replace("/", "-");
+        logFileName = logFileName.Replace(":", "-");
+        logFileName = logFileName.Replace(" ", "_");
+        logFileName += ".txt";
+
+        logFile = new StreamWriter(logFileFolder + logFileName, false, System.Text.Encoding.UTF8);
     }
 
-    public static void LogWarning(string msg) {
-#if UNITY_EDITOR
-        Debug.LogWarning(msg);
-#endif
-#if GAME_CONSOLE_IS_ENABLED && !UNITY_EDITOR
-        GameConsole.Instance.AddLogWarningMsg(msg);
-#endif
+    void OnDestroy() {
+        logFile.Close();
     }
 
-    public static void LogError(string msg) {
-#if UNITY_EDITOR
-        Debug.LogError(msg);
-#endif
-#if GAME_CONSOLE_IS_ENABLED && !UNITY_EDITOR
-        GameConsole.Instance.AddLogErrorMsg(msg);
-#endif
+    void OnEnable() {
+        Application.logMessageReceived += HandleLog;
+        Debug.Log("Enabling logger");
     }
 
-    public static void Log(Object obj, string msg) {
-        Log("[" + obj + "]" + msg);
+    void OnDisable() {
+        Debug.Log("Disabling logger");
+        Application.logMessageReceived -= HandleLog;
     }
 
-    public static void LogWarning(Object obj, string msg) {
-        LogWarning("[" + obj + "]" + msg);
-    }
-
-    public static void LogError(Object obj, string msg) {
-        LogError("[" + obj + "]" + msg);
-    }
-
-    public static void Log(Object obj, string method_name, string msg) {
-        Log("[" + obj + "]" + method_name + ": " + msg);
-    }
-
-    public static void LogWarning(Object obj, string method_name, string msg) {
-        LogWarning("[" + obj + "]" + method_name + ": " + msg);
-    }
-
-    public static void LogError(Object obj, string method_name, string msg) {
-        LogError("[" + obj + "]" + method_name + ": " + msg);
+    void HandleLog(string logString, string stackTrace, LogType type) {
+        logFile.Write("[" + type + "]: " + logString + "\n");
+        logFile.Write(stackTrace);
     }
 }
