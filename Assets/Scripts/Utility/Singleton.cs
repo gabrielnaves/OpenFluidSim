@@ -5,7 +5,7 @@ static public class Singleton {
         if (destination == null)
             destination = source;
         else
-            Logger.LogError(source, "Awake", "Multiple instances of a singleton.");
+            Debug.LogError("["+source+"Awake: Multiple instances of a singleton.");
         return destination;
     }
 }

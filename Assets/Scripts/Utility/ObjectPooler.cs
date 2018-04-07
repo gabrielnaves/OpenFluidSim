@@ -34,7 +34,7 @@ public class ObjectPooler : MonoBehaviour {
 
 	void Start() {
 		if (pooledObject == null)
-			Logger.LogError(this, "Start", "No pooled object given.");
+			Debug.LogError("[ObjectPooler("+this+")Start: No pooled object given.");
 		else
 			InitPool();
 	}
