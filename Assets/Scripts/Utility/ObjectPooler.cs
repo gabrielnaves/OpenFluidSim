@@ -8,23 +8,23 @@ public class ObjectPooler : MonoBehaviour {
 	
 	public GameObject pooledObject;
 	public int initialAmount;
-	public bool allowGrow = true; // Whether the pool's maximum object amount may increase.
+	public bool allowGrowth = true;
 	
 	private Stack<GameObject> pooledObjects = new Stack<GameObject>();
 
     /// <summary> Returns an object if possible, null otherwise. </summary>
     /// This method will not activate the object before returning it.
     public GameObject GetObject() {
-		if (pooledObjects.Count == 0 && !allowGrow)
+		if (pooledObjects.Count == 0 && !allowGrowth)
 			return null;
-		if (pooledObjects.Count == 0 && allowGrow)
+		if (pooledObjects.Count == 0 && allowGrowth)
 			return NewObject();
 		return pooledObjects.Pop();
     }
 
     /// <summary> Returns an object to the pool, deactivating it. </summary>
     /// Returning an object to the pool does not guarantee that the maximum size will remain constant, should
-	/// the *allowGrow* flag be *false*.
+	/// the *allowGrowth* flag be *false*.
     /// Returning an object to the pool also places the object as child of the pool object.
     public void ReturnObject(GameObject obj) {
 		obj.transform.parent = transform;
