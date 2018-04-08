@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// The simulation grid that components snap to
+/// </summary>
 public static class SimulationGrid {
 
     static public float cellSize = 0.12f;

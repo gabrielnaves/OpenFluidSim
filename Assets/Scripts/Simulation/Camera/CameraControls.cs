@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Controls the camera's position and size
+/// </summary>
 public class CameraControls : MonoBehaviour {
 
     public float maxCameraSize = 7f;
