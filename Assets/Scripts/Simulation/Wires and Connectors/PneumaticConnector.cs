@@ -81,13 +81,11 @@ public class PneumaticConnector : MonoBehaviour {
     }
 
     void ConnectConnectors() {
-        var newConnectionAction = new NewPneumaticConnectionAction();
-        newConnectionAction.start = SelectedComponent.instance.component.GetComponent<PneumaticConnector>();
-        newConnectionAction.end = this;
-        newConnectionAction.wire = WireCreator.instance.RetrieveWire(transform.position);
-        newConnectionAction.wire.GetComponent<Wire>().start = newConnectionAction.start;
-        newConnectionAction.wire.GetComponent<Wire>().end = newConnectionAction.end;
-        ActionStack.instance.PushAction(newConnectionAction);
+        GameObject wireObj = WireCreator.instance.RetrieveWire(transform.position);
+        Wire wire = wireObj.GetComponent<Wire>();
+        wire.start = SelectedComponent.instance.component.GetComponent<PneumaticConnector>();
+        wire.end = this;
+        ActionStack.instance.PushAction(new NewPneumaticConnectionAction(wire.start, wire.end, wireObj));
     }
 
     void LateUpdate() {

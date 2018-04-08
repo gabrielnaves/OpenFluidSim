@@ -11,11 +11,7 @@ public class DeleteComponentAction : IAction {
 
     public DeleteComponentAction(GameObject referencedObject) {
         this.referencedObject = referencedObject;
-    }
-
-    public void DoAction() {
-        DeactivateConnections(referencedObject.transform.GetChild(0).GetComponent<ComponentConnectors>());
-        referencedObject.SetActive(false);
+        RedoAction();
     }
 
     public void UndoAction() {
@@ -24,10 +20,9 @@ public class DeleteComponentAction : IAction {
     }
 
     public void RedoAction() {
-        DoAction();
+        DeactivateConnections(referencedObject.transform.GetChild(0).GetComponent<ComponentConnectors>());
+        referencedObject.SetActive(false);
     }
-
-    public void OnDestroy() {}
     
     void DeactivateConnections(ComponentConnectors componentConnectors) {
         if (componentConnectors != null)

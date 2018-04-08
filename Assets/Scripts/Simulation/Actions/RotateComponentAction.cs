@@ -17,14 +17,7 @@ public class RotateComponentAction : IAction {
     public RotateComponentAction(GameObject referencedObject, float rotationAmount) {
         this.referencedObject = referencedObject;
         this.rotationAmount = rotationAmount;
-    }
-
-    public void DoAction() {
-        Quaternion rotation = referencedObject.transform.rotation;
-        Vector3 eulerAngles = rotation.eulerAngles;
-        eulerAngles.z += rotationAmount;
-        rotation.eulerAngles = eulerAngles;
-        referencedObject.transform.rotation = rotation;
+        RedoAction();
     }
 
     public void UndoAction() {
@@ -36,8 +29,10 @@ public class RotateComponentAction : IAction {
     }
 
     public void RedoAction() {
-        DoAction();
+        Quaternion rotation = referencedObject.transform.rotation;
+        Vector3 eulerAngles = rotation.eulerAngles;
+        eulerAngles.z += rotationAmount;
+        rotation.eulerAngles = eulerAngles;
+        referencedObject.transform.rotation = rotation;
     }
-
-    public void OnDestroy() {}
 }

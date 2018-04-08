@@ -1,5 +1,10 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// The component when it hasn't yet been added to simulation pane
+/// </summary>
+/// This script represents the second step to adding a new component to the
+/// simulation pane. The floating component is 
 public class FloatingComponent : MonoBehaviour {
 
     public GameObject componentPrefab;
@@ -29,9 +34,6 @@ public class FloatingComponent : MonoBehaviour {
     }
 
     private void CreateObjectOnSimulationPane() {
-        var action = new NewComponentAction();
-        action.componentPosition = transform.position;
-        action.componentPrefab = componentPrefab;
-        ActionStack.instance.PushAction(action);
+        ActionStack.instance.PushAction(new NewComponentAction(transform.position, componentPrefab));
     }
 }
