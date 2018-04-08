@@ -16,11 +16,11 @@ public class ConnectorCursor : MonoBehaviour {
     }
 
     void Update() {
-        if (connectorCollider.OverlapPoint(SimulationInput.instance.GetMousePosition()) && !isMouseHovering) {
+        if (connectorCollider.OverlapPoint(SimulationInput.instance.mousePosition) && !isMouseHovering) {
             isMouseHovering = true;
             Cursor.SetCursor(cursorTexture, cursorHotspot, cursorMode);
         }
-        if (!connectorCollider.OverlapPoint(SimulationInput.instance.GetMousePosition()) && isMouseHovering) {
+        if (!connectorCollider.OverlapPoint(SimulationInput.instance.mousePosition) && isMouseHovering) {
             isMouseHovering = false;
             Cursor.SetCursor(null, Vector2.zero, cursorMode);
         }

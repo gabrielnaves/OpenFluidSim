@@ -51,8 +51,8 @@ public class PneumaticConnector : MonoBehaviour {
     }
 
     bool RequestedSelect() {
-        return SimulationInput.instance.GetMouseButtonDown() &&
-               connectorCollider.OverlapPoint(SimulationInput.instance.GetMousePosition()) &&
+        return SimulationInput.instance.mouseButtonDown &&
+               connectorCollider.OverlapPoint(SimulationInput.instance.mousePosition) &&
                !isSelected;
     }
 
@@ -68,8 +68,8 @@ public class PneumaticConnector : MonoBehaviour {
     }
 
     bool RequestedConnect() {
-        if (SimulationInput.instance.GetMouseButtonUp() &&
-            connectorCollider.OverlapPoint(SimulationInput.instance.GetMousePosition()))
+        if (SimulationInput.instance.mouseButtonUp &&
+            connectorCollider.OverlapPoint(SimulationInput.instance.mousePosition))
             return HasOtherConnectorSelected();
         return false;
     }
@@ -103,6 +103,6 @@ public class PneumaticConnector : MonoBehaviour {
     }
 
     bool RequestedDeselect() {
-        return isSelected && SimulationInput.instance.GetMouseButtonUp();
+        return isSelected && SimulationInput.instance.mouseButtonUp;
     }
 }

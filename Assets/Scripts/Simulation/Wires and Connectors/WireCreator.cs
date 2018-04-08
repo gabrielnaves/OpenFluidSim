@@ -49,7 +49,7 @@ public class WireCreator : MonoBehaviour {
 
     void LateUpdate() {
         if (running) {
-            currentWire.points[1] = SimulationGrid.FitToGrid(SimulationInput.instance.GetMousePosition());
+            currentWire.points[1] = SimulationGrid.FitToGrid(SimulationInput.instance.mousePosition);
             currentWire.UpdateLineRenderer();
         }
     }

@@ -33,12 +33,12 @@ public class ComponentSelect : MonoBehaviour {
     }
 
     private bool RequestedSelect() {
-        return SimulationInput.instance.GetMouseButtonDown() &&
-            componentBox.OverlapPoint(SimulationInput.instance.GetMousePosition());
+        return SimulationInput.instance.mouseButtonDown &&
+            componentBox.OverlapPoint(SimulationInput.instance.mousePosition);
     }
 
     private bool RequestedDeselect() {
-        return SimulationInput.instance.GetMouseButtonDown() &&
-            !componentBox.OverlapPoint(SimulationInput.instance.GetMousePosition());
+        return SimulationInput.instance.mouseButtonDown &&
+            !componentBox.OverlapPoint(SimulationInput.instance.mousePosition);
     }
 }

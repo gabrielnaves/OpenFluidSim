@@ -19,16 +19,16 @@ public class ComponentMove : MonoBehaviour {
     }
 
     private void CheckForClick() {
-        if (SimulationInput.instance.GetMouseButtonDown())
-            if (componentBox.OverlapPoint(SimulationInput.instance.GetMousePosition())) {
+        if (SimulationInput.instance.mouseButtonDown)
+            if (componentBox.OverlapPoint(SimulationInput.instance.mousePosition)) {
                 moving = true;
                 previousPosition = transform.position;
-                offset = SimulationInput.instance.GetMousePosition() - (Vector2)transform.position;
+                offset = SimulationInput.instance.mousePosition - (Vector2)transform.position;
             }
     }
 
     private void CheckForRelease() {
-        if (moving && SimulationInput.instance.GetMouseButtonUp()) {
+        if (moving && SimulationInput.instance.mouseButtonUp) {
             moving = false;
             if (!Equals(previousPosition, transform.position))
                 MakeMovementAction();
@@ -44,7 +44,7 @@ public class ComponentMove : MonoBehaviour {
     }
 
     private void FollowMouse() {
-        var mousePos = SimulationInput.instance.GetMousePosition();
+        var mousePos = SimulationInput.instance.mousePosition;
         transform.position = SimulationGrid.FitToGrid(mousePos - offset);
     }
 }

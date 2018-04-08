@@ -8,8 +8,9 @@ public class MouseInputArea : MonoBehaviour {
 
     const int LeftMouseButton = 0;
     const int RightMouseButton = 1;
+    const int MiddleMouseButton = 2;
 
-    new Collider2D collider;
+    new protected Collider2D collider;
 
     void Awake() {
         collider = GetComponent<Collider2D>();
@@ -17,37 +18,55 @@ public class MouseInputArea : MonoBehaviour {
 
     public bool mouseButton {
         get {
-            return Input.GetMouseButton(LeftMouseButton) && collider.OverlapPoint(mousePosition);
+            return Input.GetMouseButton(LeftMouseButton) && IsMouseInsideInputArea();
         }
     }
 
     public bool mouseButtonDown {
         get {
-            return Input.GetMouseButtonDown(LeftMouseButton) && collider.OverlapPoint(mousePosition);
+            return Input.GetMouseButtonDown(LeftMouseButton) && IsMouseInsideInputArea();
         }
     }
 
     public bool mouseButtonUp {
         get {
-            return Input.GetMouseButtonUp(LeftMouseButton);
+            return Input.GetMouseButtonUp(LeftMouseButton) || !IsMouseInsideInputArea();
         }
     }
 
     public bool rightMouseButton {
         get {
-            return Input.GetMouseButton(RightMouseButton) && collider.OverlapPoint(mousePosition);
+            return Input.GetMouseButton(RightMouseButton) && IsMouseInsideInputArea();
         }
     }
 
     public bool rightMouseButtonDown {
         get {
-            return Input.GetMouseButtonDown(RightMouseButton) && collider.OverlapPoint(mousePosition);
+            return Input.GetMouseButtonDown(RightMouseButton) && IsMouseInsideInputArea();
         }
     }
 
     public bool rightMouseButtonUp {
         get {
-            return Input.GetMouseButtonUp(RightMouseButton);
+            return Input.GetMouseButtonUp(RightMouseButton) || !IsMouseInsideInputArea();
+        }
+    }
+
+    public bool middleMouseButton {
+        get {
+            return Input.GetMouseButton(MiddleMouseButton) && IsMouseInsideInputArea();
+        }
+    }
+
+    public bool middleMouseButtonDown {
+        get {
+            return Input.GetMouseButtonDown(MiddleMouseButton) && IsMouseInsideInputArea();
+        }
+    }
+
+    public bool middleMouseButtonUp {
+        get {
+            return Input.GetMouseButtonUp(MiddleMouseButton) || !IsMouseInsideInputArea();
         }
     }
 
@@ -57,6 +76,12 @@ public class MouseInputArea : MonoBehaviour {
     public Vector2 mousePosition {
         get {
             return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+    }
+
+    public Vector3 rawMousePosition {
+        get {
+            return Input.mousePosition;
         }
     }
 

@@ -22,7 +22,7 @@ public class FloatingComponent : MonoBehaviour {
     }
 
     private void CheckForMouseInput() {
-        if (SimulationInput.instance.GetMouseButtonDown()) {
+        if (SimulationInput.instance.mouseButtonDown) {
             CreateObjectOnSimulationPane();
             FloatingSelection.instance.RemoveCurrentComponent();
         }

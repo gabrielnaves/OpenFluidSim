@@ -18,10 +18,10 @@ public class Wire : MonoBehaviour {
     }
 
     void Update() {
-        if (SimulationInput.instance.GetMouseButtonDown()) {
+        if (SimulationInput.instance.mouseButtonDown) {
             bool clickedOnWire = false;
             foreach(BoxCollider2D collider in clickColliders) {
-                if (collider.OverlapPoint(SimulationInput.instance.GetMousePosition())) {
+                if (collider.OverlapPoint(SimulationInput.instance.mousePosition)) {
                     SelectedComponent.instance.component = gameObject;
                     clickedOnWire = true;
                     break;
