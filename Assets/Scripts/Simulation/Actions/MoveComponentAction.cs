@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Action for moving a component on simulation pane
+/// </summary>
 public class MoveComponentAction : IAction {
 
     public Vector3 previousPosition;

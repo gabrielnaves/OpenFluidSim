@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Action for connecting two pneumatic connectors
+/// </summary>
+/// A single wire object is also linked to the connection.
 public class NewPneumaticConnectionAction : IAction {
 
     public PneumaticConnector start;
@@ -23,6 +27,6 @@ public class NewPneumaticConnectionAction : IAction {
     }
 
     public void OnDestroy() {
-        GameObject.Destroy(wire);
+        Object.Destroy(wire);
     }
 }

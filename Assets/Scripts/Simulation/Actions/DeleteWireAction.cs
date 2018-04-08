@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Action for deleting wires, handling the objects target wire connects.
+/// </summary>
+/// Deletion is implemented by disabling the object, instead of destroying it.
 public class DeleteWireAction : IAction {
 
     public Wire referencedWire;

@@ -1,5 +1,10 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Action for deleting components from the simulator editor
+/// </summary>
+/// Deletion is implemented by disabling the object instead of destroying it.
+/// Automatically handles connections to the target component.
 public class DeleteComponentAction : IAction {
 
     public GameObject referencedObject;
