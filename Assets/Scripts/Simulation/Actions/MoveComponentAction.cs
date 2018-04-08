@@ -5,9 +5,15 @@
 /// </summary>
 public class MoveComponentAction : IAction {
 
-    public Vector3 previousPosition;
-    public Vector3 newPosition;
-    public GameObject referencedObject;
+    Vector3 previousPosition;
+    Vector3 newPosition;
+    GameObject referencedObject;
+
+    public MoveComponentAction(GameObject referencedObject, Vector3 previousPosition, Vector3 newPosition) {
+        this.referencedObject = referencedObject;
+        this.previousPosition = previousPosition;
+        this.newPosition = newPosition;
+    }
 
     public void DoAction() {
         referencedObject.transform.position = newPosition;

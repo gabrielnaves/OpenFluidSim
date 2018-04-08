@@ -29,9 +29,6 @@ public class FloatingComponent : MonoBehaviour {
     }
 
     private void CreateObjectOnSimulationPane() {
-        var action = new NewComponentAction();
-        action.componentPosition = transform.position;
-        action.componentPrefab = componentPrefab;
-        ActionStack.instance.PushAction(action);
+        ActionStack.instance.PushAction(new NewComponentAction(componentPrefab, transform.position));
     }
 }

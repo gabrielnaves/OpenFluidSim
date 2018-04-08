@@ -6,9 +6,15 @@
 /// A single wire object is also linked to the connection.
 public class NewPneumaticConnectionAction : IAction {
 
-    public PneumaticConnector start;
-    public PneumaticConnector end;
-    public GameObject wire;
+    PneumaticConnector start;
+    PneumaticConnector end;
+    GameObject wire;
+
+    public NewPneumaticConnectionAction(PneumaticConnector start, PneumaticConnector end, GameObject wire) {
+        this.wire = wire;
+        this.start = start;
+        this.end = end;
+    }
 
     public void DoAction() {
         start.AddConnection(end);

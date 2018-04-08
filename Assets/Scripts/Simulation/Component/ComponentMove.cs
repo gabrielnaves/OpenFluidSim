@@ -46,17 +46,15 @@ public class ComponentMove {
     void CheckForRelease() {
         if (moving && SimulationInput.instance.mouseButtonUp) {
             moving = false;
-            if (!Equals(previousPosition, gameObject.transform.position))
-                MakeMovementAction();
+            if (gameObject.transform.position != previousPosition)
+                CreateMovementAction();
         }
     }
 
-    void MakeMovementAction() {
-        var newAction = new MoveComponentAction();
-        newAction.previousPosition = previousPosition;
-        newAction.newPosition = gameObject.transform.position;
-        newAction.referencedObject = gameObject;
-        ActionStack.instance.PushAction(newAction);
+    void CreateMovementAction() {
+        ActionStack.instance.PushAction(new MoveComponentAction(
+            gameObject, previousPosition, gameObject.transform.position
+        ));
     }
 
     void FollowMouse() {

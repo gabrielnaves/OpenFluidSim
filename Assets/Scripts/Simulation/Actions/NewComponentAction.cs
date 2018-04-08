@@ -3,29 +3,34 @@
 /// <summary>
 /// Action for creating a new component on the simulation pane
 /// </summary>
-/// The newly-instantiated game object is then added to SimulationPane.
+/// The newly-instantiated game object is then added to the SimulationPane.
 public class NewComponentAction : IAction {
 
-    public Vector3 componentPosition;
-    public GameObject componentPrefab;
+    GameObject componentPrefab;
+    Vector3 componentPosition;
 
-    private GameObject componentCreated;
+    GameObject createdComponent;
+
+    public NewComponentAction(GameObject componentPrefab, Vector3 componentPosition) {
+        this.componentPrefab = componentPrefab;
+        this.componentPosition = componentPosition;
+    }
 
     public void DoAction() {
-        componentCreated = Object.Instantiate(componentPrefab);
-        componentCreated.transform.position = componentPosition;
-        SimulationPane.instance.AddNewObject(componentCreated);
+        createdComponent = Object.Instantiate(componentPrefab);
+        createdComponent.transform.position = componentPosition;
+        SimulationPane.instance.AddNewObject(createdComponent);
     }
 
     public void UndoAction() {
-        componentCreated.SetActive(false);
+        createdComponent.SetActive(false);
     }
 
     public void RedoAction() {
-        componentCreated.SetActive(true);
+        createdComponent.SetActive(true);
     }
 
     public void OnDestroy() {
-        Object.Destroy(componentCreated);
+        Object.Destroy(createdComponent);
     }
 }

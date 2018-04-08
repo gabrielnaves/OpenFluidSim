@@ -17,8 +17,5 @@ public interface IAction {
     /// <summary>
     /// Called just before the action object is destroyed
     /// </summary>
-    /// Since OnDestroy is only called for undone actions, not every action
-    /// object will need specific implementation for when it's destroyed. 
-    /// <see cref="MoveComponentAction"/>
     void OnDestroy();
 }
