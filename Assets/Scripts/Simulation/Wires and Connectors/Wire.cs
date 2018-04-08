@@ -30,11 +30,8 @@ public class Wire : MonoBehaviour {
             if (!clickedOnWire && SelectedComponent.instance.IsSelected(gameObject))
                 SelectedComponent.instance.component = null;
         }
-        if (SelectedComponent.instance.IsSelected(gameObject) && Input.GetKeyDown(KeyCode.Delete)) {
-            var deleteAction = new DeleteWireAction();
-            deleteAction.referencedWire = this;
-            ActionStack.instance.PushAction(deleteAction);
-        }
+        if (SelectedComponent.instance.IsSelected(gameObject) && Input.GetKeyDown(KeyCode.Delete))
+            ActionStack.instance.PushAction(new DeleteWireAction(this));
     }
 
     void LateUpdate() {

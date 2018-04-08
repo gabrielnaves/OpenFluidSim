@@ -8,7 +8,11 @@ using UnityEngine;
 /// Deletion is implemented by disabling the object, instead of destroying it.
 public class DeleteWireAction : IAction {
 
-    public Wire referencedWire;
+    Wire referencedWire;
+
+    public DeleteWireAction(Wire referencedWire) {
+        this.referencedWire = referencedWire;
+    }
 
     public void DoAction() {
         referencedWire.gameObject.SetActive(false);

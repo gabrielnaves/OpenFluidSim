@@ -1,43 +1,47 @@
 ﻿using UnityEngine;
 
-public class ComponentSelect : MonoBehaviour {
+public class ComponentSelect {
 
     public bool isSelected { get; private set; }
 
-    private Collider2D componentBox;
+    GameObject gameObject;
+    Collider2D componentBox;
+    SpriteRenderer spriteRenderer;
 
-    void Start() {
-        componentBox = GetComponent<Collider2D>();
+    public ComponentSelect(GameObject gameObject, Collider2D componentBox, SpriteRenderer spriteRenderer) {
+        this.gameObject = gameObject;
+        this.componentBox = componentBox;
+        this.spriteRenderer = spriteRenderer;
     }
 
-    void Update() {
+    public void Update() {
         CheckForSelect();
         CheckForDeselect();
     }
 
-    private void CheckForSelect() {
+    void CheckForSelect() {
         if (RequestedSelect()) {
             SelectedComponent.instance.component = gameObject;
             isSelected = true;
-            GetComponent<SpriteRenderer>().color = new Color32(191, 186, 255, 255);
+            spriteRenderer.color = new Color32(191, 186, 255, 255);
         }
     }
 
-    private void CheckForDeselect() {
+    void CheckForDeselect() {
         if (isSelected && RequestedDeselect() || isSelected && SelectedComponent.instance.component != gameObject) {
             if (SelectedComponent.instance.component == gameObject)
                 SelectedComponent.instance.component = null;
             isSelected = false;
-            GetComponent<SpriteRenderer>().color = Color.white;
+            spriteRenderer.color = Color.white;
         }
     }
 
-    private bool RequestedSelect() {
+    bool RequestedSelect() {
         return SimulationInput.instance.mouseButtonDown &&
             componentBox.OverlapPoint(SimulationInput.instance.mousePosition);
     }
 
-    private bool RequestedDeselect() {
+    bool RequestedDeselect() {
         return SimulationInput.instance.mouseButtonDown &&
             !componentBox.OverlapPoint(SimulationInput.instance.mousePosition);
     }

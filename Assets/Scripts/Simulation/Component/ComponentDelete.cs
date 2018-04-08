@@ -1,19 +1,23 @@
 ﻿using UnityEngine;
 
-public class ComponentDelete : MonoBehaviour {
+public class ComponentDelete {
 
-	void Update () {
+    GameObject gameObject;
+
+    public ComponentDelete(GameObject gameObject) {
+        this.gameObject = gameObject;
+    }
+
+	public void Update() {
         if (RequestedDelete())
             CreateDeleteAction();
 	}
 
-    private bool RequestedDelete() {
+    bool RequestedDelete() {
         return SelectedComponent.instance.component == gameObject && Input.GetKeyDown(KeyCode.Delete);
     }
 
-    private void CreateDeleteAction() {
-        var deleteAction = new DeleteComponentAction();
-        deleteAction.referencedObject = gameObject;
-        ActionStack.instance.PushAction(deleteAction);
+    void CreateDeleteAction() {
+        ActionStack.instance.PushAction(new DeleteComponentAction(gameObject));
     }
 }

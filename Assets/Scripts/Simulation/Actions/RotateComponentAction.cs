@@ -7,12 +7,17 @@
 /// a multiple of 90.
 public class RotateComponentAction : IAction {
 
-    public GameObject referencedObject;
+    GameObject referencedObject;
 
     /// <summary>
     /// Rotation amount in degrees
     /// </summary>
-    public float rotationAmount;
+    float rotationAmount;
+
+    public RotateComponentAction(GameObject referencedObject, float rotationAmount) {
+        this.referencedObject = referencedObject;
+        this.rotationAmount = rotationAmount;
+    }
 
     public void DoAction() {
         Quaternion rotation = referencedObject.transform.rotation;

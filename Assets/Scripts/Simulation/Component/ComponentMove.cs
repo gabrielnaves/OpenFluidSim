@@ -1,50 +1,53 @@
 ﻿using UnityEngine;
 
-public class ComponentMove : MonoBehaviour {
+public class ComponentMove {
 
-    private bool moving = false;
-    private Vector3 previousPosition;
-    private Vector2 offset;
-    private Collider2D componentBox;
+    bool moving = false;
+    Vector3 previousPosition;
+    Vector2 offset;
 
-    void Start() {
-        componentBox = GetComponent<Collider2D>();
+    GameObject gameObject;
+    Collider2D componentBox;
+
+    public ComponentMove(GameObject gameObject, Collider2D componentBox) {
+        this.gameObject = gameObject;
+        this.componentBox = componentBox;
     }
 
-    void Update() {
+    public void Update() {
         CheckForClick();
         CheckForRelease();
         if (moving)
             FollowMouse();
     }
 
-    private void CheckForClick() {
+    void CheckForClick() {
         if (SimulationInput.instance.mouseButtonDown)
             if (componentBox.OverlapPoint(SimulationInput.instance.mousePosition)) {
                 moving = true;
-                previousPosition = transform.position;
-                offset = SimulationInput.instance.mousePosition - (Vector2)transform.position;
+                previousPosition = gameObject.transform.position;
+                offset = SimulationInput.instance.mousePosition - (Vector2)gameObject.transform.position;
             }
     }
 
-    private void CheckForRelease() {
+    void CheckForRelease() {
         if (moving && SimulationInput.instance.mouseButtonUp) {
             moving = false;
-            if (!Equals(previousPosition, transform.position))
+            if (!Equals(previousPosition, gameObject.transform.position))
                 MakeMovementAction();
         }
     }
 
-    private void MakeMovementAction() {
+    void MakeMovementAction() {
         var newAction = new MoveComponentAction();
         newAction.previousPosition = previousPosition;
-        newAction.newPosition = transform.position;
+        newAction.newPosition = gameObject.transform.position;
         newAction.referencedObject = gameObject;
         ActionStack.instance.PushAction(newAction);
     }
 
-    private void FollowMouse() {
+    void FollowMouse() {
         var mousePos = SimulationInput.instance.mousePosition;
-        transform.position = SimulationGrid.FitToGrid(mousePos - offset);
+        gameObject.transform.position = SimulationGrid.FitToGrid(mousePos - offset);
     }
 }
