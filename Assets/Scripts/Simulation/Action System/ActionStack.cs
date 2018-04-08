@@ -18,6 +18,7 @@ public class ActionStack : MonoBehaviour {
     public Stack<IAction> redoStack { get; private set; }
 
     public void PushAction(IAction action) {
+        action.DoAction();
         actionStack.Push(action);
         ClearRedoStack();
     }
@@ -39,6 +40,8 @@ public class ActionStack : MonoBehaviour {
     }
 
     private void ClearRedoStack() {
+        foreach (var act in redoStack)
+            act.OnDestroy();
         redoStack.Clear();
     }
 }

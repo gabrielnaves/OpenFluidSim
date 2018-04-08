@@ -6,9 +6,12 @@
 /// The newly-instantiated game object is then added to SimulationPane.
 public class NewComponentAction : IAction {
 
-    GameObject componentCreated;
+    public Vector3 componentPosition;
+    public GameObject componentPrefab;
 
-    public NewComponentAction(Vector3 componentPosition, GameObject componentPrefab) {
+    private GameObject componentCreated;
+
+    public void DoAction() {
         componentCreated = Object.Instantiate(componentPrefab);
         componentCreated.transform.position = componentPosition;
         SimulationPane.instance.AddNewObject(componentCreated);
@@ -22,7 +25,7 @@ public class NewComponentAction : IAction {
         componentCreated.SetActive(true);
     }
 
-    ~NewComponentAction() {
+    public void OnDestroy() {
         Object.Destroy(componentCreated);
     }
 }

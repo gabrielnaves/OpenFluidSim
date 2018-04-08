@@ -52,9 +52,11 @@ public class ComponentMove {
     }
 
     void MakeMovementAction() {
-        ActionStack.instance.PushAction(new MoveComponentAction(
-            gameObject, previousPosition, gameObject.transform.position
-        ));
+        var newAction = new MoveComponentAction();
+        newAction.previousPosition = previousPosition;
+        newAction.newPosition = gameObject.transform.position;
+        newAction.referencedObject = gameObject;
+        ActionStack.instance.PushAction(newAction);
     }
 
     void FollowMouse() {

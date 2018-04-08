@@ -5,15 +5,12 @@
 /// </summary>
 public class MoveComponentAction : IAction {
 
-    GameObject referencedObject;
-    Vector3 previousPosition;
-    Vector3 newPosition;
+    public Vector3 previousPosition;
+    public Vector3 newPosition;
+    public GameObject referencedObject;
 
-    public MoveComponentAction(GameObject referencedObject, Vector3 previousPosition, Vector3 newPosition) {
-        this.referencedObject = referencedObject;
-        this.previousPosition = previousPosition;
-        this.newPosition = newPosition;
-        RedoAction();
+    public void DoAction() {
+        referencedObject.transform.position = newPosition;
     }
 
     public void UndoAction() {
@@ -21,6 +18,8 @@ public class MoveComponentAction : IAction {
     }
 
     public void RedoAction() {
-        referencedObject.transform.position = newPosition;
+        DoAction();
     }
+
+    public void OnDestroy() {}
 }

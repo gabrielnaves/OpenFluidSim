@@ -12,7 +12,12 @@ public class DeleteWireAction : IAction {
 
     public DeleteWireAction(Wire referencedWire) {
         this.referencedWire = referencedWire;
-        RedoAction();
+    }
+
+    public void DoAction() {
+        referencedWire.gameObject.SetActive(false);
+        referencedWire.start.RemoveConnection(referencedWire.end);
+        referencedWire.end.RemoveConnection(referencedWire.start);
     }
 
     public void UndoAction() {
@@ -22,8 +27,8 @@ public class DeleteWireAction : IAction {
     }
 
     public void RedoAction() {
-        referencedWire.gameObject.SetActive(false);
-        referencedWire.start.RemoveConnection(referencedWire.end);
-        referencedWire.end.RemoveConnection(referencedWire.start);
+        DoAction();
     }
+
+    public void OnDestroy() {}
 }

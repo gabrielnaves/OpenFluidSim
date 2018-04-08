@@ -6,15 +6,14 @@
 /// A single wire object is also linked to the connection.
 public class NewPneumaticConnectionAction : IAction {
 
-    PneumaticConnector start;
-    PneumaticConnector end;
-    GameObject wire;
+    public PneumaticConnector start;
+    public PneumaticConnector end;
+    public GameObject wire;
 
-    public NewPneumaticConnectionAction(PneumaticConnector start, PneumaticConnector end, GameObject wire) {
-        this.start = start;
-        this.end = end;
-        this.wire = wire;
-        RedoAction();
+    public void DoAction() {
+        start.AddConnection(end);
+        end.AddConnection(start);
+        wire.SetActive(true);
     }
 
     public void UndoAction() {
@@ -24,12 +23,10 @@ public class NewPneumaticConnectionAction : IAction {
     }
 
     public void RedoAction() {
-        start.AddConnection(end);
-        end.AddConnection(start);
-        wire.SetActive(true);
+        DoAction();
     }
 
-    ~NewPneumaticConnectionAction() {
+    public void OnDestroy() {
         Object.Destroy(wire);
     }
 }
