@@ -1,5 +1,13 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Implements component movement (in the editor canvas) functionality
+/// </summary>
+/// This script implements the possibility to move components (pneumatic and
+/// electric) on the editor canvas.
+/// It has nothing to do with any component movement during simulation, like
+/// valve animations.
+/// BUG: It's possible to move components that aren't selected when they overlap
 public class ComponentMove {
 
     bool moving = false;
@@ -22,12 +30,17 @@ public class ComponentMove {
     }
 
     void CheckForClick() {
-        if (SimulationInput.instance.mouseButtonDown)
-            if (componentBox.OverlapPoint(SimulationInput.instance.mousePosition)) {
-                moving = true;
-                previousPosition = gameObject.transform.position;
-                offset = SimulationInput.instance.mousePosition - (Vector2)gameObject.transform.position;
-            }
+        if (RequestedMovement()) { 
+            moving = true;
+            previousPosition = gameObject.transform.position;
+            offset = SimulationInput.instance.mousePosition - (Vector2)gameObject.transform.position;
+        }
+    }
+
+    bool RequestedMovement() {
+        return SimulationInput.instance.mouseButtonDown &&
+               componentBox.OverlapPoint(SimulationInput.instance.mousePosition) &&
+               SelectedComponent.instance.IsSelected(gameObject);
     }
 
     void CheckForRelease() {

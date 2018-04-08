@@ -1,5 +1,11 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Provides selection, movement, rotation and deletion for electric/pneumatic components
+/// </summary>
+/// This script reunites the implementation for each editing action on
+/// a single MonoBehaviour. This method results in a cleaner game object
+/// for electric and pneumatic components.
 public class BasicComponentEditing : MonoBehaviour {
 
     ComponentSelect componentSelect;

@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Implements component rotation 90 degrees (relative to previous orientation)
+/// </summary>
 public class ComponentRotate {
 
     int right = -1;

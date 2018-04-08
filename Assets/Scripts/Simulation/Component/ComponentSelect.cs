@@ -1,5 +1,13 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Implements component selection functionality
+/// </summary>
+/// Current method for component selection uses two parts: this script and
+/// the SelectedComponent class.
+/// Each component checks on Update whether it has been selected each frame,
+/// and they update the SelectedComponent class accordingly.
+/// TODO: Current method does not allow multiple selection, change it
 public class ComponentSelect {
 
     public bool isSelected { get; private set; }
