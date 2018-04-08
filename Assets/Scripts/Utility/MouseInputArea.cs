@@ -3,6 +3,8 @@
 /// <summary>
 /// Component for Handling mouse inputs within an area represented as a Collider2D
 /// </summary>
+/// If the mouse leaves the input area all "buttonUp" flags are set, even if
+/// the target mouse button is still pressed.
 [RequireComponent(typeof(Collider2D))]
 public class MouseInputArea : MonoBehaviour {
 
@@ -79,6 +81,9 @@ public class MouseInputArea : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Mouse position as pixel coordinates
+    /// </summary>
     public Vector3 rawMousePosition {
         get {
             return Input.mousePosition;
