@@ -45,6 +45,9 @@ public class MultiSelection : MonoBehaviour {
             foreach (var col in SimulationPane.instance.componentsContainer.GetComponentsInChildren<Collider2D>())
                 if (col.OverlapPoint(SimulationInput.instance.mousePosition))
                     return false;
+            foreach (var col in SimulationPane.instance.wiresContainer.GetComponentsInChildren<Collider2D>())
+                if (col.OverlapPoint(SimulationInput.instance.mousePosition))
+                    return false;
             return true;
         }
         return false;
@@ -68,6 +71,17 @@ public class MultiSelection : MonoBehaviour {
                 obj.GetComponent<BasicComponentEditing>().isSelected = true;
             else
                 obj.GetComponent<BasicComponentEditing>().isSelected = false;
+        }
+
+        var activeWires = SimulationPane.instance.GetActiveWires();
+        foreach(var wire in activeWires) {
+            var cols = wire.GetComponentsInChildren<Collider2D>();
+            foreach (var col in cols) {
+                if (col.IsTouching(boxCollider))
+                    wire.GetComponent<Wire>().isSelected = true;
+                else
+                    wire.GetComponent<Wire>().isSelected = false;
+            }
         }
     }
 }

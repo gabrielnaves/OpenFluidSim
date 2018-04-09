@@ -556,6 +556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   componentsContainer: {fileID: 861555994}
+  wiresContainer: {fileID: 430173531}
 --- !u!1 &430173530
 GameObject:
   m_ObjectHideFlags: 0
@@ -2227,8 +2228,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionBox: {fileID: 1282718972}
-  rightColor: {r: 0.5294118, g: 0.8039216, b: 1, a: 0.266}
-  leftColor: {r: 0.97794116, g: 0.72626513, b: 0.72626513, a: 0.39215687}
 --- !u!1 &1852640851
 GameObject:
   m_ObjectHideFlags: 0

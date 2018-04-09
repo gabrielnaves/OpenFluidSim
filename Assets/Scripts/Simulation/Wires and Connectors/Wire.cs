@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -17,6 +16,8 @@ public class Wire : MonoBehaviour {
     public List<Vector3> points = new List<Vector3>();
     public PneumaticConnector start;
     public PneumaticConnector end;
+    
+    public bool isSelected;
 
     LineRenderer lineRenderer;
 
@@ -27,29 +28,20 @@ public class Wire : MonoBehaviour {
     }
 
     void Update() {
-        if (SimulationInput.instance.mouseButtonDown) {
-            bool clickedOnWire = false;
-            foreach(BoxCollider2D collider in clickColliders) {
-                if (collider.OverlapPoint(SimulationInput.instance.mousePosition)) {
-                    SelectedComponent.instance.component = gameObject;
-                    clickedOnWire = true;
-                    break;
-                }
-            }
-            if (!clickedOnWire && SelectedComponent.instance.IsSelected(gameObject))
-                SelectedComponent.instance.component = null;
-        }
-        if (SelectedComponent.instance.IsSelected(gameObject) && Input.GetKeyDown(KeyCode.Delete))
+        if (isSelected && Input.GetKeyDown(KeyCode.Delete))
             ActionStack.instance.PushAction(new DeleteWireAction(this));
     }
 
     void LateUpdate() {
+        if (AttachedComponentsEnabled())
+            wireEnabled = true;
         if (wireEnabled) {
             if (!AttachedComponentsEnabled()) {
                 lineRenderer.startColor = Color.clear;
                 lineRenderer.endColor = Color.clear;
+                wireEnabled = false;
             }
-            else if (SelectedComponent.instance.IsSelected(gameObject)) {
+            else if (isSelected) {
                 lineRenderer.startColor = Color.green;
                 lineRenderer.endColor = Color.green;
             }
@@ -66,7 +58,9 @@ public class Wire : MonoBehaviour {
     }
 
     bool AttachedComponentsEnabled() {
-        return start.isActiveAndEnabled && end.isActiveAndEnabled;
+        if (start && end)
+            return start.isActiveAndEnabled && end.isActiveAndEnabled;
+        return false;
     }
 
     bool AttachedComponentsMoved() {

@@ -12,15 +12,21 @@ public class SimulationPane : MonoBehaviour {
     static public SimulationPane instance { get; private set; }
 
     public Transform componentsContainer;
+    public Transform wiresContainer;
 
-    List<GameObject> activeComponents = new List<GameObject>();
+    public List<GameObject> activeComponents = new List<GameObject>();
+    public List<GameObject> activeWires = new List<GameObject>();
 
-    public void AddNewObject(GameObject obj) {
+    public void AddNewComponent(GameObject obj) {
         obj.transform.parent = componentsContainer;
     }
 
     public GameObject[] GetActiveComponents() {
         return activeComponents.ToArray();
+    }
+
+    public GameObject[] GetActiveWires() {
+        return activeWires.ToArray();
     }
 
     void Awake() {
@@ -32,5 +38,10 @@ public class SimulationPane : MonoBehaviour {
         foreach (Transform child in componentsContainer)
             if (child.gameObject.activeInHierarchy)
                 activeComponents.Add(child.gameObject);
+
+        activeWires.Clear();
+        foreach (Transform child in wiresContainer)
+            if (child.gameObject.activeInHierarchy && child.GetComponent<Wire>().wireEnabled)
+                activeWires.Add(child.gameObject);
     }
 }
