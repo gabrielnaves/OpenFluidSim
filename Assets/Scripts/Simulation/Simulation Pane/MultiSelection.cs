@@ -9,13 +9,11 @@ public class MultiSelection : MonoBehaviour {
     public bool selecting { get; private set; }
 
     Collider2D boxCollider;
-    SpriteRenderer boxSpriteRenderer;
     Vector3 startingPosition;
 
     void Awake() {
         instance = (MultiSelection)Singleton.Setup(this, instance);
         boxCollider = selectionBox.GetComponent<Collider2D>();
-        boxSpriteRenderer = selectionBox.GetComponent<SpriteRenderer>();
     }
 
     void Start() {
@@ -44,12 +42,9 @@ public class MultiSelection : MonoBehaviour {
 
     bool ClickedOutsideAComponent() {
         if (SimulationInput.instance.mouseButtonDown) {
-            var activeComponents = SimulationPane.instance.GetActiveComponents();
-            foreach (var obj in activeComponents) {
-                var collider = obj.GetComponent<Collider2D>();
-                if (collider.OverlapPoint(SimulationInput.instance.mousePosition))
+            foreach (var col in SimulationPane.instance.componentsContainer.GetComponentsInChildren<Collider2D>())
+                if (col.OverlapPoint(SimulationInput.instance.mousePosition))
                     return false;
-            }
             return true;
         }
         return false;
