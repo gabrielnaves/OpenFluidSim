@@ -21,7 +21,7 @@ public class ComponentDelete {
 	}
 
     bool RequestedDelete() {
-        return SelectedComponent.instance.component == gameObject && Input.GetKeyDown(KeyCode.Delete);
+        return gameObject && Input.GetKeyDown(KeyCode.Delete);
     }
 
     void CreateDeleteAction() {

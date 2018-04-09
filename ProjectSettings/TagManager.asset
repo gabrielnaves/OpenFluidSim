@@ -59,6 +59,9 @@ TagManager:
   - name: Mechanical Contacts
     uniqueID: 841699943
     locked: 0
+  - name: Selection Box
+    uniqueID: 1439198207
+    locked: 0
   - name: GUI
     uniqueID: 1681208753
     locked: 0

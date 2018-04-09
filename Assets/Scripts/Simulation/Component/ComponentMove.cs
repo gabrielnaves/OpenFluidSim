@@ -7,7 +7,6 @@
 /// electric) on the editor canvas.
 /// It has nothing to do with any component movement during simulation, like
 /// valve animations.
-/// BUG: It's possible to move components that aren't selected when they overlap
 public class ComponentMove {
 
     bool moving = false;
@@ -39,8 +38,7 @@ public class ComponentMove {
 
     bool RequestedMovement() {
         return SimulationInput.instance.mouseButtonDown &&
-               componentBox.OverlapPoint(SimulationInput.instance.mousePosition) &&
-               SelectedComponent.instance.IsSelected(gameObject);
+               componentBox.OverlapPoint(SimulationInput.instance.mousePosition);
     }
 
     void CheckForRelease() {

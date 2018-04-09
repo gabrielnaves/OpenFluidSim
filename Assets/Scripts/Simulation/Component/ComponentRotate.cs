@@ -22,17 +22,15 @@ public class ComponentRotate {
 	}
 
     bool RequestedRotate(int direction) {
-        if (SelectedComponent.instance.component == gameObject) {
 #if DEVEL
             return Input.GetKeyDown(KeyCode.R) &&
             (direction == right ? !Input.GetKey(KeyCode.LeftShift) : Input.GetKey(KeyCode.LeftShift));
-#endif
-#if LAUNCH
+#elif LAUNCH
             return Input.GetKeyDown(KeyCode.R) && Input.GetKey(KeyCode.LeftControl) &&
                 (direction == right ? !Input.GetKey(KeyCode.LeftShift) : Input.GetKey(KeyCode.LeftShift));
-#endif
-        }
+#else
         return false;
+#endif
     }
 
     void NewRotationAction(int direction) {

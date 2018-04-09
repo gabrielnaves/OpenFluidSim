@@ -8,22 +8,30 @@
 /// for electric and pneumatic components.
 public class BasicComponentEditing : MonoBehaviour {
 
-    ComponentSelect componentSelect;
+    public bool isSelected;
+
     ComponentMove componentMove;
     ComponentRotate componentRotate;
     ComponentDelete componentDelete;
 
     void Awake() {
-        componentSelect = new ComponentSelect(gameObject, GetComponent<BoxCollider2D>(), GetComponent<SpriteRenderer>());
         componentMove = new ComponentMove(gameObject, GetComponent<BoxCollider2D>());
         componentRotate = new ComponentRotate(gameObject);
         componentDelete = new ComponentDelete(gameObject);
     }
 
+    void OnDisable() {
+        isSelected = false;
+    }
+
     void Update() {
-        componentSelect.Update();
-        componentMove.Update();
-        componentRotate.Update();
-        componentDelete.Update();
+        if (isSelected) {
+            GetComponent<SpriteRenderer>().color = new Color32(191, 186, 255, 255);
+            componentMove.Update();
+            componentRotate.Update();
+            componentDelete.Update();
+        }
+        else
+            GetComponent<SpriteRenderer>().color = Color.white;
     }
 }
