@@ -1,6 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Substitutes dummy connectors on component prefabs for pneumatic connectors
+/// </summary>
+/// This script circumvents Unity's lack of support for nested prefabs,
+/// that is, prefabs that are part of other prefabs, but still keep their
+/// independence.
+/// This way many component prefabs can make use of the single pneumatic connector
+/// prefab.
+/// TODO: Merge this implementation with ComponentContacts
 public class ComponentConnectors : MonoBehaviour {
 
     public List<PneumaticConnector> connectorList { get; private set; }
