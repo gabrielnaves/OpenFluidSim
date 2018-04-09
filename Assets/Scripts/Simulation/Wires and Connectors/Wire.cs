@@ -17,18 +17,19 @@ public class Wire : MonoBehaviour {
     public PneumaticConnector start;
     public PneumaticConnector end;
     
-    public bool isSelected;
+    public List<BoxCollider2D> clickColliders = new List<BoxCollider2D>();
 
     LineRenderer lineRenderer;
-
-    public List<BoxCollider2D> clickColliders = new List<BoxCollider2D>();
+    ComponentSelect componentSelect;
 
     void Awake() {
         lineRenderer = GetComponent<LineRenderer>();
+        componentSelect = new ComponentSelect();
     }
 
     void Update() {
-        if (isSelected && Input.GetKeyDown(KeyCode.Delete))
+        componentSelect.Update();
+        if (componentSelect.isSelected && Input.GetKeyDown(KeyCode.Delete))
             ActionStack.instance.PushAction(new DeleteWireAction(this));
     }
 
@@ -41,7 +42,7 @@ public class Wire : MonoBehaviour {
                 lineRenderer.endColor = Color.clear;
                 wireEnabled = false;
             }
-            else if (isSelected) {
+            else if (componentSelect.isSelected) {
                 lineRenderer.startColor = Color.green;
                 lineRenderer.endColor = Color.green;
             }
@@ -84,6 +85,7 @@ public class Wire : MonoBehaviour {
             newBox.size = new Vector2(Vector3.Distance(points[i], points[i+1]), 0.1f);
             clickColliders.Add(newBox);
         }
+        componentSelect = new ComponentSelect(gameObject, clickColliders.ToArray());
     }
 
     void DeleteAllColliders() {

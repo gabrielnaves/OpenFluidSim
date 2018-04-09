@@ -10,11 +10,13 @@ public class BasicComponentEditing : MonoBehaviour {
 
     public bool isSelected;
 
+    ComponentSelect componentSelect;
     ComponentMove componentMove;
     ComponentRotate componentRotate;
     ComponentDelete componentDelete;
 
     void Awake() {
+        componentSelect = new ComponentSelect(gameObject, GetComponent<BoxCollider2D>());
         componentMove = new ComponentMove(gameObject, GetComponent<BoxCollider2D>());
         componentRotate = new ComponentRotate(gameObject);
         componentDelete = new ComponentDelete(gameObject);
@@ -25,7 +27,8 @@ public class BasicComponentEditing : MonoBehaviour {
     }
 
     void Update() {
-        if (isSelected) {
+        componentSelect.Update();
+        if (componentSelect.isSelected) {
             GetComponent<SpriteRenderer>().color = new Color32(191, 186, 255, 255);
             componentMove.Update();
             componentRotate.Update();

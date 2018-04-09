@@ -47,6 +47,7 @@ public class WireCreator : MonoBehaviour {
         result.transform.parent = transform;
         wire.points[1] = lastPosition;
         wire.wireEnabled = true;
+        wire.UpdateLineRenderer();
         return result;
     }
 

@@ -6,10 +6,14 @@ public class MultiSelection : MonoBehaviour {
 
     static public MultiSelection instance { get; private set; }
 
-    public bool selecting { get; private set; }
+    public bool isSelecting { get; private set; }
 
     Collider2D boxCollider;
     Vector3 startingPosition;
+
+    public bool TouchingSelectionBox(Collider2D other) {
+        return other.IsTouching(boxCollider);
+    }
 
     void Awake() {
         instance = (MultiSelection)Singleton.Setup(this, instance);
@@ -22,20 +26,19 @@ public class MultiSelection : MonoBehaviour {
 
 	void LateUpdate() {
         CheckIfSelecting();
-        if (selecting) {
+        if (isSelecting)
             ResizeSelectionBox();
-            SelectComponentsInsideSelectionBox();
-        }
 	}
 
     void CheckIfSelecting() {
-        if (!selecting && ClickedOutsideAComponent()) {
-            selecting = true;
+        if (!isSelecting && ClickedOutsideAComponent()) {
+            isSelecting = true;
             selectionBox.SetActive(true);
             startingPosition = SimulationInput.instance.mousePosition;
+            SelectedComponents.instance.components.Clear();
         }
-        if (selecting && (Input.GetMouseButtonUp(0)) || SimulationInput.instance.GetEscapeKeyDown()) {
-            selecting = false;
+        if (isSelecting && (Input.GetMouseButtonUp(0)) || SimulationInput.instance.GetEscapeKeyDown()) {
+            isSelecting = false;
             selectionBox.SetActive(false);
         }
     }
@@ -63,25 +66,16 @@ public class MultiSelection : MonoBehaviour {
         );
     }
 
-    void SelectComponentsInsideSelectionBox() {
-        var activeComponents = SimulationPane.instance.GetActiveComponents();
-        foreach(var obj in activeComponents) {
-            var col = obj.GetComponent<Collider2D>();
-            if (col.IsTouching(boxCollider))
-                obj.GetComponent<BasicComponentEditing>().isSelected = true;
-            else
-                obj.GetComponent<BasicComponentEditing>().isSelected = false;
-        }
-
-        var activeWires = SimulationPane.instance.GetActiveWires();
-        foreach(var wire in activeWires) {
-            var cols = wire.GetComponentsInChildren<Collider2D>();
-            foreach (var col in cols) {
-                if (col.IsTouching(boxCollider))
-                    wire.GetComponent<Wire>().isSelected = true;
-                else
-                    wire.GetComponent<Wire>().isSelected = false;
-            }
-        }
-    }
+    //    var activeWires = SimulationPane.instance.GetActiveWires();
+    //    foreach(var wire in activeWires) {
+    //        var cols = wire.GetComponentsInChildren<Collider2D>();
+    //        foreach (var col in cols) {
+    //            if (col.IsTouching(boxCollider)) {
+    //                wire.GetComponent<Wire>().isSelected = true;
+    //                SelectedComponents.instance.components.Add(wire);
+    //            }
+    //            else
+    //                wire.GetComponent<Wire>().isSelected = false;
+    //        }
+    //    }
 }

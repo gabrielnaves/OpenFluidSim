@@ -68,7 +68,7 @@ public class PneumaticConnector : MonoBehaviour {
 
     void SelectThis() {
         isSelected = true;
-        SelectedComponent.instance.component = gameObject;
+        SelectedComponents.instance.SelectComponent(gameObject);
         WireCreator.instance.StartGeneration(transform.position);
     }
 
@@ -85,15 +85,15 @@ public class PneumaticConnector : MonoBehaviour {
     }
 
     bool HasOtherConnectorSelected() {
-        if (SelectedComponent.instance.HasComponent() && !SelectedComponent.instance.IsSelected(gameObject))
-            return SelectedComponent.instance.component.GetComponent<PneumaticConnector>();
+        if (SelectedComponents.instance.HasComponent() && !SelectedComponents.instance.IsSelected(gameObject))
+            return SelectedComponents.instance.HasComponentOfType<PneumaticConnector>();
         return false;
     }
 
     void ConnectConnectors() {
         GameObject wireObj = WireCreator.instance.RetrieveWire(transform.position);
         Wire wire = wireObj.GetComponent<Wire>();
-        wire.start = SelectedComponent.instance.component.GetComponent<PneumaticConnector>();
+        wire.start = SelectedComponents.instance.GetComponentOfType<PneumaticConnector>();
         wire.end = this;
         ActionStack.instance.PushAction(new NewPneumaticConnectionAction(wire.start, wire.end, wireObj));
     }
@@ -104,7 +104,7 @@ public class PneumaticConnector : MonoBehaviour {
 
     void CheckForDeselect() {
         if (RequestedDeselect()) {
-            SelectedComponent.instance.component = null;
+            SelectedComponents.instance.DeselectComponent(gameObject);
             isSelected = false;
             WireCreator.instance.StopGeneration();
         }
