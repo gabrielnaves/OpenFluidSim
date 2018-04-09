@@ -1,15 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Updates the cursor image when the mouse is hovering over the attached Collider2D
+/// </summary>
+/// Used alongside PneumaticConnector. 
+[RequireComponent(typeof(Collider2D))]
 public class ConnectorCursor : MonoBehaviour {
 
     public Texture2D cursorTexture;
     public Vector2 cursorHotspot = new Vector2(8, 8);
     public CursorMode cursorMode = CursorMode.Auto;
 
-    private Collider2D connectorCollider;
-    private bool isMouseHovering;
+    Collider2D connectorCollider;
+    bool isMouseHovering;
 
     void Awake() {
         connectorCollider = GetComponent<Collider2D>();

@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Visual representation of a pneumatic connection
+/// </summary>
+/// Wires are mostly for visualization purposes, but they can be
+/// selected and deleted.
+/// When a wire is deleted the corresponding  pneumatic connection
+/// is disabled as well.
+/// Wires are currently implemented as simple straight lines. This
+/// implementation will be improved if I have the time to do so.
 public class Wire : MonoBehaviour {
 
     public bool wireEnabled = false;

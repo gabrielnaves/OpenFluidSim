@@ -14,8 +14,8 @@ public class ActionStack : MonoBehaviour {
 
     static public ActionStack instance { get; private set; }
 
-    public Stack<IAction> actionStack { get; private set; }
-    public Stack<IAction> redoStack { get; private set; }
+    Stack<IAction> actionStack;
+    Stack<IAction> redoStack;
 
     public void PushAction(IAction action) {
         action.DoAction();
@@ -33,13 +33,21 @@ public class ActionStack : MonoBehaviour {
         actionStack.Push(redoStack.Pop());
     }
 
+    public int ActionStackSize() {
+        return actionStack.Count;
+    }
+
+    public int RedoStackSize() {
+        return redoStack.Count;
+    }
+
     void Awake() {
         instance = (ActionStack)Singleton.Setup(this, instance);
         actionStack = new Stack<IAction>();
         redoStack = new Stack<IAction>();
     }
 
-    private void ClearRedoStack() {
+    void ClearRedoStack() {
         foreach (var act in redoStack)
             act.OnDestroy();
         redoStack.Clear();

@@ -1,7 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Generates Wire objects
+/// </summary>
+///  Wires are currently implemented as simple straight lines. This
+/// implementation will be improved if I have the time to do so. 
 public class WireCreator : MonoBehaviour {
 
     public static WireCreator instance { get; private set; }

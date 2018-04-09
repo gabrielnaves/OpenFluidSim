@@ -15,6 +15,9 @@ public class FloatingSelection : MonoBehaviour {
 
     GameObject floatingComponent;
 
+    /// <summary>Adds a new floating component to the floating selection</summary>
+    /// There can only be one floating component active at any given time,
+    /// adding a new component will destroy the previous one.
     public void AddComponent(GameObject component) {
         RemoveCurrentComponent();
         floatingComponent = component;

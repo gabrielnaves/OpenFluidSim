@@ -6,6 +6,7 @@ using UnityEngine;
 /// Action for deleting wires, handling the objects target wire connects.
 /// </summary>
 /// Deletion is implemented by disabling the object, instead of destroying it.
+/// Deleting a wire also disables the corresponding pneumatic connection.
 public class DeleteWireAction : IAction {
 
     Wire referencedWire;

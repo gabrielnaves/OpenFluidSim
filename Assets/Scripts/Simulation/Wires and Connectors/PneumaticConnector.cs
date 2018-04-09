@@ -1,6 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Implements connections between pneumatic components
+/// </summary>
+/// This script creates and stores local pneumatic connection information,
+/// that is, other components that are connected to this component. 
+/// This script also activates the WireCreator when a connection is requested.
 public class PneumaticConnector : MonoBehaviour {
 
     public List<PneumaticConnector> connectedObjects = new List<PneumaticConnector>();
