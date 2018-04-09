@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4340256062119806}
-  - component: {fileID: 114339457899146926}
   m_Layer: 0
   m_Name: Connectors
   m_TagString: Untagged
@@ -35,6 +34,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4911368737436946}
+  - component: {fileID: 114805923765901442}
   m_Layer: 0
   m_Name: Connector (2)
   m_TagString: Untagged
@@ -50,6 +50,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4217608862302086}
+  - component: {fileID: 114741367304977446}
   m_Layer: 0
   m_Name: Connector (1)
   m_TagString: Untagged
@@ -65,6 +66,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4589994656928324}
+  - component: {fileID: 114470482286152372}
   m_Layer: 0
   m_Name: Connector (3)
   m_TagString: Untagged
@@ -81,6 +83,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4051065586076042}
   - component: {fileID: 114252110552492422}
+  - component: {fileID: 114839905592948212}
   - component: {fileID: 212511986999688642}
   - component: {fileID: 61424203643631294}
   - component: {fileID: 50262071572091962}
@@ -216,19 +219,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588d1a443e506654184c3d652a99ca18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114339457899146926
+--- !u!114 &114470482286152372
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1120645071678858}
+  m_GameObject: {fileID: 1551668842115566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8af17d62301bea84bb7f77c21f24d860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPrefab: {fileID: 1726225566437832, guid: 8171f81fb4f37524f8c9e7f827fb953f,
+    type: 2}
+--- !u!114 &114741367304977446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1441300484070016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8af17d62301bea84bb7f77c21f24d860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPrefab: {fileID: 1726225566437832, guid: 8171f81fb4f37524f8c9e7f827fb953f,
+    type: 2}
+--- !u!114 &114805923765901442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1343293898463086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8af17d62301bea84bb7f77c21f24d860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPrefab: {fileID: 1726225566437832, guid: 8171f81fb4f37524f8c9e7f827fb953f,
+    type: 2}
+--- !u!114 &114839905592948212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1954862927556124}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1e17ffcee5629946bd6416077ae4b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pneumaticConnectorPrefab: {fileID: 1726225566437832, guid: 8171f81fb4f37524f8c9e7f827fb953f,
-    type: 2}
 --- !u!212 &212511986999688642
 SpriteRenderer:
   m_ObjectHideFlags: 1

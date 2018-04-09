@@ -20,6 +20,10 @@ public class PneumaticConnector : MonoBehaviour {
         spriteRenderer.color = openColor;
     }
 
+    void Start() {
+        GetComponentInParent<ComponentConnections>().AddPneumaticConnector(this);
+    }
+
     public void AddConnection(PneumaticConnector other) {
         if (!connectedObjects.Contains(other))
             connectedObjects.Add(other);

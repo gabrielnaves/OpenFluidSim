@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4362120074660888}
-  - component: {fileID: 114610802707938344}
   m_Layer: 0
   m_Name: Mechanical Contacts
   m_TagString: Untagged
@@ -35,6 +34,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4332113303949460}
+  - component: {fileID: 114066195901069046}
   m_Layer: 0
   m_Name: Contact (1)
   m_TagString: Untagged
@@ -51,6 +51,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4694611923304926}
   - component: {fileID: 114114705520954270}
+  - component: {fileID: 114889702909820594}
   - component: {fileID: 212430561259481222}
   - component: {fileID: 61430861412195828}
   - component: {fileID: 50934176093264446}
@@ -147,6 +148,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.34, y: 0.38}
   m_EdgeRadius: 0
+--- !u!114 &114066195901069046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1536104005726136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8af17d62301bea84bb7f77c21f24d860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPrefab: {fileID: 1564929938265032, guid: 0e0e93393e7c9dd4cb833f543e212481,
+    type: 2}
 --- !u!114 &114114705520954270
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -158,19 +172,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588d1a443e506654184c3d652a99ca18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114610802707938344
+--- !u!114 &114889702909820594
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1122194159487054}
+  m_GameObject: {fileID: 1900003696779002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 166ab2aa15af6be49b16c6b947877f1c, type: 3}
+  m_Script: {fileID: 11500000, guid: d1e17ffcee5629946bd6416077ae4b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mechanicalContactPrefab: {fileID: 1564929938265032, guid: 0e0e93393e7c9dd4cb833f543e212481,
-    type: 2}
 --- !u!212 &212430561259481222
 SpriteRenderer:
   m_ObjectHideFlags: 1
