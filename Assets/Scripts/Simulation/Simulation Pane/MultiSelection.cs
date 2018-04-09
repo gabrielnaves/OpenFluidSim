@@ -35,7 +35,6 @@ public class MultiSelection : MonoBehaviour {
             isSelecting = true;
             selectionBox.SetActive(true);
             startingPosition = SimulationInput.instance.mousePosition;
-            SelectedComponents.instance.components.Clear();
         }
         if (isSelecting && (Input.GetMouseButtonUp(0)) || SimulationInput.instance.GetEscapeKeyDown()) {
             isSelecting = false;
@@ -65,17 +64,4 @@ public class MultiSelection : MonoBehaviour {
             1
         );
     }
-
-    //    var activeWires = SimulationPane.instance.GetActiveWires();
-    //    foreach(var wire in activeWires) {
-    //        var cols = wire.GetComponentsInChildren<Collider2D>();
-    //        foreach (var col in cols) {
-    //            if (col.IsTouching(boxCollider)) {
-    //                wire.GetComponent<Wire>().isSelected = true;
-    //                SelectedComponents.instance.components.Add(wire);
-    //            }
-    //            else
-    //                wire.GetComponent<Wire>().isSelected = false;
-    //        }
-    //    }
 }
