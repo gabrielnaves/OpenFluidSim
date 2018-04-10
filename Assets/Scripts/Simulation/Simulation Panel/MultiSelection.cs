@@ -44,10 +44,10 @@ public class MultiSelection : MonoBehaviour {
 
     bool ClickedOutsideAComponent() {
         if (SimulationInput.instance.mouseButtonDown) {
-            foreach (var col in SimulationPane.instance.componentsContainer.GetComponentsInChildren<Collider2D>())
+            foreach (var col in SimulationPanel.instance.componentsContainer.GetComponentsInChildren<Collider2D>())
                 if (col.OverlapPoint(SimulationInput.instance.mousePosition))
                     return false;
-            foreach (var col in SimulationPane.instance.wiresContainer.GetComponentsInChildren<Collider2D>())
+            foreach (var col in SimulationPanel.instance.wiresContainer.GetComponentsInChildren<Collider2D>())
                 if (col.OverlapPoint(SimulationInput.instance.mousePosition))
                     return false;
             return true;

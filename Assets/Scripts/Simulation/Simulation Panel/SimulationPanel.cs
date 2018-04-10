@@ -2,14 +2,14 @@
 using UnityEngine;
 
 /// <summary>
-/// Simulation pane singleton instance
+/// Simulation panel singleton instance
 /// </summary>
-/// Enables easy referencing to simulation pane object, and provides
+/// Enables easy referencing to simulation panel object, and provides
 /// a function for adding new components (pneumatic, etc.) to the
 /// components container.
-public class SimulationPane : MonoBehaviour {
+public class SimulationPanel : MonoBehaviour {
 
-    static public SimulationPane instance { get; private set; }
+    static public SimulationPanel instance { get; private set; }
 
     public Transform componentsContainer;
     public Transform wiresContainer;
@@ -19,6 +19,6 @@ public class SimulationPane : MonoBehaviour {
     }
 
     void Awake() {
-        instance = (SimulationPane)Singleton.Setup(this, instance);
+        instance = (SimulationPanel)Singleton.Setup(this, instance);
     }
 }

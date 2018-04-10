@@ -520,7 +520,7 @@ GameObject:
   - component: {fileID: 379646322}
   - component: {fileID: 379646323}
   m_Layer: 0
-  m_Name: Simulation Pane
+  m_Name: Simulation Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2215,7 +2215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56f9179f97a7b82459fd473d6dd69f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  component: {fileID: 0}
+  components: []
 --- !u!114 &1837970451
 MonoBehaviour:
   m_ObjectHideFlags: 0

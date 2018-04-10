@@ -19,7 +19,7 @@ public class NewComponentAction : IAction {
     public void DoAction() {
         createdComponent = Object.Instantiate(componentPrefab);
         createdComponent.transform.position = componentPosition;
-        SimulationPane.instance.AddNewComponent(createdComponent);
+        SimulationPanel.instance.AddNewComponent(createdComponent);
     }
 
     public void UndoAction() {
