@@ -11,10 +11,10 @@ public class SimulationInput : MouseInputArea {
     static public SimulationInput instance { get; private set; }
 
     public float holdDistance = 0.1f;
-    public float minHoldTime = 0.3f;
 
     public bool singleClick { get; private set; }
-    public bool mouseHold { get; private set; }
+    public bool mouseDrag { get; private set; }
+    public Vector2 startingHoldPoint { get; private set; }
 
     public bool GetEscapeKeyDown() {
         return Input.GetKeyDown(KeyCode.Escape);
@@ -26,27 +26,26 @@ public class SimulationInput : MouseInputArea {
     }
 
     bool clicked = false;
-    Vector2 mousePositionOnClick;
 
     void LateUpdate() {
         if (singleClick)
             singleClick = false;
 
         if (mouseButtonDown) {
-            mousePositionOnClick = mousePosition;
+            startingHoldPoint = mousePosition;
             clicked = true;
         }
 
         if (mouseButtonUp && clicked) {
-            if (!mouseHold)
+            if (!mouseDrag)
                 singleClick = true;
-            mouseHold = false;
+            mouseDrag = false;
             clicked = false;
         }
 
         if (clicked) {
-            if (Vector2.Distance(mousePosition, mousePositionOnClick) > holdDistance)
-                mouseHold = true;
+            if (Vector2.Distance(mousePosition, startingHoldPoint) > holdDistance)
+                mouseDrag = true;
         }
     }
 
