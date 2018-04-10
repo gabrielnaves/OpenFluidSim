@@ -557,6 +557,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentsContainer: {fileID: 861555994}
   wiresContainer: {fileID: 430173531}
+  activeComponents: []
+  activeWires: []
 --- !u!1 &430173530
 GameObject:
   m_ObjectHideFlags: 0

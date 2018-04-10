@@ -14,8 +14,32 @@ public class SimulationPanel : MonoBehaviour {
     public Transform componentsContainer;
     public Transform wiresContainer;
 
-    public void AddNewComponent(GameObject obj) {
-        obj.transform.parent = componentsContainer;
+    [ViewOnly]
+    public List<BasicComponentEditing> activeComponents;
+
+    [ViewOnly]
+    public List<Wire> activeWires;
+
+    public void AddComponent(BasicComponentEditing component) {
+        component.transform.parent = componentsContainer;
+        if (!activeComponents.Contains(component))
+            activeComponents.Add(component);
+    }
+
+    public void RemoveComponent(BasicComponentEditing component) {
+        if (activeComponents.Contains(component))
+            activeComponents.Remove(component);
+    }
+
+    public void AddWire(Wire wire) {
+        wire.transform.parent = wiresContainer;
+        if (!activeWires.Contains(wire))
+            activeWires.Add(wire);
+    }
+
+    public void RemoveWire(Wire wire) {
+        if (activeWires.Contains(wire))
+            activeWires.Remove(wire);
     }
 
     void Awake() {

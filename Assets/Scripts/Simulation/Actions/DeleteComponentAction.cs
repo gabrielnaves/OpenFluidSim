@@ -15,11 +15,13 @@ public class DeleteComponentAction : IAction {
 
     public void DoAction() {
         DeactivateConnections(referencedObject.GetComponent<ComponentConnections>());
+        SimulationPanel.instance.RemoveComponent(referencedObject.GetComponent<BasicComponentEditing>());
         referencedObject.SetActive(false);
     }
 
     public void UndoAction() {
         ReactivateConnections(referencedObject.GetComponent<ComponentConnections>());
+        SimulationPanel.instance.AddComponent(referencedObject.GetComponent<BasicComponentEditing>());
         referencedObject.SetActive(true);
     }
 
@@ -29,9 +31,9 @@ public class DeleteComponentAction : IAction {
 
     public void OnDestroy() {}
     
-    void DeactivateConnections(ComponentConnections componentConnectors) {
-        if (componentConnectors != null)
-            foreach (var connector in componentConnectors.connectorList)
+    void DeactivateConnections(ComponentConnections componentConnections) {
+        if (componentConnections != null)
+            foreach (var connector in componentConnections.connectorList)
                 RemoveExternalConnections(connector);
     }
 
@@ -40,9 +42,9 @@ public class DeleteComponentAction : IAction {
             other.RemoveConnection(connector);
     }
 
-    void ReactivateConnections(ComponentConnections componentConnectors) {
-        if (componentConnectors != null)
-            foreach (var connector in componentConnectors.connectorList)
+    void ReactivateConnections(ComponentConnections componentConnections) {
+        if (componentConnections != null)
+            foreach (var connector in componentConnections.connectorList)
                 AddExternalConnections(connector);
     }
 

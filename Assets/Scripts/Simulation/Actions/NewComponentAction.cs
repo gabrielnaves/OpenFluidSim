@@ -9,7 +9,7 @@ public class NewComponentAction : IAction {
     GameObject componentPrefab;
     Vector3 componentPosition;
 
-    GameObject createdComponent;
+    BasicComponentEditing createdComponent;
 
     public NewComponentAction(GameObject componentPrefab, Vector3 componentPosition) {
         this.componentPrefab = componentPrefab;
@@ -17,17 +17,19 @@ public class NewComponentAction : IAction {
     }
 
     public void DoAction() {
-        createdComponent = Object.Instantiate(componentPrefab);
+        createdComponent = Object.Instantiate(componentPrefab).GetComponent<BasicComponentEditing>();
         createdComponent.transform.position = componentPosition;
-        SimulationPanel.instance.AddNewComponent(createdComponent);
+        SimulationPanel.instance.AddComponent(createdComponent);
     }
 
     public void UndoAction() {
-        createdComponent.SetActive(false);
+        createdComponent.gameObject.SetActive(false);
+        SimulationPanel.instance.RemoveComponent(createdComponent);
     }
 
     public void RedoAction() {
-        createdComponent.SetActive(true);
+        createdComponent.gameObject.SetActive(true);
+        SimulationPanel.instance.AddComponent(createdComponent);
     }
 
     public void OnDestroy() {
