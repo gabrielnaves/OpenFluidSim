@@ -20,12 +20,14 @@ public class NewPneumaticConnectionAction : IAction {
         start.AddConnection(end);
         end.AddConnection(start);
         wire.SetActive(true);
+        SimulationPanel.instance.AddWire(wire.GetComponent<Wire>());
     }
 
     public void UndoAction() {
         start.RemoveConnection(end);
         end.RemoveConnection(start);
         wire.SetActive(false);
+        SimulationPanel.instance.RemoveWire(wire.GetComponent<Wire>());
     }
 
     public void RedoAction() {

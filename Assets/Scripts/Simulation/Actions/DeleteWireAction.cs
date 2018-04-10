@@ -19,12 +19,14 @@ public class DeleteWireAction : IAction {
         referencedWire.gameObject.SetActive(false);
         referencedWire.start.RemoveConnection(referencedWire.end);
         referencedWire.end.RemoveConnection(referencedWire.start);
+        SimulationPanel.instance.RemoveWire(referencedWire);
     }
 
     public void UndoAction() {
         referencedWire.gameObject.SetActive(true);
         referencedWire.start.AddConnection(referencedWire.end);
         referencedWire.end.AddConnection(referencedWire.start);
+        SimulationPanel.instance.AddWire(referencedWire);
     }
 
     public void RedoAction() {

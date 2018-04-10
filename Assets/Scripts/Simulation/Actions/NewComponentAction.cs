@@ -33,6 +33,6 @@ public class NewComponentAction : IAction {
     }
 
     public void OnDestroy() {
-        Object.Destroy(createdComponent);
+        Object.Destroy(createdComponent.gameObject);
     }
 }
