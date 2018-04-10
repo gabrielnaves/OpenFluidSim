@@ -15,18 +15,18 @@ public class SimulationPanel : MonoBehaviour {
     public Transform wiresContainer;
 
     [ViewOnly]
-    public List<BasicComponentEditing> activeComponents;
+    public List<BaseComponent> activeComponents;
 
     [ViewOnly]
     public List<Wire> activeWires;
 
-    public void AddComponent(BasicComponentEditing component) {
+    public void AddComponent(BaseComponent component) {
         component.transform.parent = componentsContainer;
         if (!activeComponents.Contains(component))
             activeComponents.Add(component);
     }
 
-    public void RemoveComponent(BasicComponentEditing component) {
+    public void RemoveComponent(BaseComponent component) {
         if (activeComponents.Contains(component))
             activeComponents.Remove(component);
     }

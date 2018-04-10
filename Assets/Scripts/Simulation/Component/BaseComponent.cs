@@ -6,7 +6,7 @@
 /// This script reunites the implementation for each editing action on
 /// a single MonoBehaviour. This method results in a cleaner game object
 /// for electric and pneumatic components.
-public class BasicComponentEditing : MonoBehaviour {
+public class BaseComponent : MonoBehaviour {
 
     public bool isSelected;
 

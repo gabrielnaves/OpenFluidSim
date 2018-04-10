@@ -15,13 +15,13 @@ public class DeleteComponentAction : IAction {
 
     public void DoAction() {
         DeactivateConnections(referencedObject.GetComponent<ComponentConnections>());
-        SimulationPanel.instance.RemoveComponent(referencedObject.GetComponent<BasicComponentEditing>());
+        SimulationPanel.instance.RemoveComponent(referencedObject.GetComponent<BaseComponent>());
         referencedObject.SetActive(false);
     }
 
     public void UndoAction() {
         ReactivateConnections(referencedObject.GetComponent<ComponentConnections>());
-        SimulationPanel.instance.AddComponent(referencedObject.GetComponent<BasicComponentEditing>());
+        SimulationPanel.instance.AddComponent(referencedObject.GetComponent<BaseComponent>());
         referencedObject.SetActive(true);
     }
 
