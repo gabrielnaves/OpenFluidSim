@@ -32,7 +32,7 @@ public class MouseInputArea : MonoBehaviour {
 
     public bool mouseButtonUp {
         get {
-            return Input.GetMouseButtonUp(LeftMouseButton) || !IsMouseInsideInputArea();
+            return Input.GetMouseButtonUp(LeftMouseButton);
         }
     }
 
@@ -50,7 +50,7 @@ public class MouseInputArea : MonoBehaviour {
 
     public bool rightMouseButtonUp {
         get {
-            return Input.GetMouseButtonUp(RightMouseButton) || !IsMouseInsideInputArea();
+            return Input.GetMouseButtonUp(RightMouseButton);
         }
     }
 
@@ -68,7 +68,7 @@ public class MouseInputArea : MonoBehaviour {
 
     public bool middleMouseButtonUp {
         get {
-            return Input.GetMouseButtonUp(MiddleMouseButton) || !IsMouseInsideInputArea();
+            return Input.GetMouseButtonUp(MiddleMouseButton);
         }
     }
 
