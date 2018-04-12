@@ -11,8 +11,10 @@ public class SimulationInput : MouseInputArea {
     static public SimulationInput instance { get; private set; }
 
     public float holdDistance = 0.1f;
+    public float doubleClickTime = 0.2f;
 
     public bool singleClick { get; private set; }
+    public bool doubleClick { get; private set; }
     public bool mouseDrag { get; private set; }
     public bool mouseDragStart { get; private set; }
     public bool mouseDragEnd { get; private set; }
@@ -24,9 +26,12 @@ public class SimulationInput : MouseInputArea {
     }
 
     bool clicked = false;
+    bool waitingSecondClick = false;
+    float elapsedTime = 0;
 
     void Update() {
         ResetSingleFrameFlags();
+        UpdateDoubleClickTimer();
 
         if (mouseButtonDown) {
             startingDragPoint = mousePosition;
@@ -34,8 +39,17 @@ public class SimulationInput : MouseInputArea {
         }
 
         if (mouseButtonUp && clicked) {
-            if (!mouseDrag)
-                singleClick = true;
+            if (!mouseDrag) {
+                if (!waitingSecondClick) {
+                    waitingSecondClick = true;
+                    singleClick = true;
+                }
+                else {
+                    waitingSecondClick = false;
+                    elapsedTime = 0f;
+                    doubleClick = true;
+                }
+            }
             else
                 mouseDragEnd = true;
             mouseDrag = false;
@@ -51,10 +65,22 @@ public class SimulationInput : MouseInputArea {
     void ResetSingleFrameFlags() {
         if (singleClick)
             singleClick = false;
+        if (doubleClick)
+            doubleClick = false;
         if (mouseDragStart)
             mouseDragStart = false;
         if (mouseDragEnd)
             mouseDragEnd = false;
+    }
+
+    void UpdateDoubleClickTimer() {
+        if (waitingSecondClick) {
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime > doubleClickTime) {
+                waitingSecondClick = false;
+                elapsedTime = 0f;
+            }
+        }
     }
 
     bool Equal(Vector2 a, Vector2 b) {
