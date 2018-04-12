@@ -22,6 +22,7 @@ public class SimulationPanel : MonoBehaviour {
 
     List<ISelectable> activeSelectables;
     List<IDraggable> activeDraggables;
+    List<IConfigurable> activeConfigurables;
 
     public BaseComponent[] GetActiveComponents() {
         return activeComponents.ToArray();
@@ -49,6 +50,10 @@ public class SimulationPanel : MonoBehaviour {
 
     public IDraggable[] GetActiveDraggables() {
         return activeDraggables.ToArray();
+    }
+
+    public IConfigurable[] GetActiveConfigurables() {
+        return activeConfigurables.ToArray();
     }
 
     public void AddComponent(BaseComponent component) {
@@ -123,6 +128,16 @@ public class SimulationPanel : MonoBehaviour {
             activeDraggables.Remove(draggable);
     }
 
+    public void AddConfigurable(IConfigurable configurable) {
+        if (!activeConfigurables.Contains(configurable))
+            activeConfigurables.Add(configurable);
+    }
+
+    public void RemoveConfigurable(IConfigurable configurable) {
+        if (activeConfigurables.Contains(configurable))
+            activeConfigurables.Remove(configurable);
+    }
+
     void Awake() {
         instance = (SimulationPanel)Singleton.Setup(this, instance);
         activeComponents = new List<BaseComponent>();
@@ -133,5 +148,6 @@ public class SimulationPanel : MonoBehaviour {
 
         activeSelectables = new List<ISelectable>();
         activeDraggables = new List<IDraggable>();
+        activeConfigurables = new List<IConfigurable>();
     }
 }

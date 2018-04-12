@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Handler for all mouse inputs on the simulation panel during edit mode
@@ -27,6 +25,15 @@ public class EditorMouseInputHandler : MonoBehaviour {
             foreach (var selectable in simPanel.GetActiveSelectables()) {
                 if (selectable.RequestedSelect()) {
                     SelectedObjects.instance.SelectObject(selectable);
+                    break;
+                }
+            }
+        }
+        if (input.doubleClick) {
+            foreach (var configurable in simPanel.GetActiveConfigurables()) {
+                if (configurable.RequestedConfig()) {
+                    SelectedObjects.instance.ClearSelection();
+                    configurable.OpenConfigWindow();
                     break;
                 }
             }
