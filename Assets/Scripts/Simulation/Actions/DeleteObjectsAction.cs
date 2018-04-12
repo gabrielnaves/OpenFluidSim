@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Action for deleting components from the simulator editor
@@ -7,9 +8,9 @@
 /// Automatically handles connections to the target component.
 public class DeleteObjectsAction : IAction {
 
-    BaseComponent[] referencedComponents;
+    List<BaseComponent> referencedComponents;
     
-    public DeleteObjectsAction(BaseComponent[] referencedComponents) {
+    public DeleteObjectsAction(List<BaseComponent> referencedComponents) {
         this.referencedComponents = referencedComponents;
     }
 

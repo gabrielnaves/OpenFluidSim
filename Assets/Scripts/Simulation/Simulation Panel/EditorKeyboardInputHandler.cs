@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class EditorKeyboardInputHandler : MonoBehaviour {
 
@@ -14,8 +15,8 @@ public class EditorKeyboardInputHandler : MonoBehaviour {
     }
 
     void RotateCommand(bool clockwise) {
-        BaseComponent[] componentsToRotate = SelectedObjects.instance.GetSelectedComponents();
-        if (componentsToRotate.Length > 0)
+        List<BaseComponent> componentsToRotate = SelectedObjects.instance.GetSelectedComponents();
+        if (componentsToRotate.Count > 0)
             ActionStack.instance.PushAction(new RotateComponentAction(
                 componentsToRotate,
                 clockwise
@@ -23,8 +24,8 @@ public class EditorKeyboardInputHandler : MonoBehaviour {
     }
 
     void DeleteCommand() {
-        BaseComponent[] componentsToDelete = SelectedObjects.instance.GetSelectedComponents();
-        if (componentsToDelete.Length > 0)
+        List<BaseComponent> componentsToDelete = SelectedObjects.instance.GetSelectedComponents();
+        if (componentsToDelete.Count > 0)
             ActionStack.instance.PushAction(new DeleteObjectsAction(componentsToDelete));
     }
 }

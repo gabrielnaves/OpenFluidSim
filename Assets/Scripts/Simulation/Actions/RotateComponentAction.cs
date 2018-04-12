@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Action for rotating components (relative to previous rotation value)
@@ -7,11 +8,11 @@
 /// a multiple of 90.
 public class RotateComponentAction : IAction {
 
-    BaseComponent[] referencedComponents;
+    List<BaseComponent> referencedComponents;
     bool clockwise;
     float rotationAmount;
 
-    public RotateComponentAction(BaseComponent[] referencedComponents, bool clockwise) {
+    public RotateComponentAction(List<BaseComponent> referencedComponents, bool clockwise) {
         this.referencedComponents = referencedComponents;
         this.clockwise = clockwise;
         rotationAmount = clockwise ? -90f : 90;
@@ -44,7 +45,7 @@ public class RotateComponentAction : IAction {
     public void OnDestroy() {}
 
     public string Name() {
-        if (referencedComponents.Length == 1)
+        if (referencedComponents.Count == 1)
             return "Rotate " + (clockwise ? "clockwise " : "counter-clockwise ") + referencedComponents[0];
         return "Rotate multiple " + (clockwise ? "clockwise" : "counter-clockwise");
     }

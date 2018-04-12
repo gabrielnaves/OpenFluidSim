@@ -2,15 +2,12 @@
 using UnityEngine;
 
 /// <summary>
-/// Holds the reference to the currently selected components or wires
+/// Holds the reference to the currently selected objects
 /// </summary>
 public class SelectedObjects : MonoBehaviour {
 
     static public SelectedObjects instance { get; private set; }
 
-    /// <summary>
-    /// Currently selected objects
-    /// </summary>
     List<ISelectable> selectedObjects = new List<ISelectable>();
 
     public bool HasObject() {
@@ -47,14 +44,13 @@ public class SelectedObjects : MonoBehaviour {
         return selectedObjects.ToArray();
     }
 
-    public BaseComponent[] GetSelectedComponents() {
-        if (selectedObjects == null)
-            return new BaseComponent[0];
+    public List<BaseComponent> GetSelectedComponents() {
         List<BaseComponent> selectedComponents = new List<BaseComponent>();
-        foreach (var obj in selectedObjects)
-            if (obj is BaseComponent)
-                selectedComponents.Add(obj as BaseComponent);
-        return selectedComponents.ToArray();
+        if (selectedObjects != null)
+            foreach (var obj in selectedObjects)
+                if (obj is BaseComponent)
+                    selectedComponents.Add(obj as BaseComponent);
+        return selectedComponents;
     }
 
     void Awake() {

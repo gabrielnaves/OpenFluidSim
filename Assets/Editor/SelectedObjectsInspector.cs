@@ -25,7 +25,10 @@ public class SelectedObjectsInspector : Editor {
             else {
                 EditorGUILayout.LabelField(objects.Length + " selected objects");
                 foreach (var obj in objects)
-                    EditorGUILayout.ObjectField(obj as MonoBehaviour, typeof(MonoBehaviour), allowSceneObjects:true);
+                    if (obj is MonoBehaviour)
+                        EditorGUILayout.ObjectField(obj as MonoBehaviour, typeof(MonoBehaviour), allowSceneObjects:true);
+                    else
+                        EditorGUILayout.LabelField("Object: " + obj);
             }
         }
     }
