@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Handles input within the simulation pane
+/// Produces input flags specific to the simulation panel
 /// </summary>
 /// This class extends MouseInputArea's functionality via inheritance.
 /// Unlike the base class, this one is inteded to be unique on scene,
@@ -14,7 +14,9 @@ public class SimulationInput : MouseInputArea {
 
     public bool singleClick { get; private set; }
     public bool mouseDrag { get; private set; }
-    public Vector2 startingHoldPoint { get; private set; }
+    public bool mouseDragStart { get; private set; }
+    public bool mouseDragEnd { get; private set; }
+    public Vector2 startingDragPoint { get; private set; }
 
     public bool GetEscapeKeyDown() {
         return Input.GetKeyDown(KeyCode.Escape);
@@ -27,26 +29,36 @@ public class SimulationInput : MouseInputArea {
 
     bool clicked = false;
 
-    void LateUpdate() {
-        if (singleClick)
-            singleClick = false;
+    void Update() {
+        ResetSingleFrameFlags();
 
         if (mouseButtonDown) {
-            startingHoldPoint = mousePosition;
+            startingDragPoint = mousePosition;
             clicked = true;
         }
 
         if (mouseButtonUp && clicked) {
             if (!mouseDrag)
                 singleClick = true;
+            else
+                mouseDragEnd = true;
             mouseDrag = false;
             clicked = false;
         }
 
         if (clicked) {
-            if (Vector2.Distance(mousePosition, startingHoldPoint) > holdDistance)
-                mouseDrag = true;
+            if (Vector2.Distance(mousePosition, startingDragPoint) > holdDistance && !mouseDrag)
+                mouseDrag = mouseDragStart = true;
         }
+    }
+
+    void ResetSingleFrameFlags() {
+        if (singleClick)
+            singleClick = false;
+        if (mouseDragStart)
+            mouseDragStart = false;
+        if (mouseDragEnd)
+            mouseDragEnd = false;
     }
 
     bool Equal(Vector2 a, Vector2 b) {

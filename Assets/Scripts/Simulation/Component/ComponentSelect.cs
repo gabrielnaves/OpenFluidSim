@@ -23,31 +23,31 @@ public class ComponentSelect {
     }
 
     public void Update() {
-        if (InvalidReferences()) {
-            isSelected = false;
-            return;
-        }
+        //if (InvalidReferences()) {
+        //    isSelected = false;
+        //    return;
+        //}
 
-        if (MultiSelection.instance.isSelecting) {
-            isSelected = false;
-            foreach (var collider in colliders) {
-                if (MultiSelection.instance.TouchingSelectionBox(collider))
-                    isSelected = true;
-            }
-        }
-        else if (SimulationInput.instance.mouseButtonDown) {
-            isSelected = false;
-            foreach (var collider in colliders) {
-                if (collider.OverlapPoint(SimulationInput.instance.mousePosition))
-                    isSelected = true;
-            }
-        }
-        if (SimulationInput.instance.GetEscapeKeyDown())
-            isSelected = false;
-        if (isSelected)
-            SelectedComponents.instance.SelectComponent(gameObject);
-        else
-            SelectedComponents.instance.DeselectComponent(gameObject);
+        //if (BoxSelection.instance.isSelecting) {
+        //    isSelected = false;
+        //    foreach (var collider in colliders) {
+        //        if (BoxSelection.instance.TouchingSelectionBox(collider))
+        //            isSelected = true;
+        //    }
+        //}
+        //else if (SimulationInput.instance.mouseButtonDown) {
+        //    isSelected = false;
+        //    foreach (var collider in colliders) {
+        //        if (collider.OverlapPoint(SimulationInput.instance.mousePosition))
+        //            isSelected = true;
+        //    }
+        //}
+        //if (SimulationInput.instance.GetEscapeKeyDown())
+        //    isSelected = false;
+        //if (isSelected)
+        //    SelectedComponents.instance.SelectComponent(gameObject);
+        //else
+        //    SelectedComponents.instance.DeselectComponent(gameObject);
     }
 
     bool InvalidReferences() {

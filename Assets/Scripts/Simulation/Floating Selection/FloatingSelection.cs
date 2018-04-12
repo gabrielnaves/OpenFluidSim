@@ -29,6 +29,15 @@ public class FloatingSelection : MonoBehaviour {
             DestroyImmediate(floatingComponent);
     }
 
+    public bool HasFloatingComponent() {
+        return floatingComponent != null;
+    }
+
+    public void PlaceFloatingComponent() {
+        floatingComponent.GetComponent<FloatingComponent>().CreateObjectOnSimulationPane();
+        RemoveCurrentComponent();
+    }
+
 	void Awake () {
         instance = (FloatingSelection)Singleton.Setup(this, instance);
 	}

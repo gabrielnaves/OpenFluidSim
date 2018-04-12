@@ -6,35 +6,41 @@
 /// This script reunites the implementation for each editing action on
 /// a single MonoBehaviour. This method results in a cleaner game object
 /// for electric and pneumatic components.
-public class BaseComponent : MonoBehaviour {
+public class BaseComponent : MonoBehaviour, ISelectable, IDraggable {
 
-    public bool isSelected;
+    new Collider2D collider;
+    SpriteRenderer spriteRenderer;
 
-    ComponentSelect componentSelect;
-    ComponentMove componentMove;
-    ComponentRotate componentRotate;
-    ComponentDelete componentDelete;
+    public bool RequestedSelect() {
+        return SimulationInput.instance.singleClick && collider.OverlapPoint(SimulationInput.instance.mousePosition);
+    }
+
+    public bool IsInsideSelectionBox(Collider2D selectionBox) {
+        return selectionBox.IsTouching(collider);
+    }
+
+    public void OnSelect() {
+        spriteRenderer.color = new Color32(191, 186, 255, 255);
+    }
+
+    public void OnDeselect() {
+        spriteRenderer.color = Color.white;
+    }
+
+    public bool RequestedDrag() {
+        return SimulationInput.instance.mouseDragStart && collider.OverlapPoint(SimulationInput.instance.startingDragPoint);
+    }
+
+    public void StartDragging() {
+
+    }
+
+    public void EndDragging() {
+
+    }
 
     void Awake() {
-        componentSelect = new ComponentSelect(gameObject, GetComponent<BoxCollider2D>());
-        componentMove = new ComponentMove(gameObject, GetComponent<BoxCollider2D>());
-        componentRotate = new ComponentRotate(gameObject);
-        componentDelete = new ComponentDelete(gameObject);
-    }
-
-    void OnDisable() {
-        isSelected = false;
-    }
-
-    void Update() {
-        componentSelect.Update();
-        if (componentSelect.isSelected) {
-            GetComponent<SpriteRenderer>().color = new Color32(191, 186, 255, 255);
-            componentMove.Update();
-            componentRotate.Update();
-            componentDelete.Update();
-        }
-        else
-            GetComponent<SpriteRenderer>().color = Color.white;
+        collider = GetComponent<Collider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 }

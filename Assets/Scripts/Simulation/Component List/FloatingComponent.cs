@@ -15,7 +15,6 @@ public class FloatingComponent : MonoBehaviour {
 	void Update () {
         FollowMousePosition();
         CheckForEscapeInput();
-        CheckForMouseInput();
     }
 
     private void FollowMousePosition() {
@@ -29,14 +28,7 @@ public class FloatingComponent : MonoBehaviour {
             FloatingSelection.instance.RemoveCurrentComponent();
     }
 
-    private void CheckForMouseInput() {
-        if (SimulationInput.instance.mouseButtonDown) {
-            CreateObjectOnSimulationPane();
-            FloatingSelection.instance.RemoveCurrentComponent();
-        }
-    }
-
-    private void CreateObjectOnSimulationPane() {
+    public void CreateObjectOnSimulationPane() {
         ActionStack.instance.PushAction(new NewComponentAction(componentPrefab, transform.position));
     }
 }

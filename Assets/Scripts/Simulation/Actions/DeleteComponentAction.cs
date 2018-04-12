@@ -14,13 +14,13 @@ public class DeleteComponentAction : IAction {
     }
 
     public void DoAction() {
-        DeactivateConnections(referencedObject.GetComponent<ComponentConnections>());
+        //DeactivateConnections(referencedObject.GetComponent<ComponentConnections>());
         SimulationPanel.instance.RemoveComponent(referencedObject.GetComponent<BaseComponent>());
         referencedObject.SetActive(false);
     }
 
     public void UndoAction() {
-        ReactivateConnections(referencedObject.GetComponent<ComponentConnections>());
+        //ReactivateConnections(referencedObject.GetComponent<ComponentConnections>());
         SimulationPanel.instance.AddComponent(referencedObject.GetComponent<BaseComponent>());
         referencedObject.SetActive(true);
     }
@@ -31,25 +31,25 @@ public class DeleteComponentAction : IAction {
 
     public void OnDestroy() {}
     
-    void DeactivateConnections(ComponentConnections componentConnections) {
-        if (componentConnections != null)
-            foreach (var connector in componentConnections.connectorList)
-                RemoveExternalConnections(connector);
-    }
+    //void DeactivateConnections(ComponentConnections componentConnections) {
+    //    if (componentConnections != null)
+    //        foreach (var connector in componentConnections.connectorList)
+    //            RemoveExternalConnections(connector);
+    //}
 
-    void RemoveExternalConnections(PneumaticConnector connector) {
-        foreach (var other in connector.connectedObjects)
-            other.RemoveConnection(connector);
-    }
+    //void RemoveExternalConnections(PneumaticConnector connector) {
+    //    foreach (var other in connector.connectedObjects)
+    //        other.RemoveConnection(connector);
+    //}
 
-    void ReactivateConnections(ComponentConnections componentConnections) {
-        if (componentConnections != null)
-            foreach (var connector in componentConnections.connectorList)
-                AddExternalConnections(connector);
-    }
+    //void ReactivateConnections(ComponentConnections componentConnections) {
+    //    if (componentConnections != null)
+    //        foreach (var connector in componentConnections.connectorList)
+    //            AddExternalConnections(connector);
+    //}
 
-    void AddExternalConnections(PneumaticConnector connector) {
-        foreach (var other in connector.connectedObjects)
-            other.AddConnection(connector);
-    }
+    //void AddExternalConnections(PneumaticConnector connector) {
+    //    foreach (var other in connector.connectedObjects)
+    //        other.AddConnection(connector);
+    //}
 }
