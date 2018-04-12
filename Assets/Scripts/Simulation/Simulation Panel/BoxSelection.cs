@@ -9,11 +9,13 @@ public class BoxSelection : MonoBehaviour {
     [ViewOnly]
     public bool isSelecting;
 
+    bool additiveSelection;
     Collider2D boxCollider;
     Vector3 startingPosition;
 
     public void StartSelecting() {
         isSelecting = true;
+        additiveSelection = Input.GetKey(KeyCode.LeftShift);
         selectionBox.SetActive(true);
         startingPosition = SimulationInput.instance.startingDragPoint;
         ResizeSelectionBox();
@@ -48,7 +50,8 @@ public class BoxSelection : MonoBehaviour {
     }
 
     void CheckForSelectableObjects() {
-        SelectedObjects.instance.ClearSelection();
+        if (!additiveSelection)
+            SelectedObjects.instance.ClearSelection();
         foreach (var selectable in SimulationPanel.instance.GetActiveSelectables()) {
             if (selectable.IsInsideSelectionBox(boxCollider))
                 SelectedObjects.instance.SelectObject(selectable);

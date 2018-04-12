@@ -22,7 +22,8 @@ public class EditorMouseInputHandler : MonoBehaviour {
             justPlacedFloatingComponent = true;
         }
         if (input.singleClick && !justPlacedFloatingComponent) {
-            SelectedObjects.instance.ClearSelection();
+            if (!Input.GetKey(KeyCode.LeftShift))
+                SelectedObjects.instance.ClearSelection();
             foreach (var selectable in simPanel.GetActiveSelectables()) {
                 if (selectable.RequestedSelect()) {
                     SelectedObjects.instance.SelectObject(selectable);
