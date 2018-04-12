@@ -18,6 +18,7 @@ public class SimulationPanel : MonoBehaviour {
     [ViewOnly] public List<Connector> activePneumaticConnectors;
     [ViewOnly] public List<Connector> activeElectricConnectors;
     [ViewOnly] public List<Wire> activeWires;
+    [ViewOnly] public List<Coil> activeCoils;
 
     List<ISelectable> activeSelectables;
     List<IDraggable> activeDraggables;
@@ -36,6 +37,10 @@ public class SimulationPanel : MonoBehaviour {
 
     public Wire[] GetActiveWires() {
         return activeWires.ToArray();
+    }
+
+    public Coil[] GetActiveCoils() {
+        return activeCoils.ToArray();
     }
 
     public ISelectable[] GetActiveSelectables() {
@@ -88,6 +93,16 @@ public class SimulationPanel : MonoBehaviour {
             activeWires.Remove(wire);
     }
 
+    public void AddCoil(Coil coil) {
+        if (!activeCoils.Contains(coil))
+            activeCoils.Add(coil);
+    }
+
+    public void RemoveCoil(Coil coil) {
+        if (activeCoils.Contains(coil))
+            activeCoils.Remove(coil);
+    }
+
     public void AddSelectable(ISelectable selectable) {
         if (!activeSelectables.Contains(selectable))
             activeSelectables.Add(selectable);
@@ -112,7 +127,10 @@ public class SimulationPanel : MonoBehaviour {
         instance = (SimulationPanel)Singleton.Setup(this, instance);
         activeComponents = new List<BaseComponent>();
         activePneumaticConnectors = new List<Connector>();
+        activeElectricConnectors = new List<Connector>();
         activeWires = new List<Wire>();
+        activeCoils = new List<Coil>();
+
         activeSelectables = new List<ISelectable>();
         activeDraggables = new List<IDraggable>();
     }

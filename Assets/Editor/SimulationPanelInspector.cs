@@ -7,8 +7,8 @@ using UnityEditor;
 public class SimulationPanelInspector : Editor {
 
     SimulationPanel simPanel;
-    bool showSelectables = true;
-    bool showDraggables = true;
+    static bool showSelectables = false;
+    static bool showDraggables = false;
 
     void OnEnable() {
         simPanel = target as SimulationPanel;

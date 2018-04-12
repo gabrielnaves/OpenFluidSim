@@ -771,6 +771,7 @@ MonoBehaviour:
   activePneumaticConnectors: []
   activeElectricConnectors: []
   activeWires: []
+  activeCoils: []
 --- !u!1001 &425265899
 Prefab:
   m_ObjectHideFlags: 0
