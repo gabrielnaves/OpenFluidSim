@@ -18,11 +18,12 @@ public class ActionStackInspector : Editor {
 
     public override void OnInspectorGUI() {
         base.OnInspectorGUI();
-
-        EditorGUILayout.Space();
-        DrawActionStack("Action stack", actionStack.GetActionStack());
-        EditorGUILayout.Space();
-        DrawActionStack("Redo stack", actionStack.GetRedoStack());
+        if (Application.isPlaying) {
+            EditorGUILayout.Space();
+            DrawActionStack("Action stack", actionStack.GetActionStack());
+            EditorGUILayout.Space();
+            DrawActionStack("Redo stack", actionStack.GetRedoStack());
+        }
     }
 
     void DrawActionStack(string title, IAction[] actions) {

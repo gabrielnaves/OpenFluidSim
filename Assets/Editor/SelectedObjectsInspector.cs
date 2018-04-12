@@ -18,14 +18,15 @@ public class SelectedObjectsInspector : Editor {
 
     public override void OnInspectorGUI() {
         base.OnInspectorGUI();
-
-        ISelectable[] objects = selectedObjects.GetSelectedObjects();
-        if (objects.Length == 0)
-            EditorGUILayout.LabelField("No selected objects");
-        else {
-            EditorGUILayout.LabelField(objects.Length + " selected objects");
-            foreach (var obj in objects)
-                EditorGUILayout.ObjectField(obj as MonoBehaviour, typeof(MonoBehaviour), allowSceneObjects:true);
+        if (Application.isPlaying) {
+            ISelectable[] objects = selectedObjects.GetSelectedObjects();
+            if (objects.Length == 0)
+                EditorGUILayout.LabelField("No selected objects");
+            else {
+                EditorGUILayout.LabelField(objects.Length + " selected objects");
+                foreach (var obj in objects)
+                    EditorGUILayout.ObjectField(obj as MonoBehaviour, typeof(MonoBehaviour), allowSceneObjects:true);
+            }
         }
     }
 }
