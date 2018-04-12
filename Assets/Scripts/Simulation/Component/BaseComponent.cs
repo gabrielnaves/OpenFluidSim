@@ -51,7 +51,6 @@ public class BaseComponent : MonoBehaviour, ISelectable, IDraggable {
     }
     
     void Update() {
-        if (componentMove.moving)
-            componentMove.Update();
+        componentMove.Update();
     }
 }

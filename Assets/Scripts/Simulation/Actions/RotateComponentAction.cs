@@ -7,32 +7,34 @@
 /// a multiple of 90.
 public class RotateComponentAction : IAction {
 
-    GameObject referencedObject;
-
-    /// <summary>
-    /// Rotation amount in degrees
-    /// </summary>
+    BaseComponent[] referencedComponents;
+    bool clockwise;
     float rotationAmount;
 
-    public RotateComponentAction(GameObject referencedObject, float rotationAmount) {
-        this.referencedObject = referencedObject;
-        this.rotationAmount = rotationAmount;
+    public RotateComponentAction(BaseComponent[] referencedComponents, bool clockwise) {
+        this.referencedComponents = referencedComponents;
+        this.clockwise = clockwise;
+        rotationAmount = clockwise ? -90f : 90;
     }
 
     public void DoAction() {
-        Quaternion rotation = referencedObject.transform.rotation;
-        Vector3 eulerAngles = rotation.eulerAngles;
-        eulerAngles.z += rotationAmount;
-        rotation.eulerAngles = eulerAngles;
-        referencedObject.transform.rotation = rotation;
+        foreach (var component in referencedComponents) {
+            Quaternion rotation = component.transform.rotation;
+            Vector3 eulerAngles = rotation.eulerAngles;
+            eulerAngles.z += rotationAmount;
+            rotation.eulerAngles = eulerAngles;
+            component.transform.rotation = rotation;
+        }
     }
 
     public void UndoAction() {
-        Quaternion rotation = referencedObject.transform.rotation;
-        Vector3 eulerAngles = rotation.eulerAngles;
-        eulerAngles.z -= rotationAmount;
-        rotation.eulerAngles = eulerAngles;
-        referencedObject.transform.rotation = rotation;
+        foreach (var component in referencedComponents) {
+            Quaternion rotation = component.transform.rotation;
+            Vector3 eulerAngles = rotation.eulerAngles;
+            eulerAngles.z -= rotationAmount;
+            rotation.eulerAngles = eulerAngles;
+            component.transform.rotation = rotation;
+        }
     }
 
     public void RedoAction() {
@@ -42,6 +44,8 @@ public class RotateComponentAction : IAction {
     public void OnDestroy() {}
 
     public string Name() {
-        return "Rotate component";
+        if (referencedComponents.Length == 1)
+            return "Rotate " + (clockwise ? "clockwise " : "counter-clockwise ") + referencedComponents[0];
+        return "Rotate multiple " + (clockwise ? "clockwise" : "counter-clockwise");
     }
 }

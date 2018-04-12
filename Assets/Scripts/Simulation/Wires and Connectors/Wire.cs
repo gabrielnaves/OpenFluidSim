@@ -20,42 +20,42 @@ public class Wire : MonoBehaviour {
     public List<BoxCollider2D> clickColliders = new List<BoxCollider2D>();
 
     LineRenderer lineRenderer;
-    ComponentSelect componentSelect;
+    //ComponentSelect componentSelect;
 
     void Awake() {
         lineRenderer = GetComponent<LineRenderer>();
-        componentSelect = new ComponentSelect();
+        //componentSelect = new ComponentSelect();
     }
 
     void Update() {
-        componentSelect.Update();
-        if (componentSelect.isSelected && Input.GetKeyDown(KeyCode.Delete))
-            ActionStack.instance.PushAction(new DeleteWireAction(this));
+        //componentSelect.Update();
+        //if (componentSelect.isSelected && Input.GetKeyDown(KeyCode.Delete))
+        //    ActionStack.instance.PushAction(new DeleteWireAction(this));
     }
 
     void LateUpdate() {
-        if (AttachedComponentsEnabled())
-            wireEnabled = true;
-        if (wireEnabled) {
-            if (!AttachedComponentsEnabled()) {
-                lineRenderer.startColor = Color.clear;
-                lineRenderer.endColor = Color.clear;
-                wireEnabled = false;
-            }
-            else if (componentSelect.isSelected) {
-                lineRenderer.startColor = Color.green;
-                lineRenderer.endColor = Color.green;
-            }
-            else {
-                lineRenderer.startColor = Color.black;
-                lineRenderer.endColor = Color.black;
-            }
-            if (AttachedComponentsMoved()) {
-                points[0] = start.transform.position;
-                points[points.Count-1] = end.transform.position;
-                UpdateLineRenderer();
-            }
-        }
+        //if (AttachedComponentsEnabled())
+        //    wireEnabled = true;
+        //if (wireEnabled) {
+        //    if (!AttachedComponentsEnabled()) {
+        //        lineRenderer.startColor = Color.clear;
+        //        lineRenderer.endColor = Color.clear;
+        //        wireEnabled = false;
+        //    }
+        //    else if (componentSelect.isSelected) {
+        //        lineRenderer.startColor = Color.green;
+        //        lineRenderer.endColor = Color.green;
+        //    }
+        //    else {
+        //        lineRenderer.startColor = Color.black;
+        //        lineRenderer.endColor = Color.black;
+        //    }
+        //    if (AttachedComponentsMoved()) {
+        //        points[0] = start.transform.position;
+        //        points[points.Count-1] = end.transform.position;
+        //        UpdateLineRenderer();
+        //    }
+        //}
     }
 
     bool AttachedComponentsEnabled() {
@@ -85,7 +85,7 @@ public class Wire : MonoBehaviour {
             newBox.size = new Vector2(Vector3.Distance(points[i], points[i+1]), 0.1f);
             clickColliders.Add(newBox);
         }
-        componentSelect = new ComponentSelect(gameObject, clickColliders.ToArray());
+        //componentSelect = new ComponentSelect(gameObject, clickColliders.ToArray());
     }
 
     void DeleteAllColliders() {
