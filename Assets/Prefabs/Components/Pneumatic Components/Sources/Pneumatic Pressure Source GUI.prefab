@@ -19,11 +19,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224251428816233948}
+  - component: {fileID: 114356275160226980}
   - component: {fileID: 222310389026230378}
   - component: {fileID: 114477186426515580}
   - component: {fileID: 114157981017342106}
   - component: {fileID: 114408417625716098}
-  - component: {fileID: 114356275160226980}
   m_Layer: 5
   m_Name: Pneumatic Pressure Source GUI
   m_TagString: Untagged
@@ -114,6 +114,7 @@ MonoBehaviour:
   m_PreferredHeight: 50
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!114 &114477186426515580
 MonoBehaviour:
   m_ObjectHideFlags: 1

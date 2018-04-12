@@ -19,11 +19,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224160480868486706}
+  - component: {fileID: 114418720474599590}
   - component: {fileID: 222717356076585656}
   - component: {fileID: 114977478089031250}
   - component: {fileID: 114822281094380880}
   - component: {fileID: 114757767693022678}
-  - component: {fileID: 114418720474599590}
   m_Layer: 5
   m_Name: Exhaust GUI
   m_TagString: Untagged
@@ -62,6 +62,7 @@ MonoBehaviour:
   m_PreferredHeight: 50
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!114 &114822281094380880
 MonoBehaviour:
   m_ObjectHideFlags: 1

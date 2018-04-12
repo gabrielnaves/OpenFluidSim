@@ -19,11 +19,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224730934970003706}
+  - component: {fileID: 114372047022658444}
   - component: {fileID: 222595140050424730}
   - component: {fileID: 114421583311135226}
   - component: {fileID: 114384694274034540}
   - component: {fileID: 114600465331413786}
-  - component: {fileID: 114372047022658444}
   m_Layer: 5
   m_Name: Coil GUI
   m_TagString: Untagged
@@ -141,6 +141,7 @@ MonoBehaviour:
   m_PreferredHeight: 26
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!222 &222595140050424730
 CanvasRenderer:
   m_ObjectHideFlags: 1

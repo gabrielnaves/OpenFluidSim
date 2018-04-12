@@ -19,11 +19,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224098759538437190}
+  - component: {fileID: 114789215029550508}
   - component: {fileID: 222517833155658192}
   - component: {fileID: 114610860247557322}
   - component: {fileID: 114056977093456816}
   - component: {fileID: 114240743151969284}
-  - component: {fileID: 114789215029550508}
   m_Layer: 5
   m_Name: Power Supply (24V) GUI
   m_TagString: Untagged
@@ -101,6 +101,7 @@ MonoBehaviour:
   m_PreferredHeight: 68
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!114 &114610860247557322
 MonoBehaviour:
   m_ObjectHideFlags: 1

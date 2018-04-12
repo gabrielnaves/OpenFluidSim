@@ -19,11 +19,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224920488063548004}
+  - component: {fileID: 114675188589306714}
   - component: {fileID: 222292337742363608}
   - component: {fileID: 114900297262392268}
   - component: {fileID: 114398317899758250}
   - component: {fileID: 114096268657986394}
-  - component: {fileID: 114675188589306714}
   m_Layer: 5
   m_Name: Contact (Normally Open) GUI
   m_TagString: Untagged
@@ -49,6 +49,7 @@ MonoBehaviour:
   m_PreferredHeight: 26
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!114 &114398317899758250
 MonoBehaviour:
   m_ObjectHideFlags: 1

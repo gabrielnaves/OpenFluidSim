@@ -19,11 +19,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224628923068642774}
+  - component: {fileID: 114060154965279774}
   - component: {fileID: 222520159570137140}
   - component: {fileID: 114169988388541396}
   - component: {fileID: 114868660216417594}
   - component: {fileID: 114243030174565962}
-  - component: {fileID: 114060154965279774}
   m_Layer: 5
   m_Name: Common (0V) GUI
   m_TagString: Untagged
@@ -89,6 +89,7 @@ MonoBehaviour:
   m_PreferredHeight: 68
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!114 &114868660216417594
 MonoBehaviour:
   m_ObjectHideFlags: 1
