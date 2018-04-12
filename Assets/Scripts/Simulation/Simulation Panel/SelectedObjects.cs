@@ -47,6 +47,16 @@ public class SelectedObjects : MonoBehaviour {
         return selectedObjects.ToArray();
     }
 
+    public BaseComponent[] GetSelectedComponents() {
+        if (selectedObjects == null)
+            return new BaseComponent[0];
+        List<BaseComponent> selectedComponents = new List<BaseComponent>();
+        foreach (var obj in selectedObjects)
+            if (obj is BaseComponent)
+                selectedComponents.Add(obj as BaseComponent);
+        return selectedComponents.ToArray();
+    }
+
     void Awake() {
         instance = (SelectedObjects)Singleton.Setup(this, instance);
     }

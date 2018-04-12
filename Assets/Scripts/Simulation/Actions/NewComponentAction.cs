@@ -26,8 +26,7 @@ public class NewComponentAction : IAction {
     public void UndoAction() {
         createdComponent.gameObject.SetActive(false);
         SimulationPanel.instance.RemoveComponent(createdComponent);
-        if (SelectedObjects.instance.IsSelected(createdComponent))
-            SelectedObjects.instance.DeselectObject(createdComponent);
+        SelectedObjects.instance.DeselectObject(createdComponent);
     }
 
     public void RedoAction() {

@@ -5,28 +5,29 @@
 /// </summary>
 /// Deletion is implemented by disabling the object instead of destroying it.
 /// Automatically handles connections to the target component.
-public class DeleteComponentAction : IAction {
+public class DeleteObjectsAction : IAction {
 
-    GameObject referencedObject;
-
-    public string Name() {
-        return "Delete Component";
-    }
-
-    public DeleteComponentAction(GameObject referencedObject) {
-        this.referencedObject = referencedObject;
+    BaseComponent[] referencedComponents;
+    
+    public DeleteObjectsAction(BaseComponent[] referencedComponents) {
+        this.referencedComponents = referencedComponents;
     }
 
     public void DoAction() {
+        foreach (var component in referencedComponents) {
+            SimulationPanel.instance.RemoveComponent(component.GetComponent<BaseComponent>());
+            SelectedObjects.instance.DeselectObject(component);
+            component.gameObject.SetActive(false);
+        }
         //DeactivateConnections(referencedObject.GetComponent<ComponentConnections>());
-        SimulationPanel.instance.RemoveComponent(referencedObject.GetComponent<BaseComponent>());
-        referencedObject.SetActive(false);
     }
 
     public void UndoAction() {
+        foreach (var component in referencedComponents) {
+            SimulationPanel.instance.AddComponent(component.GetComponent<BaseComponent>());
+            component.gameObject.SetActive(true);
+        }
         //ReactivateConnections(referencedObject.GetComponent<ComponentConnections>());
-        SimulationPanel.instance.AddComponent(referencedObject.GetComponent<BaseComponent>());
-        referencedObject.SetActive(true);
     }
 
     public void RedoAction() {
@@ -34,7 +35,7 @@ public class DeleteComponentAction : IAction {
     }
 
     public void OnDestroy() {}
-    
+
     //void DeactivateConnections(ComponentConnections componentConnections) {
     //    if (componentConnections != null)
     //        foreach (var connector in componentConnections.connectorList)
@@ -56,4 +57,8 @@ public class DeleteComponentAction : IAction {
     //    foreach (var other in connector.connectedObjects)
     //        other.AddConnection(connector);
     //}
+
+    public string Name() {
+        return "Delete Component";
+    }
 }
