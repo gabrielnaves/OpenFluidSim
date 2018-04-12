@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Implements component movement (in the editor canvas) functionality
@@ -9,54 +10,47 @@
 /// valve animations.
 public class ComponentMove {
 
-    bool moving = false;
-    Vector3 previousPosition;
-    Vector2 offset;
+    public bool moving = false;
+    List<BaseComponent> selectedComponents = new List<BaseComponent>();
+    List<Vector2> initialPositions = new List<Vector2>();
 
-    GameObject gameObject;
-    Collider2D componentBox;
+    public void StartMoving() {
+        moving = true;
+        foreach (var component in SimulationPanel.instance.activeComponents)
+            if (SelectedObjects.instance.IsSelected(component)) {
+                selectedComponents.Add(component);
+                initialPositions.Add(component.transform.position);
+            }
+    }
 
-    public ComponentMove(GameObject gameObject, Collider2D componentBox) {
-        this.gameObject = gameObject;
-        this.componentBox = componentBox;
+    public void StopMoving() {
+        CreateMovementAction();
+        selectedComponents.Clear();
+        initialPositions.Clear();
+        moving = false;
     }
 
     public void Update() {
-        CheckForClick();
-        CheckForRelease();
         if (moving)
-            FollowMouse();
+            MoveSelectedComponentsWithMouse();
     }
 
-    void CheckForClick() {
-        if (RequestedMovement()) { 
-            moving = true;
-            previousPosition = gameObject.transform.position;
-            offset = SimulationInput.instance.mousePosition - (Vector2)gameObject.transform.position;
-        }
-    }
-
-    bool RequestedMovement() {
-        return SimulationInput.instance.mouseButtonDown &&
-               componentBox.OverlapPoint(SimulationInput.instance.mousePosition);
-    }
-
-    void CheckForRelease() {
-        if (moving && SimulationInput.instance.mouseButtonUp) {
-            moving = false;
-            if (gameObject.transform.position != previousPosition)
-                CreateMovementAction();
-        }
+    void MoveSelectedComponentsWithMouse() {
+        Vector2 offset = SimulationInput.instance.mousePosition - SimulationInput.instance.startingDragPoint;
+        for (int i = 0; i < selectedComponents.Count; ++i)
+            selectedComponents[i].transform.position = SimulationGrid.FitToGrid(initialPositions[i] + offset);
     }
 
     void CreateMovementAction() {
         ActionStack.instance.PushAction(new MoveComponentAction(
-            gameObject, previousPosition, gameObject.transform.position
+            selectedComponents.ToArray(), initialPositions.ToArray(), CreateNewPositionsArray()
         ));
     }
 
-    void FollowMouse() {
-        var mousePos = SimulationInput.instance.mousePosition;
-        gameObject.transform.position = SimulationGrid.FitToGrid(mousePos - offset);
+    Vector2[] CreateNewPositionsArray() {
+        List<Vector2> newPositions = new List<Vector2>();
+        foreach (var component in selectedComponents)
+            newPositions.Add(component.transform.position);
+        return newPositions.ToArray();
     }
 }

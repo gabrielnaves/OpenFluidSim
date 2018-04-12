@@ -10,6 +10,7 @@ public class BaseComponent : MonoBehaviour, ISelectable, IDraggable {
 
     new Collider2D collider;
     SpriteRenderer spriteRenderer;
+    ComponentMove componentMove;
 
     public bool RequestedSelect() {
         return SimulationInput.instance.singleClick && collider.OverlapPoint(SimulationInput.instance.mousePosition);
@@ -32,15 +33,25 @@ public class BaseComponent : MonoBehaviour, ISelectable, IDraggable {
     }
 
     public void StartDragging() {
-
+        if (!SelectedObjects.instance.IsSelected(this)) {
+            SelectedObjects.instance.ClearSelection();
+            SelectedObjects.instance.SelectComponent(this);
+        }
+        componentMove.StartMoving();
     }
 
-    public void EndDragging() {
-
+    public void StopDragging() {
+        componentMove.StopMoving();
     }
 
     void Awake() {
         collider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        componentMove = new ComponentMove();
+    }
+    
+    void Update() {
+        if (componentMove.moving)
+            componentMove.Update();
     }
 }

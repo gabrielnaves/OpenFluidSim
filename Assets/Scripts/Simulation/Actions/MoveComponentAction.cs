@@ -1,26 +1,28 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Action for moving a component on simulation pane
+/// Action for moving one or more components on simulation pane
 /// </summary>
 public class MoveComponentAction : IAction {
 
-    Vector3 previousPosition;
-    Vector3 newPosition;
-    GameObject referencedObject;
+    BaseComponent[] referencedComponents;
+    Vector2[] previousPositions;
+    Vector2[] newPositions;
 
-    public MoveComponentAction(GameObject referencedObject, Vector3 previousPosition, Vector3 newPosition) {
-        this.referencedObject = referencedObject;
-        this.previousPosition = previousPosition;
-        this.newPosition = newPosition;
+    public MoveComponentAction(BaseComponent[] referencedComponents, Vector2[] previousPositions, Vector2[] newPositions) {
+        this.referencedComponents = referencedComponents;
+        this.previousPositions = previousPositions;
+        this.newPositions = newPositions;
     }
 
     public void DoAction() {
-        referencedObject.transform.position = newPosition;
+        for(int i = 0; i < referencedComponents.Length; ++i)
+            referencedComponents[i].transform.position = newPositions[i];
     }
 
     public void UndoAction() {
-        referencedObject.transform.position = previousPosition;
+        for (int i = 0; i < referencedComponents.Length; ++i)
+            referencedComponents[i].transform.position = previousPositions[i];
     }
 
     public void RedoAction() {

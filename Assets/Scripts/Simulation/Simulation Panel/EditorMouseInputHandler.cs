@@ -8,6 +8,7 @@ using UnityEngine;
 public class EditorMouseInputHandler : MonoBehaviour {
 
     bool justPlacedFloatingComponent;
+    IDraggable currentDraggable;
 
     void Update() {
         ProcessMouseInput();
@@ -30,10 +31,23 @@ public class EditorMouseInputHandler : MonoBehaviour {
             }
         }
         if (input.mouseDragStart && !justPlacedFloatingComponent) {
-            BoxSelection.instance.StartSelecting();
+            foreach (var draggable in simPanel.GetActiveDraggables()) {
+                if (draggable.RequestedDrag()) {
+                    draggable.StartDragging();
+                    currentDraggable = draggable;
+                    break;
+                }
+            }
+            if (currentDraggable == null)
+                BoxSelection.instance.StartSelecting();
         }
         if (input.mouseDragEnd) {
-            BoxSelection.instance.StopSelecting();
+            if (currentDraggable != null) {
+                currentDraggable.StopDragging();
+                currentDraggable = null;
+            }
+            else
+                BoxSelection.instance.StopSelecting();
         }
         if (input.mouseButtonUp)
             justPlacedFloatingComponent = false;

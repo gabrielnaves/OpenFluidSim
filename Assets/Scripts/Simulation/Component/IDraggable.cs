@@ -2,5 +2,5 @@
 
     bool RequestedDrag();
     void StartDragging();
-    void EndDragging();
+    void StopDragging();
 }
