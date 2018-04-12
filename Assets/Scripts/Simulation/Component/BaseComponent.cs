@@ -35,7 +35,7 @@ public class BaseComponent : MonoBehaviour, ISelectable, IDraggable {
     public void StartDragging() {
         if (!SelectedObjects.instance.IsSelected(this)) {
             SelectedObjects.instance.ClearSelection();
-            SelectedObjects.instance.SelectComponent(this);
+            SelectedObjects.instance.SelectObject(this);
         }
         componentMove.StartMoving();
     }

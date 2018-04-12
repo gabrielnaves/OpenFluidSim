@@ -9,36 +9,42 @@ public class SelectedObjects : MonoBehaviour {
     static public SelectedObjects instance { get; private set; }
 
     /// <summary>
-    /// Currently selected components or wires
+    /// Currently selected objects
     /// </summary>
-    List<ISelectable> objects = new List<ISelectable>();
+    List<ISelectable> selectedObjects = new List<ISelectable>();
 
     public bool HasObject() {
-        return objects.Count > 0;
+        return selectedObjects.Count > 0;
     }
 
     public bool IsSelected(ISelectable obj) {
-        return objects.Contains(obj);
+        return selectedObjects.Contains(obj);
     }
 
-    public void SelectComponent(ISelectable obj) {
+    public void SelectObject(ISelectable obj) {
         if (!IsSelected(obj)) {
-            objects.Add(obj);
+            selectedObjects.Add(obj);
             obj.OnSelect();
         }
     }
 
-    public void DeselectComponent(ISelectable obj) {
+    public void DeselectObject(ISelectable obj) {
         if (IsSelected(obj)) {
-            objects.Remove(obj);
+            selectedObjects.Remove(obj);
             obj.OnDeselect();
         }
     }
 
     public void ClearSelection() {
-        foreach (var obj in objects)
+        foreach (var obj in selectedObjects)
             obj.OnDeselect();
-        objects.Clear();
+        selectedObjects.Clear();
+    }
+
+    public ISelectable[] GetSelectedObjects() {
+        if (selectedObjects == null)
+            return new ISelectable[0];
+        return selectedObjects.ToArray();
     }
 
     void Awake() {

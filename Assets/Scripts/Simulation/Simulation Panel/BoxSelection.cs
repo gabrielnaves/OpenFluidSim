@@ -50,7 +50,7 @@ public class BoxSelection : MonoBehaviour {
         SelectedObjects.instance.ClearSelection();
         foreach (var selectable in SimulationPanel.instance.GetActiveSelectables()) {
             if (selectable.IsInsideSelectionBox(boxCollider))
-                SelectedObjects.instance.SelectComponent(selectable);
+                SelectedObjects.instance.SelectObject(selectable);
         }
     }
 }

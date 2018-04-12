@@ -25,7 +25,7 @@ public class EditorMouseInputHandler : MonoBehaviour {
             SelectedObjects.instance.ClearSelection();
             foreach (var selectable in simPanel.GetActiveSelectables()) {
                 if (selectable.RequestedSelect()) {
-                    SelectedObjects.instance.SelectComponent(selectable);
+                    SelectedObjects.instance.SelectObject(selectable);
                     break;
                 }
             }

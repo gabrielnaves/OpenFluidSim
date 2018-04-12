@@ -20,16 +20,13 @@ public class ActionStackInspector : Editor {
         base.OnInspectorGUI();
 
         EditorGUILayout.Space();
-        DrawActionStack("Action Stack", actionStack.GetActionStack());
+        DrawActionStack("Action stack", actionStack.GetActionStack());
         EditorGUILayout.Space();
-        DrawActionStack("Redo Stack", actionStack.GetRedoStack());
+        DrawActionStack("Redo stack", actionStack.GetRedoStack());
     }
 
     void DrawActionStack(string title, IAction[] actions) {
-        if (actions.Length == 0)
-            title += " empty";
-        else
-            title += ": " + actions.Length;
+        title += ": " + actions.Length;
         EditorGUILayout.LabelField(title);
 
         int amountDrawn = 0;
