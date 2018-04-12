@@ -11,6 +11,10 @@ public class DeleteWireAction : IAction {
 
     Wire referencedWire;
 
+    public string Name() {
+        return "Delete wire";
+    }
+
     public DeleteWireAction(Wire referencedWire) {
         this.referencedWire = referencedWire;
     }

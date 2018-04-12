@@ -40,4 +40,8 @@ public class RotateComponentAction : IAction {
     }
 
     public void OnDestroy() {}
+
+    public string Name() {
+        return "Rotate component";
+    }
 }

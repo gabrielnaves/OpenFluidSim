@@ -30,4 +30,10 @@ public class MoveComponentAction : IAction {
     }
 
     public void OnDestroy() {}
+
+    public string Name() {
+        if (referencedComponents.Length == 1)
+            return "Move component " + referencedComponents[0];
+        return "Move components";
+    }
 }

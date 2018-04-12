@@ -9,6 +9,10 @@ public class DeleteComponentAction : IAction {
 
     GameObject referencedObject;
 
+    public string Name() {
+        return "Delete Component";
+    }
+
     public DeleteComponentAction(GameObject referencedObject) {
         this.referencedObject = referencedObject;
     }

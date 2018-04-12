@@ -18,4 +18,6 @@ public interface IAction {
     /// Called just before the action object is destroyed
     /// </summary>
     void OnDestroy();
+
+    string Name();
 }

@@ -37,4 +37,8 @@ public class NewPneumaticConnectionAction : IAction {
     public void OnDestroy() {
         Object.Destroy(wire);
     }
+
+    public string Name() {
+        return "New pneumatic connection";
+    }
 }

@@ -19,6 +19,7 @@ public class NewComponentAction : IAction {
     public void DoAction() {
         createdComponent = Object.Instantiate(componentPrefab).GetComponent<BaseComponent>();
         createdComponent.transform.position = componentPosition;
+        createdComponent.name = createdComponent.name.Replace("(Clone)", "");
         SimulationPanel.instance.AddComponent(createdComponent);
     }
 
@@ -34,5 +35,9 @@ public class NewComponentAction : IAction {
 
     public void OnDestroy() {
         Object.Destroy(createdComponent.gameObject);
+    }
+
+    public string Name() {
+        return "New component: " + createdComponent.name;
     }
 }
