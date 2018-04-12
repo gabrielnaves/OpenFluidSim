@@ -32,6 +32,8 @@ public class Connector : MonoBehaviour, IDraggable {
     void IDraggable.StopDragging() {
         if (type == ConnectorType.pneumatic)
             RespondToStopDrag(SimulationPanel.instance.GetActivePneumaticConnectors());
+        else
+            RespondToStopDrag(SimulationPanel.instance.GetActiveElectricConnectors());
         WireCreator.instance.StopGeneration();
     }
 
@@ -53,12 +55,18 @@ public class Connector : MonoBehaviour, IDraggable {
     }
 
     void OnEnable() {
-        SimulationPanel.instance.AddPneumaticConnector(this);
+        if (type == ConnectorType.pneumatic)
+            SimulationPanel.instance.AddPneumaticConnector(this);
+        else
+            SimulationPanel.instance.AddElectricConnector(this);
         SimulationPanel.instance.AddDraggable(this);
     }
 
     void OnDisable() {
-        SimulationPanel.instance.RemovePneumaticConnector(this);
+        if (type == ConnectorType.pneumatic)
+            SimulationPanel.instance.RemovePneumaticConnector(this);
+        else
+            SimulationPanel.instance.RemoveElectricConnector(this);
         SimulationPanel.instance.RemoveDraggable(this);
     }
 

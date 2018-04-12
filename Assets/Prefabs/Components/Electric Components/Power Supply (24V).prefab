@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4429413772498232}
+  - component: {fileID: 114818886507961832}
   m_Layer: 0
   m_Name: Connector (1)
   m_TagString: Untagged
@@ -35,6 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4158292751888250}
   - component: {fileID: 114176584209668444}
+  - component: {fileID: 114821091547076610}
   - component: {fileID: 212191661947933230}
   - component: {fileID: 61508236115955082}
   - component: {fileID: 50644864994586728}
@@ -133,7 +135,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.14993203}
+  m_Offset: {x: 0, y: -0.114932}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.7204883}
@@ -144,7 +146,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.38, y: 0.68}
+  m_Size: {x: 0.38, y: 0.61}
   m_EdgeRadius: 0
 --- !u!114 &114176584209668444
 MonoBehaviour:
@@ -157,7 +159,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588d1a443e506654184c3d652a99ca18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSelected: 0
+--- !u!114 &114818886507961832
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1075278048644324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8af17d62301bea84bb7f77c21f24d860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPrefab: {fileID: 1726225566437832, guid: 8f3133e2dadbd3241ab2b5fc536b053a,
+    type: 2}
+--- !u!114 &114821091547076610
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1627475712650118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e17ffcee5629946bd6416077ae4b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  connectorList: []
+  contactList: []
 --- !u!212 &212191661947933230
 SpriteRenderer:
   m_ObjectHideFlags: 1

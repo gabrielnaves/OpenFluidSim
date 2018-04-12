@@ -16,6 +16,7 @@ public class SimulationPanel : MonoBehaviour {
 
     [ViewOnly] public List<BaseComponent> activeComponents;
     [ViewOnly] public List<Connector> activePneumaticConnectors;
+    [ViewOnly] public List<Connector> activeElectricConnectors;
     [ViewOnly] public List<Wire> activeWires;
 
     List<ISelectable> activeSelectables;
@@ -27,6 +28,10 @@ public class SimulationPanel : MonoBehaviour {
 
     public Connector[] GetActivePneumaticConnectors() {
         return activePneumaticConnectors.ToArray();
+    }
+
+    public Connector[] GetActiveElectricConnectors() {
+        return activeElectricConnectors.ToArray();
     }
 
     public Wire[] GetActiveWires() {
@@ -60,6 +65,16 @@ public class SimulationPanel : MonoBehaviour {
     public void RemovePneumaticConnector(Connector connector) {
         if (activePneumaticConnectors.Contains(connector))
             activePneumaticConnectors.Remove(connector);
+    }
+
+    public void AddElectricConnector(Connector connector) {
+        if (!activeElectricConnectors.Contains(connector))
+            activeElectricConnectors.Add(connector);
+    }
+
+    public void RemoveElectricConnector(Connector connector) {
+        if (activeElectricConnectors.Contains(connector))
+            activeElectricConnectors.Remove(connector);
     }
 
     public void AddWire(Wire wire) {
