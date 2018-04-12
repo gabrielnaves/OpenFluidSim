@@ -16,6 +16,7 @@ public class BoxSelection : MonoBehaviour {
         isSelecting = true;
         selectionBox.SetActive(true);
         startingPosition = SimulationInput.instance.startingDragPoint;
+        ResizeSelectionBox();
     }
 
     public void StopSelecting() {

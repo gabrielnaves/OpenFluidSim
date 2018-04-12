@@ -3,7 +3,7 @@
 /// <summary>
 /// Updates the cursor image when the mouse is hovering over the attached Collider2D
 /// </summary>
-/// Used alongside PneumaticConnector. 
+/// Used alongside Connector. 
 [RequireComponent(typeof(Collider2D))]
 public class ConnectorCursor : MonoBehaviour {
 

@@ -7,15 +7,15 @@ using UnityEngine;
 /// </summary>
 public class ComponentConnections : MonoBehaviour {
 
-    public List<PneumaticConnector> connectorList { get; private set; }
-    public List<MechanicalContact> contactList { get; private set; }
+    [ViewOnly] public List<Connector> connectorList;
+    [ViewOnly] public List<MechanicalContact> contactList;
 
     void Awake() {
-        connectorList = new List<PneumaticConnector>();
+        connectorList = new List<Connector>();
         contactList = new List<MechanicalContact>();
     }
 
-    public void AddPneumaticConnector(PneumaticConnector connector) {
+    public void AddPneumaticConnector(Connector connector) {
         connectorList.Add(connector);
     }
 

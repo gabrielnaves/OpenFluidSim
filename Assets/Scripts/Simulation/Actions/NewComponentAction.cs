@@ -20,18 +20,15 @@ public class NewComponentAction : IAction {
         createdComponent = Object.Instantiate(componentPrefab).GetComponent<BaseComponent>();
         createdComponent.transform.position = componentPosition;
         createdComponent.name = createdComponent.name.Replace("(Clone)", "");
-        SimulationPanel.instance.AddComponent(createdComponent);
     }
 
     public void UndoAction() {
         createdComponent.gameObject.SetActive(false);
-        SimulationPanel.instance.RemoveComponent(createdComponent);
         SelectedObjects.instance.DeselectObject(createdComponent);
     }
 
     public void RedoAction() {
         createdComponent.gameObject.SetActive(true);
-        SimulationPanel.instance.AddComponent(createdComponent);
     }
 
     public void OnDestroy() {

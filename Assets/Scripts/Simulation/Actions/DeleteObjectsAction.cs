@@ -9,26 +9,35 @@ using UnityEngine;
 public class DeleteObjectsAction : IAction {
 
     List<BaseComponent> referencedComponents;
-    
-    public DeleteObjectsAction(List<BaseComponent> referencedComponents) {
-        this.referencedComponents = referencedComponents;
+    List<Wire> referencedWires;
+
+    public DeleteObjectsAction(List<BaseComponent> componentsToDelete, List<Wire> wiresToDelete) {
+        referencedComponents = componentsToDelete;
+        referencedWires = wiresToDelete;
+        FindAllWiresThatWillBeDeleted();
     }
 
     public void DoAction() {
+        foreach (var wire in referencedWires) {
+            SelectedObjects.instance.DeselectObject(wire);
+            wire.start.RemoveConnection(wire.end);
+            wire.end.RemoveConnection(wire.start);
+            wire.gameObject.SetActive(false);
+        }
         foreach (var component in referencedComponents) {
-            SimulationPanel.instance.RemoveComponent(component.GetComponent<BaseComponent>());
             SelectedObjects.instance.DeselectObject(component);
             component.gameObject.SetActive(false);
         }
-        //DeactivateConnections(referencedObject.GetComponent<ComponentConnections>());
     }
 
     public void UndoAction() {
-        foreach (var component in referencedComponents) {
-            SimulationPanel.instance.AddComponent(component.GetComponent<BaseComponent>());
+        foreach (var component in referencedComponents)
             component.gameObject.SetActive(true);
+        foreach (var wire in referencedWires) {
+            wire.start.AddConnection(wire.end);
+            wire.end.AddConnection(wire.start);
+            wire.gameObject.SetActive(true);
         }
-        //ReactivateConnections(referencedObject.GetComponent<ComponentConnections>());
     }
 
     public void RedoAction() {
@@ -37,29 +46,22 @@ public class DeleteObjectsAction : IAction {
 
     public void OnDestroy() {}
 
-    //void DeactivateConnections(ComponentConnections componentConnections) {
-    //    if (componentConnections != null)
-    //        foreach (var connector in componentConnections.connectorList)
-    //            RemoveExternalConnections(connector);
-    //}
-
-    //void RemoveExternalConnections(PneumaticConnector connector) {
-    //    foreach (var other in connector.connectedObjects)
-    //        other.RemoveConnection(connector);
-    //}
-
-    //void ReactivateConnections(ComponentConnections componentConnections) {
-    //    if (componentConnections != null)
-    //        foreach (var connector in componentConnections.connectorList)
-    //            AddExternalConnections(connector);
-    //}
-
-    //void AddExternalConnections(PneumaticConnector connector) {
-    //    foreach (var other in connector.connectedObjects)
-    //        other.AddConnection(connector);
-    //}
-
     public string Name() {
-        return "Delete Component";
+        return "Delete Objects";
+    }
+
+    void FindAllWiresThatWillBeDeleted() {
+        List<Connector> connectorsToDelete = new List<Connector>();
+        foreach (var component in referencedComponents)
+            foreach (var connector in component.GetComponent<ComponentConnections>().connectorList)
+                if (connector.connectedObjects.Count > 0)
+                    connectorsToDelete.Add(connector);
+
+        if (connectorsToDelete.Count > 0) {
+            foreach (var wire in SimulationPanel.instance.GetActiveWires())
+                if (!referencedWires.Contains(wire))
+                    if (connectorsToDelete.Contains(wire.start) || connectorsToDelete.Contains(wire.end))
+                        referencedWires.Add(wire);
+        }
     }
 }

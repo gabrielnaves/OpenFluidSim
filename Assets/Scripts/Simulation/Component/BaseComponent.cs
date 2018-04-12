@@ -53,4 +53,16 @@ public class BaseComponent : MonoBehaviour, ISelectable, IDraggable {
     void Update() {
         componentMove.Update();
     }
+
+    void OnEnable() {
+        SimulationPanel.instance.AddComponent(this);
+        SimulationPanel.instance.AddSelectable(this);
+        SimulationPanel.instance.AddDraggable(this);
+    }
+
+    void OnDisable() {
+        SimulationPanel.instance.RemoveComponent(this);
+        SimulationPanel.instance.RemoveSelectable(this);
+        SimulationPanel.instance.RemoveDraggable(this);
+    }
 }

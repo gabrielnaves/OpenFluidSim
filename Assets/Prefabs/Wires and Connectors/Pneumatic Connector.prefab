@@ -19,11 +19,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4251366798497620}
+  - component: {fileID: 114163449077112472}
+  - component: {fileID: 114767571988925738}
   - component: {fileID: 212365556740119768}
   - component: {fileID: 58256200635374330}
   - component: {fileID: 50022130194716836}
-  - component: {fileID: 114163449077112472}
-  - component: {fileID: 114767571988925738}
   m_Layer: 0
   m_Name: Pneumatic Connector
   m_TagString: Untagged
@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c647324f9653ac74a96ff24034946925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   connectedObjects: []
 --- !u!114 &114767571988925738
 MonoBehaviour:

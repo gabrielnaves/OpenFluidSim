@@ -6,28 +6,26 @@
 /// A single wire object is also linked to the connection.
 public class NewPneumaticConnectionAction : IAction {
 
-    //PneumaticConnector start;
-    //PneumaticConnector end;
-    GameObject wire;
+    Wire wire;
+    Connector start;
+    Connector end;
 
-    public NewPneumaticConnectionAction(PneumaticConnector start, PneumaticConnector end, GameObject wire) {
+    public NewPneumaticConnectionAction(Wire wire) {
         this.wire = wire;
-        //this.start = start;
-        //this.end = end;
+        start = wire.start;
+        end = wire.end;
     }
 
     public void DoAction() {
-        //start.AddConnection(end);
-        //end.AddConnection(start);
-        wire.SetActive(true);
-        SimulationPanel.instance.AddWire(wire.GetComponent<Wire>());
+        start.AddConnection(end);
+        end.AddConnection(start);
+        wire.gameObject.SetActive(true);
     }
 
     public void UndoAction() {
-        //start.RemoveConnection(end);
-        //end.RemoveConnection(start);
-        wire.SetActive(false);
-        SimulationPanel.instance.RemoveWire(wire.GetComponent<Wire>());
+        start.RemoveConnection(end);
+        end.RemoveConnection(start);
+        wire.gameObject.SetActive(false);
     }
 
     public void RedoAction() {
@@ -35,7 +33,7 @@ public class NewPneumaticConnectionAction : IAction {
     }
 
     public void OnDestroy() {
-        Object.Destroy(wire);
+        Object.Destroy(wire.gameObject);
     }
 
     public string Name() {

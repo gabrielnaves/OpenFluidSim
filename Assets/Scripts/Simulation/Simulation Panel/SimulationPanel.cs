@@ -15,6 +15,7 @@ public class SimulationPanel : MonoBehaviour {
     public Transform wiresContainer;
 
     [ViewOnly] public List<BaseComponent> activeComponents;
+    [ViewOnly] public List<Connector> activePneumaticConnectors;
     [ViewOnly] public List<Wire> activeWires;
 
     List<ISelectable> activeSelectables;
@@ -22,6 +23,10 @@ public class SimulationPanel : MonoBehaviour {
 
     public BaseComponent[] GetActiveComponents() {
         return activeComponents.ToArray();
+    }
+
+    public Connector[] GetActivePneumaticConnectors() {
+        return activePneumaticConnectors.ToArray();
     }
 
     public Wire[] GetActiveWires() {
@@ -38,50 +43,61 @@ public class SimulationPanel : MonoBehaviour {
 
     public void AddComponent(BaseComponent component) {
         component.transform.parent = componentsContainer;
-        if (!activeComponents.Contains(component)) {
+        if (!activeComponents.Contains(component))
             activeComponents.Add(component);
-            AddSelectablesAndDraggables(component.gameObject);
-        }
     }
 
     public void RemoveComponent(BaseComponent component) {
-        if (activeComponents.Contains(component)) {
+        if (activeComponents.Contains(component))
             activeComponents.Remove(component);
-            RemoveSelectablesAndDraggables(component.gameObject);
-        }
+    }
+
+    public void AddPneumaticConnector(Connector connector) {
+        if (!activePneumaticConnectors.Contains(connector))
+            activePneumaticConnectors.Add(connector);
+    }
+
+    public void RemovePneumaticConnector(Connector connector) {
+        if (activePneumaticConnectors.Contains(connector))
+            activePneumaticConnectors.Remove(connector);
     }
 
     public void AddWire(Wire wire) {
         wire.transform.parent = wiresContainer;
-        if (!activeWires.Contains(wire)) {
+        if (!activeWires.Contains(wire))
             activeWires.Add(wire);
-            AddSelectablesAndDraggables(wire.gameObject);
-        }
     }
 
     public void RemoveWire(Wire wire) {
-        if (activeWires.Contains(wire)) {
+        if (activeWires.Contains(wire))
             activeWires.Remove(wire);
-            RemoveSelectablesAndDraggables(wire.gameObject);
-        }
     }
 
-    void AddSelectablesAndDraggables(GameObject obj) {
-        foreach (var selectable in obj.GetComponentsInChildren<ISelectable>())
+    public void AddSelectable(ISelectable selectable) {
+        if (!activeSelectables.Contains(selectable))
             activeSelectables.Add(selectable);
-        foreach (var draggable in obj.GetComponentsInChildren<IDraggable>())
+    }
+
+    public void RemoveSelectable(ISelectable selectable) {
+        if (activeSelectables.Contains(selectable))
+            activeSelectables.Remove(selectable);
+    }
+
+    public void AddDraggable(IDraggable draggable) {
+        if (!activeDraggables.Contains(draggable))
             activeDraggables.Add(draggable);
     }
 
-    void RemoveSelectablesAndDraggables(GameObject obj) {
-        foreach (var selectable in obj.GetComponentsInChildren<ISelectable>())
-            activeSelectables.Remove(selectable);
-        foreach (var draggable in obj.GetComponentsInChildren<IDraggable>())
+    public void RemoveDraggable(IDraggable draggable) {
+        if (activeDraggables.Contains(draggable))
             activeDraggables.Remove(draggable);
     }
 
     void Awake() {
         instance = (SimulationPanel)Singleton.Setup(this, instance);
+        activeComponents = new List<BaseComponent>();
+        activePneumaticConnectors = new List<Connector>();
+        activeWires = new List<Wire>();
         activeSelectables = new List<ISelectable>();
         activeDraggables = new List<IDraggable>();
     }

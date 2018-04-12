@@ -558,6 +558,7 @@ MonoBehaviour:
   componentsContainer: {fileID: 861555994}
   wiresContainer: {fileID: 430173531}
   activeComponents: []
+  activePneumaticConnectors: []
   activeWires: []
 --- !u!1 &430173530
 GameObject:
@@ -599,6 +600,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de05ef607dc99a4ba28a732242dfcca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dummyWirePrefab: {fileID: 1853912813895094, guid: 0e0638ad2efa8664e878024a03001c1a,
+    type: 2}
   wirePrefab: {fileID: 1853912813895094, guid: 02d81b7bb1e270746a46950d0f00bd23, type: 2}
 --- !u!1 &443282234
 GameObject:
@@ -1834,7 +1837,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0.00013566393, y: 0}
+  m_AnchoredPosition: {x: -0.0000047252865, y: 0}
   m_SizeDelta: {x: 704, y: 101}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1304781193

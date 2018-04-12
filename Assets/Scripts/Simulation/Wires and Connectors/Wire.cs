@@ -10,72 +10,68 @@ using UnityEngine;
 /// is disabled as well.
 /// Wires are currently implemented as simple straight lines. This
 /// implementation will be improved if I have the time to do so.
-public class Wire : MonoBehaviour {
+public class Wire : MonoBehaviour, ISelectable {
 
-    public bool wireEnabled = false;
-    public List<Vector3> points = new List<Vector3>();
-    public PneumaticConnector start;
-    public PneumaticConnector end;
-    
-    public List<BoxCollider2D> clickColliders = new List<BoxCollider2D>();
+    public Connector start;
+    public Connector end;
 
+    bool isSelected;
     LineRenderer lineRenderer;
-    //ComponentSelect componentSelect;
+    Vector3[] points;
+    List<BoxCollider2D> clickColliders = new List<BoxCollider2D>();
 
-    void Awake() {
-        lineRenderer = GetComponent<LineRenderer>();
-        //componentSelect = new ComponentSelect();
-    }
-
-    void Update() {
-        //componentSelect.Update();
-        //if (componentSelect.isSelected && Input.GetKeyDown(KeyCode.Delete))
-        //    ActionStack.instance.PushAction(new DeleteWireAction(this));
-    }
-
-    void LateUpdate() {
-        //if (AttachedComponentsEnabled())
-        //    wireEnabled = true;
-        //if (wireEnabled) {
-        //    if (!AttachedComponentsEnabled()) {
-        //        lineRenderer.startColor = Color.clear;
-        //        lineRenderer.endColor = Color.clear;
-        //        wireEnabled = false;
-        //    }
-        //    else if (componentSelect.isSelected) {
-        //        lineRenderer.startColor = Color.green;
-        //        lineRenderer.endColor = Color.green;
-        //    }
-        //    else {
-        //        lineRenderer.startColor = Color.black;
-        //        lineRenderer.endColor = Color.black;
-        //    }
-        //    if (AttachedComponentsMoved()) {
-        //        points[0] = start.transform.position;
-        //        points[points.Count-1] = end.transform.position;
-        //        UpdateLineRenderer();
-        //    }
-        //}
-    }
-
-    bool AttachedComponentsEnabled() {
-        if (start && end)
-            return start.isActiveAndEnabled && end.isActiveAndEnabled;
+    bool ISelectable.RequestedSelect() {
+        foreach (var collider in clickColliders)
+            if (collider.OverlapPoint(SimulationInput.instance.mousePosition))
+                return true;
         return false;
     }
 
-    bool AttachedComponentsMoved() {
-        return points[0] != start.transform.position || points[points.Count-1] != end.transform.position;
+    bool ISelectable.IsInsideSelectionBox(Collider2D selectionBox) {
+        foreach (var collider in clickColliders)
+            if (selectionBox.IsTouching(collider))
+                return true;
+        return false;
     }
 
-    public void UpdateLineRenderer() {
-        lineRenderer.SetPositions(points.ToArray());
+    void ISelectable.OnSelect() {
+        isSelected = true;
+    }
+
+    void ISelectable.OnDeselect() {
+        isSelected = false;
+    }
+
+    void Awake() {
+        lineRenderer = GetComponent<LineRenderer>();
+    }
+
+    void OnEnable() {
+        SimulationPanel.instance.AddWire(this);
+        SimulationPanel.instance.AddSelectable(this);
+    }
+
+    void OnDisable() {
+        SimulationPanel.instance.RemoveWire(this);
+        SimulationPanel.instance.RemoveSelectable(this);
+    }
+
+    void LateUpdate() {
+        UpdateLineRenderer();
+    }
+
+    void UpdateLineRenderer() {
+        points = new Vector3[] {
+            start.transform.position, end.transform.position
+        };
+        lineRenderer.SetPositions(points);
         UpdateClickColliders();
+        UpdateColor();
     }
 
     void UpdateClickColliders() {
         DeleteAllColliders();
-        for (int i = 0; i < points.Count - 1; ++i) {
+        for (int i = 0; i < points.Length - 1; ++i) {
             BoxCollider2D newBox = new GameObject().AddComponent<BoxCollider2D>();
             newBox.name = "Wire click collider";
             newBox.transform.parent = transform;
@@ -85,12 +81,17 @@ public class Wire : MonoBehaviour {
             newBox.size = new Vector2(Vector3.Distance(points[i], points[i+1]), 0.1f);
             clickColliders.Add(newBox);
         }
-        //componentSelect = new ComponentSelect(gameObject, clickColliders.ToArray());
     }
 
     void DeleteAllColliders() {
         foreach(BoxCollider2D collider in clickColliders)
             Destroy(collider.gameObject);
         clickColliders.Clear();
+    }
+
+    void UpdateColor() {
+        Color color = isSelected ? Color.green : Color.black;
+        lineRenderer.startColor = color;
+        lineRenderer.endColor = color;
     }
 }

@@ -53,6 +53,15 @@ public class SelectedObjects : MonoBehaviour {
         return selectedComponents;
     }
 
+    public List<Wire> GetSelectedWires() {
+        List<Wire> selectedComponents = new List<Wire>();
+        if (selectedObjects != null)
+            foreach (var obj in selectedObjects)
+                if (obj is Wire)
+                    selectedComponents.Add(obj as Wire);
+        return selectedComponents;
+    }
+
     void Awake() {
         instance = (SelectedObjects)Singleton.Setup(this, instance);
     }

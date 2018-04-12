@@ -25,7 +25,8 @@ public class EditorKeyboardInputHandler : MonoBehaviour {
 
     void DeleteCommand() {
         List<BaseComponent> componentsToDelete = SelectedObjects.instance.GetSelectedComponents();
-        if (componentsToDelete.Count > 0)
-            ActionStack.instance.PushAction(new DeleteObjectsAction(componentsToDelete));
+        List<Wire> wiresToDelete = SelectedObjects.instance.GetSelectedWires();
+        if (componentsToDelete.Count > 0 || wiresToDelete.Count > 0)
+            ActionStack.instance.PushAction(new DeleteObjectsAction(componentsToDelete, wiresToDelete));
     }
 }
