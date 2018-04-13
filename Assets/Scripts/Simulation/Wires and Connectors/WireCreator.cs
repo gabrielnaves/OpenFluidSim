@@ -55,4 +55,11 @@ public class WireCreator : MonoBehaviour {
         if (running)
             dummyWire.points[1] = SimulationGrid.FitToGrid(SimulationInput.instance.mousePosition);
     }
+
+    public Wire MakeWire(Connector start, Connector end) {
+        Wire wire = Instantiate(wirePrefab).GetComponent<Wire>();
+        wire.start = start;
+        wire.end = end;
+        return wire;
+    }
 }
