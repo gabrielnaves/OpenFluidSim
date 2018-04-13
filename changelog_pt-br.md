@@ -64,3 +64,4 @@ Changelog das alterações relevantes no simulador (e no simulador apenas). Para
 [v0.1]: https://github.com/gabrielnaves/TG/compare/2adb1b50f7405e099494ee41dddea7cf6715895e...v0.1
 [v0.2]: https://github.com/gabrielnaves/TG/compare/v0.1...v0.2
 [v0.3]: https://github.com/gabrielnaves/TG/compare/v0.2...v0.3
+[v0.4]: https://github.com/gabrielnaves/TG/compare/v0.2...v0.4
