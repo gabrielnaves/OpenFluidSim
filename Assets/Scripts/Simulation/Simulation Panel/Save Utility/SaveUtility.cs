@@ -33,7 +33,7 @@ public class SaveUtility : MonoBehaviour {
 
     void WriteDataToFile() {
         StreamWriter file = new StreamWriter(fileLocation + fileName, false, System.Text.Encoding.UTF8);
-        file.Write(JsonUtility.ToJson(data));
+        file.Write(JsonUtility.ToJson(data, true));
         file.Close();
     }
 }
