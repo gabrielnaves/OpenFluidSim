@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class Contact : MonoBehaviour, IConfigurable {
 
-    public enum Type { coil, sensor }
-    public enum State { open, closed }
+    public enum Type { coil, sensor, solenoid }
+    public enum State { open, closed, none }
 
     public Type type = Type.coil;
     public State state = State.open;
@@ -24,8 +24,10 @@ public class Contact : MonoBehaviour, IConfigurable {
         ContactEnabler[] contactEnablers;
         if (type == Type.coil)
             contactEnablers = SimulationPanel.instance.GetActiveCoils();
-        else
+        else if (type == Type.sensor)
             contactEnablers = SimulationPanel.instance.GetActiveSensors();
+        else
+            contactEnablers = SimulationPanel.instance.GetActiveSolenoids();
         if (contactEnablers.Length > 0)
             CreateConfigWindow(contactEnablers);
     }

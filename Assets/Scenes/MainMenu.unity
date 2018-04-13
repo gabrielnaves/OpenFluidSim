@@ -773,6 +773,7 @@ MonoBehaviour:
   activeWires: []
   activeCoils: []
   activeSensors: []
+  activeSolenoids: []
 --- !u!1001 &425265899
 Prefab:
   m_ObjectHideFlags: 0

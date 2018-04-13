@@ -4,9 +4,11 @@ using UnityEngine;
 /// <summary>
 /// Simulation panel singleton instance
 /// </summary>
-/// Enables easy referencing to simulation panel object, and provides
-/// a function for adding new components (pneumatic, etc.) to the
-/// components container.
+/// Enables easy referencing to all simulation panel objects.
+/// Every simulation object is listed here, in almost every type they can
+/// be found in.
+/// Objects are expected to add/remove themselves from the simulation panel
+/// instance through OnEnable/OnDisable.
 public class SimulationPanel : MonoBehaviour {
 
     static public SimulationPanel instance { get; private set; }
@@ -20,6 +22,7 @@ public class SimulationPanel : MonoBehaviour {
     [ViewOnly] public List<Wire> activeWires;
     [ViewOnly] public List<Coil> activeCoils;
     [ViewOnly] public List<Sensor> activeSensors;
+    [ViewOnly] public List<Solenoid> activeSolenoids;
 
     List<ISelectable> activeSelectables;
     List<IDraggable> activeDraggables;
@@ -47,6 +50,10 @@ public class SimulationPanel : MonoBehaviour {
 
     public Sensor[] GetActiveSensors() {
         return activeSensors.ToArray();
+    }
+
+    public Solenoid[] GetActiveSolenoids() {
+        return activeSolenoids.ToArray();
     }
 
     public ISelectable[] GetActiveSelectables() {
@@ -123,6 +130,16 @@ public class SimulationPanel : MonoBehaviour {
             activeSensors.Remove(sensor);
     }
 
+    public void AddSolenoid(Solenoid solenoid) {
+        if (!activeSolenoids.Contains(solenoid))
+            activeSolenoids.Add(solenoid);
+    }
+
+    public void RemoveSolenoid(Solenoid solenoid) {
+        if (activeSolenoids.Contains(solenoid))
+            activeSolenoids.Remove(solenoid);
+    }
+
     public void AddSelectable(ISelectable selectable) {
         if (!activeSelectables.Contains(selectable))
             activeSelectables.Add(selectable);
@@ -161,6 +178,7 @@ public class SimulationPanel : MonoBehaviour {
         activeWires = new List<Wire>();
         activeCoils = new List<Coil>();
         activeSensors = new List<Sensor>();
+        activeSolenoids = new List<Solenoid>();
 
         activeSelectables = new List<ISelectable>();
         activeDraggables = new List<IDraggable>();
