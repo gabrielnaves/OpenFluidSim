@@ -2599,6 +2599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdDistance: 0.1
+  doubleClickTime: 0.2
 --- !u!114 &1852640854
 MonoBehaviour:
   m_ObjectHideFlags: 0

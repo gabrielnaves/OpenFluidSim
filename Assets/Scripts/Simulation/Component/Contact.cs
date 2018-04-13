@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Contact : MonoBehaviour, IConfigurable {
 
     public enum ContactType { open, closed }
+
     public ContactType type = ContactType.open;
+    public Text nameText;
+    public GameObject configWindowPrefab;
 
     [ViewOnly] public Coil correspondingCoil;
 
@@ -15,7 +19,8 @@ public class Contact : MonoBehaviour, IConfigurable {
     }
 
     void IConfigurable.OpenConfigWindow() {
-        Debug.Log("Open config window for " + name);
+        if (SimulationPanel.instance.GetActiveCoils().Length > 0)
+            Instantiate(configWindowPrefab).GetComponent<ContactConfigWindow>().contact = this;
     }
 
     void Awake() {
@@ -28,5 +33,14 @@ public class Contact : MonoBehaviour, IConfigurable {
 
     void OnDisable() {
         SimulationPanel.instance.RemoveConfigurable(this);
+    }
+
+    void LateUpdate() {
+        if (correspondingCoil == null)
+            nameText.text = "--";
+        else if (!correspondingCoil.gameObject.activeInHierarchy)
+            nameText.text = "--";
+        else
+            nameText.text = correspondingCoil.coilName;
     }
 }
