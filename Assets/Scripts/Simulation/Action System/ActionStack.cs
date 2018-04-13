@@ -33,6 +33,14 @@ public class ActionStack : MonoBehaviour {
         actionStack.Push(redoStack.Pop());
     }
 
+    /// <summary>
+    /// Clears both the action stack and redo stack. Used when clearing the entire simulation.
+    /// </summary>
+    public void WipeStacks() {
+        redoStack.Clear();
+        actionStack.Clear();
+    }
+
     public int ActionStackSize() {
         if (actionStack == null)
             return 0;

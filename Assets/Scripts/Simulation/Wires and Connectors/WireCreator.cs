@@ -46,7 +46,6 @@ public class WireCreator : MonoBehaviour {
     /// </summary>
     public Wire RetrieveWire(Connector end) {
         Wire wire = Instantiate(wirePrefab).GetComponent<Wire>();
-        wire.transform.parent = transform;
         wire.start = start;
         wire.end = end;
         return wire;

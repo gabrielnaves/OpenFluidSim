@@ -184,4 +184,26 @@ public class SimulationPanel : MonoBehaviour {
         activeDraggables = new List<IDraggable>();
         activeConfigurables = new List<IConfigurable>();
     }
+
+    public void ClearEntireSimulation() {
+        ActionStack.instance.WipeStacks();
+        CreateNewComponentsContainer();
+        CreateNewWiresContainer();
+    }
+
+    void CreateNewComponentsContainer() {
+        Transform newContainer = new GameObject().transform;
+        newContainer.parent = componentsContainer.parent;
+        newContainer.name = componentsContainer.name;
+        Destroy(componentsContainer.gameObject);
+        componentsContainer = newContainer;
+    }
+
+    void CreateNewWiresContainer() {
+        Transform newContainer = new GameObject().transform;
+        newContainer.parent = wiresContainer.parent;
+        newContainer.name = wiresContainer.name;
+        Destroy(wiresContainer.gameObject);
+        wiresContainer = newContainer;
+    }
 }
