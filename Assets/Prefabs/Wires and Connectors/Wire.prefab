@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4493110053851064}
   - component: {fileID: 114480841566406972}
+  - component: {fileID: 114325898437861308}
   - component: {fileID: 120947384810112694}
   - component: {fileID: 50687700106245070}
   m_Layer: 0
@@ -62,6 +63,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &114325898437861308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1853912813895094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21837ebbbd846741b214e6796ae5ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObject: {fileID: 1570791912028230, guid: f4a09dbfc4dcfd644a2872e962fa4eda,
+    type: 2}
+  initialAmount: 2
+  allowGrowth: 0
 --- !u!114 &114480841566406972
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,12 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77db8c198f2fe49479fa1f42c47c0301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wireEnabled: 0
-  points: []
   start: {fileID: 0}
   end: {fileID: 0}
-  isSelected: 0
-  clickColliders: []
 --- !u!120 &120947384810112694
 LineRenderer:
   m_ObjectHideFlags: 1

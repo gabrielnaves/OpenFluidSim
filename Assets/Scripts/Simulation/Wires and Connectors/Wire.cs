@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Visual representation of a pneumatic connection
+/// Visual representation of a pneumatic or electric connection
 /// </summary>
 /// Wires are mostly for visualization purposes, but they can be
 /// selected and deleted.
@@ -12,12 +12,13 @@ using UnityEngine;
 /// implementation will be improved if I have the time to do so.
 public class Wire : MonoBehaviour, ISelectable {
 
-    public Connector start;
-    public Connector end;
 
-    bool isSelected;
+    [ViewOnly] public Connector start;
+    [ViewOnly] public Connector end;
+
     LineRenderer lineRenderer;
-    Vector3[] points;
+    ObjectPooler clickColliderPooler;
+    Vector3[] points = new Vector3[2];
     List<BoxCollider2D> clickColliders = new List<BoxCollider2D>();
 
     bool ISelectable.RequestedSelect() {
@@ -35,15 +36,28 @@ public class Wire : MonoBehaviour, ISelectable {
     }
 
     void ISelectable.OnSelect() {
-        isSelected = true;
+        UpdateColor(isSelected:true);
     }
 
     void ISelectable.OnDeselect() {
-        isSelected = false;
+        UpdateColor(isSelected:false);
+    }
+
+    void UpdateColor(bool isSelected) {
+        Color color = isSelected ? Color.green : Color.black;
+        lineRenderer.startColor = color;
+        lineRenderer.endColor = color;
     }
 
     void Awake() {
         lineRenderer = GetComponent<LineRenderer>();
+        clickColliderPooler = GetComponent<ObjectPooler>();
+    }
+
+    void Start() {
+        points[0] = start.transform.position;
+        points[1] = end.transform.position;
+        UpdateLineRenderer();
     }
 
     void OnEnable() {
@@ -57,41 +71,44 @@ public class Wire : MonoBehaviour, ISelectable {
     }
 
     void LateUpdate() {
-        UpdateLineRenderer();
+        if (ReferencesMoved())
+            UpdateLineRenderer();
+    }
+
+    bool ReferencesMoved() {
+        bool moved = false;
+        if (start.transform.position != points[0]) {
+            points[0] = start.transform.position;
+            moved = true;
+        }
+        if (end.transform.position != points[1]) {
+            points[1] = end.transform.position;
+            moved = true;
+        }
+        return moved;
     }
 
     void UpdateLineRenderer() {
-        points = new Vector3[] {
-            start.transform.position, end.transform.position
-        };
         lineRenderer.SetPositions(points);
         UpdateClickColliders();
-        UpdateColor();
     }
 
     void UpdateClickColliders() {
-        DeleteAllColliders();
+        ClearColliderlist();
         for (int i = 0; i < points.Length - 1; ++i) {
-            BoxCollider2D newBox = new GameObject().AddComponent<BoxCollider2D>();
-            newBox.name = "Wire click collider";
-            newBox.transform.parent = transform;
+            BoxCollider2D newBox = clickColliderPooler.GetObject().GetComponent<BoxCollider2D>();
             newBox.transform.position = (points[i] + points[i+1]) / 2;
             newBox.transform.rotation =
                 Quaternion.Euler(0, 0, Mathf.Atan2(points[i+1].y - points[i].y, points[i+1].x - points[i].x) * Mathf.Rad2Deg);
             newBox.size = new Vector2(Vector3.Distance(points[i], points[i+1]), 0.1f);
+            newBox.gameObject.SetActive(true);
             clickColliders.Add(newBox);
         }
     }
 
-    void DeleteAllColliders() {
-        foreach(BoxCollider2D collider in clickColliders)
-            Destroy(collider.gameObject);
+    void ClearColliderlist() {
+        foreach (BoxCollider2D collider in clickColliders)
+            clickColliderPooler.ReturnObject(collider.gameObject);
         clickColliders.Clear();
-    }
-
-    void UpdateColor() {
-        Color color = isSelected ? Color.green : Color.black;
-        lineRenderer.startColor = color;
-        lineRenderer.endColor = color;
     }
 }

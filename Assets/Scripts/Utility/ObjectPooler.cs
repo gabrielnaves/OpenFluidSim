@@ -32,7 +32,7 @@ public class ObjectPooler : MonoBehaviour {
 		pooledObjects.Push(obj);
 	}
 
-	void Start() {
+	void Awake() {
 		if (pooledObject == null)
 			Debug.LogError("[ObjectPooler("+this+")Start: No pooled object given.");
 		else
