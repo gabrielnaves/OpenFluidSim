@@ -3,13 +3,15 @@ using UnityEngine.UI;
 
 public class Contact : MonoBehaviour, IConfigurable {
 
-    public enum ContactType { open, closed }
+    public enum Type { coil, sensor }
+    public enum State { open, closed }
 
-    public ContactType type = ContactType.open;
+    public Type type = Type.coil;
+    public State state = State.open;
     public Text nameText;
     public GameObject configWindowPrefab;
 
-    [ViewOnly] public Coil correspondingCoil;
+    [ViewOnly] public ContactEnabler correlatedContact;
 
     new Collider2D collider;
 
@@ -19,8 +21,20 @@ public class Contact : MonoBehaviour, IConfigurable {
     }
 
     void IConfigurable.OpenConfigWindow() {
-        if (SimulationPanel.instance.GetActiveCoils().Length > 0)
-            Instantiate(configWindowPrefab).GetComponent<ContactConfigWindow>().contact = this;
+        ContactEnabler[] contactEnablers;
+        if (type == Type.coil)
+            contactEnablers = SimulationPanel.instance.GetActiveCoils();
+        else
+            contactEnablers = SimulationPanel.instance.GetActiveSensors();
+        if (contactEnablers.Length > 0)
+            CreateConfigWindow(contactEnablers);
+    }
+
+    void CreateConfigWindow(ContactEnabler[] contactEnablers) {
+        GameObject configWindowObj = Instantiate(configWindowPrefab);
+        ContactConfigWindow configWindow = configWindowObj.GetComponent<ContactConfigWindow>();
+        configWindow.contact = this;
+        configWindow.enablers = contactEnablers;
     }
 
     void Awake() {
@@ -36,11 +50,11 @@ public class Contact : MonoBehaviour, IConfigurable {
     }
 
     void LateUpdate() {
-        if (correspondingCoil == null)
+        if (correlatedContact == null)
             nameText.text = "--";
-        else if (!correspondingCoil.gameObject.activeInHierarchy)
+        else if (!correlatedContact.gameObject.activeInHierarchy)
             nameText.text = "--";
         else
-            nameText.text = correspondingCoil.coilName;
+            nameText.text = correlatedContact.nameStr;
     }
 }

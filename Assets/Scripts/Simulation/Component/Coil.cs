@@ -1,15 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-
-public class Coil : MonoBehaviour {
-
-    public Text nameText;
-
-    public string coilName {
-        get {
-            return nameText.text;
-        }
-    }
+﻿public class Coil : ContactEnabler {
 
     void OnEnable() {
         SimulationPanel.instance.AddCoil(this);

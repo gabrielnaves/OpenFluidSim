@@ -346,7 +346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7416537514c47a94487c2a90ac0391ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 0
+  state: 1
   nameText: {fileID: 114528060468082052}
   configWindowPrefab: {fileID: 1414779451249630, guid: 50ffd0790d8f56b45a145aeef801806b,
     type: 2}

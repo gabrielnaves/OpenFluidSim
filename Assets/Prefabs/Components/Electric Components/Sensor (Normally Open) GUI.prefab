@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114398317899758250}
   - component: {fileID: 114096268657986394}
   m_Layer: 5
-  m_Name: Sensor GUI
+  m_Name: Sensor (Normally Open) GUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
