@@ -17,6 +17,7 @@ public class LoadUtility : MonoBehaviour {
     public void LoadFromFile() {
         try {
             ReadDataContainer();
+            ClearCurrentSimulation();
             InstantiateComponents();
         }
         catch (FileNotFoundException) {
@@ -27,6 +28,10 @@ public class LoadUtility : MonoBehaviour {
     void ReadDataContainer() {
         StreamReader file = new StreamReader(fileLocation + fileName, System.Text.Encoding.UTF8);
         data = JsonUtility.FromJson<SaveData>(file.ReadToEnd());
+    }
+
+    void ClearCurrentSimulation() {
+        SimulationPanel.instance.ClearEntireSimulation();
     }
 
     void InstantiateComponents() {

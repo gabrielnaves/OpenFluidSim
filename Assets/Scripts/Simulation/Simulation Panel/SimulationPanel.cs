@@ -186,6 +186,7 @@ public class SimulationPanel : MonoBehaviour {
     }
 
     public void ClearEntireSimulation() {
+        SelectedObjects.instance.ClearSelection();
         ActionStack.instance.WipeStacks();
         CreateNewComponentsContainer();
         CreateNewWiresContainer();
