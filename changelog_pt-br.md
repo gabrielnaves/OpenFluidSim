@@ -2,6 +2,16 @@
 
 Changelog das alterações relevantes no simulador (e no simulador apenas). Para ver a lista completa de commits entre versões, clique no link da versão desejada.
 
+## [v0.4] - 13-04-2018
+### Adicionado
+
+*Editor*
+- Componentes elétricos básicos: Contatora, Fonte 24V, GND (0V), Contatos, Sensores, Solenoide, PushButton
+- Correlação de contatos com contatoras
+- Correlação de sensores no sistema elétrico com sensores no sistema pneumático
+- Correlação de solenoides no sistema elétrico com solenoides de válvulas pneumáticas
+
+
 ## [v0.3] - 12-04-2018
 ### Adicionado
 
