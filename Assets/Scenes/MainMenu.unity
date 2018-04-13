@@ -2049,6 +2049,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1282032970}
+  - component: {fileID: 1282032971}
   m_Layer: 5
   m_Name: Component Library
   m_TagString: Untagged
@@ -2074,6 +2075,45 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1282032971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1282032969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375545d5942b07944b3cedf7263e7a17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentNames:
+  - Pneumatic Pressure Source
+  - Exhaust
+  - 5_2 Valve Simple Solenoid
+  - Double Acting Cylinder
+  - Proximity Sensor
+  - Common (0V)
+  - Power Supply (24V)
+  - Coil
+  - Contact (Normally Open)
+  - Contact (Normally Closed)
+  - Solenoid
+  - Push Button
+  - Sensor (Normally Open)
+  componentPrefabs:
+  - {fileID: 1304852347586600, guid: 585b7f4fd387964478af74ade9ad7e1d, type: 2}
+  - {fileID: 1968449142307530, guid: 2d4d2155b02aeb14b95c867ff8c0e751, type: 2}
+  - {fileID: 1314985671537490, guid: 19b93be596c63274fb081754176ee036, type: 2}
+  - {fileID: 1813538412503084, guid: 1b53a9880f1c50a4ba8ec6b25ce92ad8, type: 2}
+  - {fileID: 1900003696779002, guid: e5d996dc54b23c349a68dd1bc21e5b8c, type: 2}
+  - {fileID: 1781121472985760, guid: 713f64c57a75d4c44ba6d737736171fb, type: 2}
+  - {fileID: 1627475712650118, guid: ddf599c090fa0c44fb9b24ebb1294a77, type: 2}
+  - {fileID: 1683566428866880, guid: 04031a83f9fdb214c824a0faacb48628, type: 2}
+  - {fileID: 1048923335371640, guid: bcdd477c22380a44e8ceed88414de225, type: 2}
+  - {fileID: 1931020446992568, guid: fdf1e51af1ca6244a95624e97ec1fb4a, type: 2}
+  - {fileID: 1048923335371640, guid: 56aeee796fc935545899111becad267f, type: 2}
+  - {fileID: 1048923335371640, guid: 945fe65681fe55e4ca2d36de46f8e844, type: 2}
+  - {fileID: 1048923335371640, guid: 6b76efdc29d093949b1579a4a3f8bc51, type: 2}
 --- !u!1 &1282718972
 GameObject:
   m_ObjectHideFlags: 0
