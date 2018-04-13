@@ -20,7 +20,7 @@ public class SimulationPanelInspector : Editor {
     public override void OnInspectorGUI() {
         base.OnInspectorGUI();
         if (Application.isPlaying) {
-            showSelectables = EditorGUILayout.Foldout(showSelectables, "Active Selectables");
+            showSelectables = EditorGUILayout.Foldout(showSelectables, "Active Selectables", true);
             if (showSelectables) {
                 GUI.enabled = false;
                 ISelectable[] selectables = simPanel.GetActiveSelectables();
@@ -31,7 +31,7 @@ public class SimulationPanelInspector : Editor {
                 GUI.enabled = true;
             }
 
-            showDraggables = EditorGUILayout.Foldout(showDraggables, "Active Draggables");
+            showDraggables = EditorGUILayout.Foldout(showDraggables, "Active Draggables", true);
             if (showDraggables) {
                 GUI.enabled = false;
                 IDraggable[] draggables = simPanel.GetActiveDraggables();
@@ -42,7 +42,7 @@ public class SimulationPanelInspector : Editor {
                 GUI.enabled = true;
             }
 
-            showConfigurables = EditorGUILayout.Foldout(showConfigurables, "Active Configurables");
+            showConfigurables = EditorGUILayout.Foldout(showConfigurables, "Active Configurables", true);
             if (showConfigurables) {
                 GUI.enabled = false;
                 IConfigurable[] configurables = simPanel.GetActiveConfigurables();
