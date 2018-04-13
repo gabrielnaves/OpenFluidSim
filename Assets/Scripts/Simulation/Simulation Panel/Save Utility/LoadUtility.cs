@@ -15,8 +15,13 @@ public class LoadUtility : MonoBehaviour {
     }
 
     public void LoadFromFile() {
-        ReadDataContainer();
-        InstantiateComponents();
+        try {
+            ReadDataContainer();
+            InstantiateComponents();
+        }
+        catch (FileNotFoundException) {
+            Debug.LogError("File " + fileLocation+fileName + " could not be found.");
+        }
     }
 
     void ReadDataContainer() {
