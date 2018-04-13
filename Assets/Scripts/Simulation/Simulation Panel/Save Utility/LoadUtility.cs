@@ -16,11 +16,19 @@ public class LoadUtility : MonoBehaviour {
 
     public void LoadFromFile() {
         ReadDataContainer();
+        InstantiateComponents();
     }
 
     void ReadDataContainer() {
         StreamReader file = new StreamReader(fileLocation + fileName, System.Text.Encoding.UTF8);
         data = JsonUtility.FromJson<SaveData>(file.ReadToEnd());
-        Debug.Log(JsonUtility.ToJson(data));
+    }
+
+    void InstantiateComponents() {
+        for (int i = 0; i < data.components.Length; ++i) {
+            var newComponent = Instantiate(ComponentLibrary.instance.nameToPrefab[data.components[i]]);
+            newComponent.transform.position = data.positions[i];
+            newComponent.name = newComponent.name.Replace("(Clone)", "");
+        }
     }
 }

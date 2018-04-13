@@ -49,3 +49,8 @@ Docs/**
 # Logs #
 # ==== #
 Logs/**
+
+# =========== #
+# Saved Files #
+# =========== #
+SavedFiles/**
