@@ -41,6 +41,8 @@ public class SaveUtility : MonoBehaviour {
             componentData.connectors[i] = new SavedConnectorData();
             CreateSavedConnectorData(componentData.connectors[i], connections.connectorList[i]);
         }
+
+        FillContactCorrelationInfo(componentData, baseComponent.GetComponent<Contact>());
     }
 
     void CreateSavedConnectorData(SavedConnectorData connectorData, Connector connector) {
@@ -48,6 +50,17 @@ public class SaveUtility : MonoBehaviour {
         connectorData.otherConnectorIds = new int[connector.connectedObjects.Count];
         for (int i = 0; i < connector.connectedObjects.Count; ++i)
             connectorData.otherConnectorIds[i] = connector.connectedObjects[i].gameObject.GetInstanceID();
+    }
+
+    void FillContactCorrelationInfo(SavedComponentData componentData, Contact contact) {
+        componentData.isContact = false;
+        componentData.contactTargetId = 0;
+        if (contact != null) {
+            if (contact.correlatedContact.gameObject.activeInHierarchy) {
+                componentData.isContact = true;
+                componentData.contactTargetId = contact.correlatedContact.gameObject.GetInstanceID();
+            }
+        }
     }
 
     void WriteDataToFile() {

@@ -56,6 +56,7 @@ public class LoadUtility : MonoBehaviour {
     void CreateConnections() {
         BuildConnectorDictionary();
         ConnectConnectors();
+        MakeContactCorrelations();
         loading = false;
     }
 
@@ -80,6 +81,15 @@ public class LoadUtility : MonoBehaviour {
                     otherConnector.AddConnection(thisConnector);
                     WireCreator.instance.MakeWire(thisConnector, otherConnector);
                 }
+            }
+        }
+    }
+
+    void MakeContactCorrelations() {
+        foreach (var component in data.components) {
+            if (component.isContact) {
+                Contact contact = idToComponent[component.componentId].GetComponent<Contact>();
+                contact.correlatedContact = idToComponent[component.contactTargetId].GetComponent<ContactEnabler>();
             }
         }
     }

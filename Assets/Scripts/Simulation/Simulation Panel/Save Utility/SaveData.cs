@@ -11,6 +11,8 @@ public class SavedComponentData {
     public string name;
     public int componentId;
     public Vector3 position;
+    public bool isContact;
+    public int contactTargetId;
     public SavedConnectorData[] connectors;
 }
 
