@@ -2,23 +2,20 @@
 using UnityEngine;
 
 [Serializable]
-public class BaseComponentData {
-    public string[] components;
-    public Vector3[] positions;
-    public int[] componentIds;
-    public ComponentConnectionsData[] connections;
+public class SavedData {
+    public SavedComponentData[] components;
 }
 
 [Serializable]
-public class ComponentConnectionsData {
-    public int thisComponentId;
-    public int[] connectorIds;
-    public ConnectorData[] connectors;
+public class SavedComponentData {
+    public string name;
+    public int componentId;
+    public Vector3 position;
+    public SavedConnectorData[] connectors;
 }
 
 [Serializable]
-public class ConnectorData {
-    public int parentConnectionId;
-    public int thisConnectorId;
+public class SavedConnectorData {
+    public int connectorId;
     public int[] otherConnectorIds;
 }
