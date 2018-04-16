@@ -2,4 +2,5 @@
 
     bool RequestedConfig();
     void OpenConfigWindow();
+    bool IsConfigured();
 }

@@ -32,6 +32,13 @@ public class Contact : MonoBehaviour, IConfigurable {
             CreateConfigWindow(contactEnablers);
     }
 
+    bool IConfigurable.IsConfigured() {
+        if (correlatedContact != null)
+            if (correlatedContact.gameObject.activeInHierarchy)
+                return true;
+        return false;
+    }
+
     void CreateConfigWindow(ContactEnabler[] contactEnablers) {
         GameObject configWindowObj = Instantiate(configWindowPrefab);
         ContactConfigWindow configWindow = configWindowObj.GetComponent<ContactConfigWindow>();
