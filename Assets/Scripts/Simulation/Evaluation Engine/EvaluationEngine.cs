@@ -16,6 +16,7 @@ public class EvaluationEngine : MonoBehaviour {
             CheckComponentAmount();
             CheckConnectors();
             CheckContacts();
+            SimulationPanel.instance.EnterSimulationMode();
         }
         catch (EvaluationException exception) {
             var window = Instantiate(MessageWindowPrefab).GetComponent<ListMessageWindow>();
