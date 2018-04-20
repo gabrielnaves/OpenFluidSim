@@ -5,6 +5,8 @@ using EvaluationExceptions;
 
 public class EvaluationEngine : MonoBehaviour {
 
+    public GameObject MessageWindowPrefab;
+
     BaseComponent[] activeComponents;
 
     public void EvaluateCurrentSimulation() {
@@ -14,6 +16,11 @@ public class EvaluationEngine : MonoBehaviour {
             CheckComponentAmount();
             CheckConnectors();
             CheckContacts();
+        }
+        catch (EvaluationException exception) {
+            var window = Instantiate(MessageWindowPrefab).GetComponent<ListMessageWindow>();
+            window.listItems = exception.GetProblemList();
+            window.windowTitle = exception.Message;
         }
         catch (Exception exception) {
             Debug.Log(exception.Message);

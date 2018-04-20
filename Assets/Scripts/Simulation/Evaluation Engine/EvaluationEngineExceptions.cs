@@ -3,7 +3,12 @@ using UnityEngine;
 
 namespace EvaluationExceptions {
 
-    public class OpenConnectorException : Exception {
+    public abstract class EvaluationException : Exception {
+
+        public abstract string[] GetProblemList();
+    }
+
+    public class OpenConnectorException : EvaluationException {
         public BaseComponent[] components;
 
         public OpenConnectorException(BaseComponent[] components) {
@@ -17,9 +22,16 @@ namespace EvaluationExceptions {
                 else return "Componentes não conectados:";
             }
         }
+
+        public override string[] GetProblemList() {
+            string[] result = new string[components.Length];
+            for (int i = 0; i < components.Length; ++i)
+                result[i] = components[i].gameObject.name;
+            return result;
+        }
     }
 
-    public class UnassignedContactException : Exception {
+    public class UnassignedContactException : EvaluationException {
         public Contact[] contacts;
 
         public UnassignedContactException(Contact[] contacts) {
@@ -32,6 +44,13 @@ namespace EvaluationExceptions {
                     return "Contato não configurado:";
                 else return "Contatos não configurados:";
             }
+        }
+
+        public override string[] GetProblemList() {
+            string[] result = new string[contacts.Length];
+            for (int i = 0; i < contacts.Length; ++i)
+                result[i] = contacts[i].gameObject.name;
+            return result;
         }
     }
 }
