@@ -185,12 +185,6 @@ public class SimulationPanel : MonoBehaviour {
         activeConfigurables = new List<IConfigurable>();
     }
 
-    public void EnterSimulationMode() {
-        SelectedObjects.instance.ClearSelection();
-        SimulationInput.instance.gameObject.SetActive(false);
-        Debug.Log("Entered simulation mode");
-    }
-
     public void ClearEntireSimulation() {
         SelectedObjects.instance.ClearSelection();
         ActionStack.instance.WipeStacks();

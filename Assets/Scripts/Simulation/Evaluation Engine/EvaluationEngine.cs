@@ -7,16 +7,19 @@ public class EvaluationEngine : MonoBehaviour {
 
     public GameObject MessageWindowPrefab;
 
+    [ViewOnly] public bool isSimulationOk;
+
     BaseComponent[] activeComponents;
 
     public void EvaluateCurrentSimulation() {
+        isSimulationOk = false;
         try {
             SimulationInput.instance.gameObject.SetActive(false);
             activeComponents = SimulationPanel.instance.GetActiveComponents();
             CheckComponentAmount();
             CheckConnectors();
             CheckContacts();
-            SimulationPanel.instance.EnterSimulationMode();
+            isSimulationOk = true;
         }
         catch (EvaluationException exception) {
             var window = Instantiate(MessageWindowPrefab).GetComponent<ListMessageWindow>();

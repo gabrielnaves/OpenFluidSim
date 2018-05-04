@@ -888,6 +888,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1986629814}
+  - {fileID: 1973122546}
   - {fileID: 1852640852}
   - {fileID: 1837970449}
   - {fileID: 600118925}
@@ -1049,7 +1050,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 379646322}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &443282234
 GameObject:
@@ -1119,7 +1120,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 379646322}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &600118926
 MonoBehaviour:
@@ -1492,7 +1493,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 833177370}
-  - component: {fileID: 833177371}
   m_Layer: 0
   m_Name: Evaluation Engine
   m_TagString: Untagged
@@ -1511,21 +1511,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 379646322}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &833177371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 833177369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 276944edb76af514684a9b0413972f11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MessageWindowPrefab: {fileID: 1801208899872588, guid: 5dfe76263a396cb47ac6d60ae765a33d,
-    type: 2}
 --- !u!1001 &860593307
 Prefab:
   m_ObjectHideFlags: 0
@@ -1657,7 +1644,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 379646322}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &913396233
 Prefab:
@@ -3008,7 +2995,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 379646322}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1822429104
 MonoBehaviour:
@@ -3053,7 +3040,7 @@ Transform:
   m_Children:
   - {fileID: 1282718973}
   m_Father: {fileID: 379646322}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1837970450
 MonoBehaviour:
@@ -3111,7 +3098,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 379646322}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1852640853
 MonoBehaviour:
@@ -3346,6 +3333,63 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1901199936}
+--- !u!1 &1973122545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1973122546}
+  - component: {fileID: 1973122548}
+  - component: {fileID: 1973122547}
+  m_Layer: 0
+  m_Name: Simulation Mode
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1973122546
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1973122545}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 379646322}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1973122547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1973122545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 276944edb76af514684a9b0413972f11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MessageWindowPrefab: {fileID: 1801208899872588, guid: 5dfe76263a396cb47ac6d60ae765a33d,
+    type: 2}
+  isSimulationOk: 0
+--- !u!114 &1973122548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1973122545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e590ddfcfa0720449995bf27b1669c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  evaluationEngine: {fileID: 1973122547}
+  mode: 0
 --- !u!1 &1986629813
 GameObject:
   m_ObjectHideFlags: 0
@@ -3844,8 +3888,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 833177371}
-        m_MethodName: EvaluateCurrentSimulation
+      - m_Target: {fileID: 1973122548}
+        m_MethodName: ChangeToSimulationMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
