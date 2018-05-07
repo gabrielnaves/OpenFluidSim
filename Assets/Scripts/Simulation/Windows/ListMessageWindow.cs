@@ -24,7 +24,8 @@ public class ListMessageWindow : MonoBehaviour {
     }
 
     void OnDestroy() {
-        SimulationInput.instance.gameObject.SetActive(true);
+        if (SimulationInput.instance)
+            SimulationInput.instance.gameObject.SetActive(true);
     }
 
     void GenerateListEntries() {
