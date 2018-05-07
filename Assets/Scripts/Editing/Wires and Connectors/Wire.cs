@@ -36,15 +36,14 @@ public class Wire : MonoBehaviour, ISelectable {
     }
 
     void ISelectable.OnSelect() {
-        UpdateColor(isSelected:true);
+        UpdateColor(Color.green);
     }
 
     void ISelectable.OnDeselect() {
-        UpdateColor(isSelected:false);
+        UpdateColor(Color.black);
     }
 
-    void UpdateColor(bool isSelected) {
-        Color color = isSelected ? Color.green : Color.black;
+    void UpdateColor(Color color) {
         lineRenderer.startColor = color;
         lineRenderer.endColor = color;
     }
@@ -73,6 +72,8 @@ public class Wire : MonoBehaviour, ISelectable {
     void LateUpdate() {
         if (ReferencesMoved())
             UpdateLineRenderer();
+        if (SimulationMode.instance.mode == SimulationMode.Mode.simulation)
+            UpdateColor(start.signal && end.signal ? Color.green : Color.red);
     }
 
     bool ReferencesMoved() {

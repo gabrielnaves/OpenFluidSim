@@ -33,7 +33,7 @@ public class SimulationPanel : MonoBehaviour {
     }
 
     public BaseComponent[] GetActivePneumaticComponents() {
-        List<BaseComponent> components = activeComponents;
+        List<BaseComponent> components = new List<BaseComponent>(activeComponents);
         for (int i = 0; i < components.Count; ++i)
             if (!components[i].CompareTag(Tags.PneumaticComponent))
                 components.RemoveAt(i--);
@@ -41,7 +41,7 @@ public class SimulationPanel : MonoBehaviour {
     }
 
     public BaseComponent[] GetActiveElectricComponents() {
-        List<BaseComponent> components = activeComponents;
+        List<BaseComponent> components = new List<BaseComponent>(activeComponents);
         for (int i = 0; i < components.Count; ++i)
             if (!components[i].CompareTag(Tags.ElectricComponent))
                 components.RemoveAt(i--);

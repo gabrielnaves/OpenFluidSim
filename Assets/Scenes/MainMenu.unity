@@ -892,7 +892,6 @@ Transform:
   - {fileID: 1852640852}
   - {fileID: 1837970449}
   - {fileID: 600118925}
-  - {fileID: 833177370}
   - {fileID: 1822429103}
   - {fileID: 861555994}
   - {fileID: 430173531}
@@ -1050,7 +1049,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 379646322}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &443282234
 GameObject:
@@ -1485,34 +1484,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 786151395}
---- !u!1 &833177369
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 833177370}
-  m_Layer: 0
-  m_Name: Evaluation Engine
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &833177370
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 833177369}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 379646322}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &860593307
 Prefab:
   m_ObjectHideFlags: 0
@@ -1644,7 +1615,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 379646322}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &913396233
 Prefab:
@@ -2995,7 +2966,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 379646322}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1822429104
 MonoBehaviour:
@@ -3343,6 +3314,7 @@ GameObject:
   - component: {fileID: 1973122546}
   - component: {fileID: 1973122548}
   - component: {fileID: 1973122547}
+  - component: {fileID: 1973122549}
   m_Layer: 0
   m_Name: Simulation Mode
   m_TagString: Untagged
@@ -3390,6 +3362,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   evaluationEngine: {fileID: 1973122547}
   mode: 0
+--- !u!114 &1973122549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1973122545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19efa71877b19074c80c37782d45e6db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  connectors: []
+  sourceConnectors: []
 --- !u!1 &1986629813
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,6 +24,7 @@ public class SimulationMode : MonoBehaviour {
         if (evaluationEngine.isSimulationOk) {
             SelectedObjects.instance.ClearSelection();
             SimulationInput.instance.gameObject.SetActive(false);
+            ElectricSimulationEngine.instance.Setup();
             mode = Mode.simulation;
         }
     }

@@ -2,6 +2,5 @@
 
 public abstract class ElectricComponent : MonoBehaviour {
 
-    [ViewOnly] public bool input;
-    public abstract bool GetOutput();
+    public abstract void RespondToSignal();
 }
