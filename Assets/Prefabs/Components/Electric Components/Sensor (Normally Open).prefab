@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 50527246558096002}
   m_Layer: 0
   m_Name: Sensor (Normally Open)
-  m_TagString: Untagged
+  m_TagString: ElectricComponent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -301,7 +301,7 @@ MonoBehaviour:
   nameText: {fileID: 114405419051057294}
   configWindowPrefab: {fileID: 1414779451249630, guid: 50ffd0790d8f56b45a145aeef801806b,
     type: 2}
-  correspondingCoil: {fileID: 0}
+  correlatedContact: {fileID: 0}
 --- !u!114 &114802017127985834
 MonoBehaviour:
   m_ObjectHideFlags: 1

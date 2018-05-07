@@ -32,6 +32,22 @@ public class SimulationPanel : MonoBehaviour {
         return activeComponents.ToArray();
     }
 
+    public BaseComponent[] GetActivePneumaticComponents() {
+        List<BaseComponent> components = activeComponents;
+        for (int i = 0; i < components.Count; ++i)
+            if (!components[i].CompareTag(Tags.PneumaticComponent))
+                components.RemoveAt(i--);
+        return components.ToArray();
+    }
+
+    public BaseComponent[] GetActiveElectricComponents() {
+        List<BaseComponent> components = activeComponents;
+        for (int i = 0; i < components.Count; ++i)
+            if (!components[i].CompareTag(Tags.ElectricComponent))
+                components.RemoveAt(i--);
+        return components.ToArray();
+    }
+
     public Connector[] GetActivePneumaticConnectors() {
         return activePneumaticConnectors.ToArray();
     }

@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 50420672870037020}
   m_Layer: 0
   m_Name: Pneumatic Pressure Source
-  m_TagString: Untagged
+  m_TagString: PneumaticComponent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,6 +159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e17ffcee5629946bd6416077ae4b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  connectorList: []
+  contactList: []
 --- !u!114 &114266258939792370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,7 +185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588d1a443e506654184c3d652a99ca18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSelected: 0
 --- !u!212 &212010962297642460
 SpriteRenderer:
   m_ObjectHideFlags: 1

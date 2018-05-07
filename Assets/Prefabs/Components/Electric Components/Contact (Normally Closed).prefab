@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 50103502983312360}
   m_Layer: 0
   m_Name: Contact (Normally Closed)
-  m_TagString: Untagged
+  m_TagString: ElectricComponent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -351,7 +351,7 @@ MonoBehaviour:
   nameText: {fileID: 114528060468082052}
   configWindowPrefab: {fileID: 1414779451249630, guid: 50ffd0790d8f56b45a145aeef801806b,
     type: 2}
-  correspondingCoil: {fileID: 0}
+  correlatedContact: {fileID: 0}
 --- !u!212 &212477065625556352
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 50538751271134162}
   m_Layer: 0
   m_Name: 5_2 Valve Simple Solenoid
-  m_TagString: Untagged
+  m_TagString: PneumaticComponent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
