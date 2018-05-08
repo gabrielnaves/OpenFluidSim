@@ -17,7 +17,7 @@ public class RedoButton : MonoBehaviour {
     }
 
     void Update() {
-        if (ActionStack.instance.RedoStackSize() == 0)
+        if (ActionStack.instance.RedoStackSize() == 0 || SimulationMode.instance.mode == SimulationMode.Mode.simulation)
             DeactivateButton();
         else
             ActivateButton();

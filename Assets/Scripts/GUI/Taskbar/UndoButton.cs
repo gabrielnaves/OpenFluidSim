@@ -17,7 +17,7 @@ public class UndoButton : MonoBehaviour {
     }
 
     void Update() {
-        if (ActionStack.instance.ActionStackSize() == 0)
+        if (ActionStack.instance.ActionStackSize() == 0 || SimulationMode.instance.mode == SimulationMode.Mode.simulation)
             DeactivateButton();
         else
             ActivateButton();
