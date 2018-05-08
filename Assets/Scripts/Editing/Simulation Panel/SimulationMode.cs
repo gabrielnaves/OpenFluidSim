@@ -16,7 +16,11 @@ public class SimulationMode : MonoBehaviour {
     }
 
     public void ChangeToEditorMode() {
-        Debug.Log("Change to editor mode not implemented");
+        SimulationInput.instance.gameObject.SetActive(true);
+        ElectricSimulationEngine.instance.Stop();
+        foreach (var wire in SimulationPanel.instance.GetActiveWires())
+            wire.UpdateColor(Color.black);
+        mode = Mode.editor;
     }
 
     public void ChangeToSimulationMode() {

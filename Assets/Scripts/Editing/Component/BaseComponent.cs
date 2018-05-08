@@ -11,6 +11,7 @@ public class BaseComponent : MonoBehaviour, ISelectable, IDraggable {
     new Collider2D collider;
     SpriteRenderer spriteRenderer;
     ComponentMove componentMove;
+    Color originalColor;
 
     public bool RequestedSelect() {
         return SimulationInput.instance.singleClick && collider.OverlapPoint(SimulationInput.instance.mousePosition);
@@ -25,7 +26,7 @@ public class BaseComponent : MonoBehaviour, ISelectable, IDraggable {
     }
 
     public void OnDeselect() {
-        spriteRenderer.color = Color.white;
+        spriteRenderer.color = originalColor;
     }
 
     public bool RequestedDrag() {
@@ -48,6 +49,7 @@ public class BaseComponent : MonoBehaviour, ISelectable, IDraggable {
         collider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         componentMove = new ComponentMove();
+        originalColor = spriteRenderer.color;
     }
     
     void Update() {

@@ -12,7 +12,6 @@ using UnityEngine;
 /// implementation will be improved if I have the time to do so.
 public class Wire : MonoBehaviour, ISelectable {
 
-
     [ViewOnly] public Connector start;
     [ViewOnly] public Connector end;
 
@@ -43,7 +42,7 @@ public class Wire : MonoBehaviour, ISelectable {
         UpdateColor(Color.black);
     }
 
-    void UpdateColor(Color color) {
+    public void UpdateColor(Color color) {
         lineRenderer.startColor = color;
         lineRenderer.endColor = color;
     }

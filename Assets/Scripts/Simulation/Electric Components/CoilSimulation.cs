@@ -10,6 +10,11 @@ public class CoilSimulation : ElectricComponent {
     SpriteRenderer spriteRenderer;
     bool gotSignal;
 
+    public override void Stop() {
+        spriteRenderer.color = Color.white;
+        contacts.Clear();
+    }
+
     public override void RespondToSignal(Connector connector, float signal) {
         foreach (var con in connections.connectorList) {
             if (con != connector) {
@@ -32,25 +37,19 @@ public class CoilSimulation : ElectricComponent {
                 Deactivate();
             gotSignal = false;
         }
-        UpdateColor();
     }
 
     void Activate() {
         active = true;
+        spriteRenderer.color = Color.magenta;
         foreach (var contact in contacts)
             contact.CoilActivated();
     }
 
     void Deactivate() {
         active = false;
+        spriteRenderer.color = Color.white;
         foreach (var contact in contacts)
             contact.CoilDeactivated();
-    }
-
-    void UpdateColor() {
-        if (SimulationMode.instance.mode == SimulationMode.Mode.simulation && active)
-            spriteRenderer.color = Color.magenta;
-        else
-            spriteRenderer.color = Color.white;
     }
 }

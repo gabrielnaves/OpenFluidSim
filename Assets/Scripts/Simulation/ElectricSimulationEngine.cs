@@ -7,8 +7,8 @@ public class ElectricSimulationEngine : MonoBehaviour {
     public static ElectricSimulationEngine instance { get; private set; }
 
     [ViewOnly] public Connector[] connectors;
-    [ViewOnly] public List<Connector> sourceConnectors;
-    [ViewOnly] public List<Connector> commonConnectors;
+    [ViewOnly] public List<Connector> sourceConnectors = new List<Connector>();
+    [ViewOnly] public List<Connector> commonConnectors = new List<Connector>();
 
     void Awake() {
         instance = (ElectricSimulationEngine)Singleton.Setup(this, instance);
@@ -25,6 +25,15 @@ public class ElectricSimulationEngine : MonoBehaviour {
         foreach (var component in SimulationPanel.instance.GetActiveElectricComponents())
             if (component.GetComponent<ElectricComponent>())
                 component.GetComponent<ElectricComponent>().Setup();
+    }
+
+    public void Stop() {
+        foreach (var component in SimulationPanel.instance.GetActiveElectricComponents())
+            if (component.GetComponent<ElectricComponent>())
+                component.GetComponent<ElectricComponent>().Stop();
+        connectors = null;
+        sourceConnectors.Clear();
+        commonConnectors.Clear();
     }
 
     void Update() {
