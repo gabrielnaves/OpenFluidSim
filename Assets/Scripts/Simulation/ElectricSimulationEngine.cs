@@ -8,6 +8,7 @@ public class ElectricSimulationEngine : MonoBehaviour {
 
     [ViewOnly] public Connector[] connectors;
     [ViewOnly] public List<Connector> sourceConnectors;
+    [ViewOnly] public List<Connector> commonConnectors;
 
     void Awake() {
         instance = (ElectricSimulationEngine)Singleton.Setup(this, instance);
@@ -16,30 +17,41 @@ public class ElectricSimulationEngine : MonoBehaviour {
     public void Setup() {
         connectors = SimulationPanel.instance.GetActiveElectricConnectors();
         foreach (var connector in connectors) {
-            if (connector.transform.parent.parent.name.Contains("Power Supply"))
+            if (connector.GetComponentInParent<PowerSupplySimulation>())
                 sourceConnectors.Add(connector);
+            if (connector.GetComponentInParent<ElectricCommonSimulation>())
+                commonConnectors.Add(connector);
         }
+        foreach (var component in SimulationPanel.instance.GetActiveElectricComponents())
+            if (component.GetComponent<ElectricComponent>())
+                component.GetComponent<ElectricComponent>().Setup();
     }
 
     void Update() {
         ClearSignals();
+        foreach (var common in commonConnectors)
+            SpreadSignal(common, -1f);
         foreach (var source in sourceConnectors)
-            SpreadSignal(source);
+            SpreadSignal(source, 1f);
     }
 
     void ClearSignals() {
         if (SimulationMode.instance.mode == SimulationMode.Mode.simulation) {
             foreach (var connector in connectors)
-                connector.signal = false;
+                connector.signal = 0;
         }
     }
 
-    void SpreadSignal(Connector source) {
-        if (source.signal != true) {
-            source.signal = true;
+    public void SpreadSignal(Connector source, float signal) {
+        if (source.signal == 0) {
+            source.signal = signal;
+
+            var electricComponent = source.GetComponentInParent<ElectricComponent>();
+            if (electricComponent) electricComponent.RespondToSignal(source, signal);
+
             foreach (var other in source.connectedObjects)
-                if (other.signal == false)
-                    SpreadSignal(other);
+                if (other.signal == 0)
+                    SpreadSignal(other, signal);
         }
     }
 }

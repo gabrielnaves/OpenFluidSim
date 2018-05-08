@@ -14,7 +14,7 @@ public class Connector : MonoBehaviour, IDraggable {
 
     public List<Connector> connectedObjects = new List<Connector>();
 
-    [ViewOnly] public bool signal;
+    [ViewOnly] public float signal;
 
     Color openColor = Color.red;
     Color connectedColor = Color.clear;

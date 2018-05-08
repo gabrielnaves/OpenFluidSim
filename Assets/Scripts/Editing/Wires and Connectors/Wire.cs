@@ -72,8 +72,16 @@ public class Wire : MonoBehaviour, ISelectable {
     void LateUpdate() {
         if (ReferencesMoved())
             UpdateLineRenderer();
-        if (SimulationMode.instance.mode == SimulationMode.Mode.simulation)
-            UpdateColor(start.signal && end.signal ? Color.green : Color.red);
+        if (SimulationMode.instance.mode == SimulationMode.Mode.simulation) {
+            if (start.signal > 0 && end.signal > 0)
+                UpdateColor(Color.magenta);
+            else if (start.signal < 0 && end.signal < 0)
+                UpdateColor(Color.green);
+            else if (start.signal == 0 && end.signal == 0)
+                UpdateColor(Color.black);
+            else
+                UpdateColor(Color.red);
+        }
     }
 
     bool ReferencesMoved() {
