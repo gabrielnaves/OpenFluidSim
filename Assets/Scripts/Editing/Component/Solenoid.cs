@@ -1,5 +1,7 @@
 ﻿public class Solenoid : ContactEnabler {
 
+    [ViewOnly] public bool activated = false;
+
     void OnEnable() {
         SimulationPanel.instance.AddSolenoid(this);
     }
