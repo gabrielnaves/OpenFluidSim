@@ -11,7 +11,12 @@ public class CorrelationConfigWindow : MonoBehaviour {
     [ViewOnly] public CorrelationTarget[] correlationTargets;
 
     public void CloseContactWindow(CorrelationTarget target) {
+        if (correlatedObject.correlationTarget != null)
+            correlatedObject.correlationTarget.RemoveCorrelatedObject(correlatedObject);
+
         correlatedObject.correlationTarget = target;
+        target.AddCorrelatedObject(correlatedObject);
+
         SimulationInput.instance.gameObject.SetActive(true);
         Destroy(gameObject);
     }

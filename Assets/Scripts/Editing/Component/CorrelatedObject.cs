@@ -43,10 +43,14 @@ public abstract class CorrelatedObject : MonoBehaviour, IConfigurable {
 
     void OnEnable() {
         SimulationPanel.instance.AddConfigurable(this);
+        if (correlationTarget != null)
+            correlationTarget.AddCorrelatedObject(this);
     }
 
     void OnDisable() {
         SimulationPanel.instance.RemoveConfigurable(this);
+        if (correlationTarget != null)
+            correlationTarget.RemoveCorrelatedObject(this);
     }
 
     void LateUpdate() {
