@@ -1,4 +1,4 @@
-﻿public class Coil : ContactEnabler {
+﻿public class Coil : CorrelationTarget {
 
     void OnEnable() {
         SimulationPanel.instance.AddCoil(this);

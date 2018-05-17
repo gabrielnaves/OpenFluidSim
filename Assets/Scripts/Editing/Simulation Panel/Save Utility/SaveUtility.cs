@@ -53,14 +53,14 @@ public class SaveUtility : MonoBehaviour {
     }
 
     void FillContactCorrelationInfo(SavedComponentData componentData, Contact contact) {
-        componentData.isContact = false;
-        componentData.contactTargetId = 0;
-        if (contact != null) {
-            if (contact.correlatedContact.gameObject.activeInHierarchy) {
-                componentData.isContact = true;
-                componentData.contactTargetId = contact.correlatedContact.gameObject.GetInstanceID();
-            }
-        }
+        //componentData.isContact = false;
+        //componentData.contactTargetId = 0;
+        //if (contact != null) {
+        //    if (contact.correlatedContact.gameObject.activeInHierarchy) {
+        //        componentData.isContact = true;
+        //        componentData.contactTargetId = contact.correlatedContact.gameObject.GetInstanceID();
+        //    }
+        //}
     }
 
     void WriteDataToFile() {

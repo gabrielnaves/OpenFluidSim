@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ContactEnabler : MonoBehaviour {
+public abstract class CorrelationTarget : MonoBehaviour {
 
     public Text nameText;
 

@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ContactConfigWindow : MonoBehaviour {
+public class CorrelationConfigWindow : MonoBehaviour {
 
     public GameObject baseButton;
     public ContentsManager contentsManager;
     public Text title;
 
-    [ViewOnly] public Contact contact;
-    [ViewOnly] public ContactEnabler[] enablers;
+    [ViewOnly] public CorrelatedObject correlatedObject;
+    [ViewOnly] public CorrelationTarget[] correlationTargets;
 
-    public void CloseContactWindow(ContactEnabler target) {
-        contact.correlatedContact = target;
+    public void CloseContactWindow(CorrelationTarget target) {
+        correlatedObject.correlationTarget = target;
         SimulationInput.instance.gameObject.SetActive(true);
         Destroy(gameObject);
     }
@@ -25,26 +25,18 @@ public class ContactConfigWindow : MonoBehaviour {
         SelectedObjects.instance.ClearSelection();
         SimulationInput.instance.gameObject.SetActive(false);
         GenerateButtons();
-        GenerateTitle();
     }
 
     void GenerateButtons() {
-        foreach (var enabler in enablers) {
+        foreach (var target in correlationTargets) {
             GameObject newButton = Instantiate(baseButton);
-            newButton.transform.GetChild(0).GetComponent<Text>().text = enabler.nameStr;
+            newButton.transform.GetChild(0).GetComponent<Text>().text = target.nameStr;
             contentsManager.AddToContents(newButton);
             newButton.GetComponent<Button>().onClick.AddListener(() => {
-                CloseContactWindow(enabler);
+                CloseContactWindow(target);
             });
             newButton.SetActive(true);
         }
-    }
-
-    void GenerateTitle() {
-        if (contact.type == Contact.Type.coil)
-            title.text = "Selecione uma contatora abaixo:";
-        else
-            title.text = "Selecione um sensor abaixo:";
     }
 
     void Update() {

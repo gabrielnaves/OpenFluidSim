@@ -1,17 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-
-public class ElectricSolenoid : MonoBehaviour {
-
-    public Text nameText;
-
-    public string nameStr {
-        get {
-            return nameText.text;
-        }
-    }
-
-    [ViewOnly] public bool activated = false;
+﻿public class ElectricSolenoid : CorrelationTarget {
 
     void OnEnable() {
         SimulationPanel.instance.AddSolenoid(this);

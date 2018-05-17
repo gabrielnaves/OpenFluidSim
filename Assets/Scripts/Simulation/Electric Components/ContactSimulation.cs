@@ -20,7 +20,7 @@ public class ContactSimulation : ElectricComponent {
     }
 
     public override void Setup() {
-        contact.correlatedContact.GetComponent<CoilSimulation>().contacts.Add(this);
+        contact.correlationTarget.GetComponent<CoilSimulation>().contacts.Add(this);
         state = contact.state;
         simulating = true;
     }

@@ -56,7 +56,7 @@ public class LoadUtility : MonoBehaviour {
     void CreateConnections() {
         BuildConnectorDictionary();
         ConnectConnectors();
-        MakeContactCorrelations();
+        //MakeContactCorrelations();
         loading = false;
     }
 
@@ -86,11 +86,11 @@ public class LoadUtility : MonoBehaviour {
     }
 
     void MakeContactCorrelations() {
-        foreach (var component in data.components) {
-            if (component.isContact) {
-                Contact contact = idToComponent[component.componentId].GetComponent<Contact>();
-                contact.correlatedContact = idToComponent[component.contactTargetId].GetComponent<ContactEnabler>();
-            }
-        }
+        //foreach (var component in data.components) {
+        //    if (component.isContact) {
+        //        Contact contact = idToComponent[component.componentId].GetComponent<Contact>();
+        //        contact.correlatedContact = idToComponent[component.contactTargetId].GetComponent<CorrelationTarget>();
+        //    }
+        //}
     }
 }

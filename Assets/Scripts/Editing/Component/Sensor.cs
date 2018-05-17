@@ -1,4 +1,4 @@
-﻿public class Sensor : ContactEnabler {
+﻿public class Sensor : CorrelationTarget {
 
     void OnEnable() {
         SimulationPanel.instance.AddSensor(this);

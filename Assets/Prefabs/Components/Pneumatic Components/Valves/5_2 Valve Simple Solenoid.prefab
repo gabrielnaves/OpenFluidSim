@@ -728,9 +728,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 114131859335725202}
-  configWindowPrefab: {fileID: 1870433042061384, guid: 49decf7a8682a4f4882e92d6a983ccdd,
+  configWindowPrefab: {fileID: 1414779451249630, guid: 50ffd0790d8f56b45a145aeef801806b,
     type: 2}
-  correlatedSolenoid: {fileID: 0}
+  correlationTarget: {fileID: 0}
 --- !u!114 &114780885875908634
 MonoBehaviour:
   m_ObjectHideFlags: 1
