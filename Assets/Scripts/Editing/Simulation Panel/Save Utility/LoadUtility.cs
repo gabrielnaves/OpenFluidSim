@@ -56,7 +56,8 @@ public class LoadUtility : MonoBehaviour {
     void CreateConnections() {
         BuildConnectorDictionary();
         ConnectConnectors();
-        //MakeContactCorrelations();
+        MakeSolenoidCorrelations();
+        MakeContactCorrelations();
         loading = false;
     }
 
@@ -85,12 +86,28 @@ public class LoadUtility : MonoBehaviour {
         }
     }
 
+    void MakeSolenoidCorrelations() {
+        foreach (var component in data.components) {
+            if (component.solenoids.Length == 0)
+                continue;
+            var componentReferences = idToComponent[component.componentId].GetComponent<ComponentReferences>();
+            for (int i = 0; i < component.solenoids.Length; ++i) {
+                if (component.solenoids[i].configured) {
+                    componentReferences.solenoidList[i].correlationTarget =
+                        idToComponent[component.solenoids[i].solenoidTargetId].GetComponent<CorrelationTarget>();
+                    componentReferences.solenoidList[i].correlationTarget.AddCorrelatedObject(componentReferences.solenoidList[i]);
+                }
+            }
+        }
+    }
+
     void MakeContactCorrelations() {
-        //foreach (var component in data.components) {
-        //    if (component.isContact) {
-        //        Contact contact = idToComponent[component.componentId].GetComponent<Contact>();
-        //        contact.correlatedContact = idToComponent[component.contactTargetId].GetComponent<CorrelationTarget>();
-        //    }
-        //}
+        foreach (var component in data.components) {
+            if (component.isContact) {
+                Contact contact = idToComponent[component.componentId].GetComponent<Contact>();
+                contact.correlationTarget = idToComponent[component.contactTargetId].GetComponent<CorrelationTarget>();
+                contact.correlationTarget.AddCorrelatedObject(contact);
+            }
+        }
     }
 }

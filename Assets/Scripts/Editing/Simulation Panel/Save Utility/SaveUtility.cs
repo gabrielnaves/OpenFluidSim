@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SaveUtility : MonoBehaviour {
@@ -35,11 +36,20 @@ public class SaveUtility : MonoBehaviour {
         componentData.componentId = baseComponent.gameObject.GetInstanceID();
         componentData.position = baseComponent.transform.position;
 
-        var connections = baseComponent.GetComponent<ComponentReferences>();
-        componentData.connectors = new SavedConnectorData[connections.connectorList.Count];
-        for (int i = 0; i < connections.connectorList.Count; ++i) {
+        ComponentReferences componentReferences = baseComponent.GetComponent<ComponentReferences>();
+
+        List<Connector> connectorList = componentReferences.connectorList;
+        componentData.connectors = new SavedConnectorData[connectorList.Count];
+        for (int i = 0; i < connectorList.Count; ++i) {
             componentData.connectors[i] = new SavedConnectorData();
-            CreateSavedConnectorData(componentData.connectors[i], connections.connectorList[i]);
+            CreateSavedConnectorData(componentData.connectors[i], connectorList[i]);
+        }
+
+        List<PneumaticSolenoid> solenoidList = componentReferences.solenoidList;
+        componentData.solenoids = new SavedSolenoidData[solenoidList.Count];
+        for (int i = 0; i < solenoidList.Count; ++i) {
+            componentData.solenoids[i] = new SavedSolenoidData();
+            CreateSavedSolenoidData(componentData.solenoids[i], solenoidList[i]);
         }
 
         FillContactCorrelationInfo(componentData, baseComponent.GetComponent<Contact>());
@@ -52,15 +62,24 @@ public class SaveUtility : MonoBehaviour {
             connectorData.otherConnectorIds[i] = connector.connectedObjects[i].gameObject.GetInstanceID();
     }
 
+    void CreateSavedSolenoidData(SavedSolenoidData solenoidData, PneumaticSolenoid solenoid) {
+        solenoidData.configured = false;
+        solenoidData.solenoidTargetId = 0;
+        if (solenoid.IsConfigured()) {
+            solenoidData.configured = true;
+            solenoidData.solenoidTargetId = solenoid.correlationTarget.gameObject.GetInstanceID();
+        }
+    }
+
     void FillContactCorrelationInfo(SavedComponentData componentData, Contact contact) {
-        //componentData.isContact = false;
-        //componentData.contactTargetId = 0;
-        //if (contact != null) {
-        //    if (contact.correlatedContact.gameObject.activeInHierarchy) {
-        //        componentData.isContact = true;
-        //        componentData.contactTargetId = contact.correlatedContact.gameObject.GetInstanceID();
-        //    }
-        //}
+        componentData.isContact = false;
+        componentData.contactTargetId = 0;
+        if (contact != null) {
+            if (contact.IsConfigured()) {
+                componentData.isContact = true;
+                componentData.contactTargetId = contact.correlationTarget.gameObject.GetInstanceID();
+            }
+        }
     }
 
     void WriteDataToFile() {
