@@ -62,6 +62,9 @@ TagManager:
   - name: Mechanical Contacts
     uniqueID: 841699943
     locked: 0
+  - name: Floating Component
+    uniqueID: 3388656173
+    locked: 0
   - name: Selection Box
     uniqueID: 1439198207
     locked: 0
