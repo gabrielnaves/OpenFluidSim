@@ -6,7 +6,7 @@ public class CoilSimulation : ElectricComponent {
     [ViewOnly] public bool active;
     [ViewOnly] public List<ContactSimulation> contacts = new List<ContactSimulation>();
 
-    ComponentConnections connections;
+    ComponentReferences connections;
     SpriteRenderer spriteRenderer;
     bool gotSignal;
 
@@ -25,7 +25,7 @@ public class CoilSimulation : ElectricComponent {
     }
 
     void Awake() {
-        connections = GetComponent<ComponentConnections>();
+        connections = GetComponent<ComponentReferences>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 

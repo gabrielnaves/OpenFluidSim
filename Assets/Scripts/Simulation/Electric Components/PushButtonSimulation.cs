@@ -9,14 +9,14 @@ public class PushButtonSimulation : ElectricComponent {
     public Contact.State startingState;
     [ViewOnly] public Contact.State state;
 
-    ComponentConnections connections;
+    ComponentReferences connections;
     SpriteRenderer spriteRenderer;
     new Collider2D collider;
     bool simulating;
     float receivedSignal;
 
     void Awake() {
-        connections = GetComponent<ComponentConnections>();
+        connections = GetComponent<ComponentReferences>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
     }

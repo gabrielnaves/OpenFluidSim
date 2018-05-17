@@ -65,7 +65,7 @@ public class LoadUtility : MonoBehaviour {
         foreach (var component in data.components) {
             for (int i = 0; i < component.connectors.Length; ++i) {
                 BaseComponent target = idToComponent[component.componentId];
-                ComponentConnections targetConnections = target.GetComponent<ComponentConnections>();
+                ComponentReferences targetConnections = target.GetComponent<ComponentReferences>();
                 idToConnector[component.connectors[i].connectorId] = targetConnections.connectorList[i];
             }
         }

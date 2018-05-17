@@ -53,7 +53,7 @@ public class DeleteObjectsAction : IAction {
     void FindAllWiresThatWillBeDeleted() {
         List<Connector> connectorsToDelete = new List<Connector>();
         foreach (var component in referencedComponents)
-            foreach (var connector in component.GetComponent<ComponentConnections>().connectorList)
+            foreach (var connector in component.GetComponent<ComponentReferences>().connectorList)
                 if (connector.connectedObjects.Count > 0)
                     connectorsToDelete.Add(connector);
 

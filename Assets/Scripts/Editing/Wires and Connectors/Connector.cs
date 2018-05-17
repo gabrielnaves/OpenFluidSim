@@ -53,7 +53,7 @@ public class Connector : MonoBehaviour, IDraggable {
         connectorCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.color = openColor;
-        GetComponentInParent<ComponentConnections>().AddPneumaticConnector(this);
+        GetComponentInParent<ComponentReferences>().AddPneumaticConnector(this);
     }
 
     void OnEnable() {

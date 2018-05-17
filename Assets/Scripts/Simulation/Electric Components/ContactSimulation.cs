@@ -8,14 +8,14 @@ public class ContactSimulation : ElectricComponent {
     [ViewOnly] public Contact.State state;
 
     Contact contact;
-    ComponentConnections connections;
+    ComponentReferences connections;
     SpriteRenderer spriteRenderer;
     float receivedSignal = 0;
     bool simulating;
 
     void Awake() {
         contact = GetComponent<Contact>();
-        connections = GetComponent<ComponentConnections>();
+        connections = GetComponent<ComponentReferences>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 

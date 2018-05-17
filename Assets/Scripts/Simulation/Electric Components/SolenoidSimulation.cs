@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class SolenoidSimulation : ElectricComponent {
 
-    ComponentConnections connections;
+    ComponentReferences connections;
     SpriteRenderer spriteRenderer;
     bool simulating;
     bool active;
     bool gotSignal;
 
     void Awake() {
-        connections = GetComponent<ComponentConnections>();
+        connections = GetComponent<ComponentReferences>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 

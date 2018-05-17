@@ -40,7 +40,7 @@ public class EvaluationEngine : MonoBehaviour {
     void CheckConnectors() {
         List<BaseComponent> unconnectedComponents = new List<BaseComponent>();
         foreach (var component in activeComponents)
-            foreach (var connector in component.GetComponent<ComponentConnections>().connectorList)
+            foreach (var connector in component.GetComponent<ComponentReferences>().connectorList)
                 if (connector.connectedObjects.Count == 0 && !unconnectedComponents.Contains(component))
                     unconnectedComponents.Add(component);
         if (unconnectedComponents.Count > 0)

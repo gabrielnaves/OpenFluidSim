@@ -7,4 +7,8 @@
     protected override string CreateConfigWindowTitle() {
         return "Selecione um Solenoide abaixo:";
     }
+
+    void Start() {
+        GetComponentInParent<ComponentReferences>().AddPneumaticSolenoid(this);
+    }
 }

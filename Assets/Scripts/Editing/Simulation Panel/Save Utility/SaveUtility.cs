@@ -35,7 +35,7 @@ public class SaveUtility : MonoBehaviour {
         componentData.componentId = baseComponent.gameObject.GetInstanceID();
         componentData.position = baseComponent.transform.position;
 
-        var connections = baseComponent.GetComponent<ComponentConnections>();
+        var connections = baseComponent.GetComponent<ComponentReferences>();
         componentData.connectors = new SavedConnectorData[connections.connectorList.Count];
         for (int i = 0; i < connections.connectorList.Count; ++i) {
             componentData.connectors[i] = new SavedConnectorData();
