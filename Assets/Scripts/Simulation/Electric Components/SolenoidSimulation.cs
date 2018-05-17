@@ -6,7 +6,6 @@ public class SolenoidSimulation : ElectricComponent {
 
     ComponentConnections connections;
     SpriteRenderer spriteRenderer;
-    Contact contact;
     bool simulating;
     bool active;
     bool gotSignal;
@@ -14,7 +13,6 @@ public class SolenoidSimulation : ElectricComponent {
     void Awake() {
         connections = GetComponent<ComponentConnections>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        contact = GetComponent<Contact>();
     }
 
     public override void Setup() {

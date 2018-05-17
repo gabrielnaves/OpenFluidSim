@@ -22,7 +22,7 @@ public class SimulationPanel : MonoBehaviour {
     [ViewOnly] public List<Wire> activeWires;
     [ViewOnly] public List<Coil> activeCoils;
     [ViewOnly] public List<Sensor> activeSensors;
-    [ViewOnly] public List<Solenoid> activeSolenoids;
+    [ViewOnly] public List<ElectricSolenoid> activeSolenoids;
 
     List<ISelectable> activeSelectables;
     List<IDraggable> activeDraggables;
@@ -68,7 +68,7 @@ public class SimulationPanel : MonoBehaviour {
         return activeSensors.ToArray();
     }
 
-    public Solenoid[] GetActiveSolenoids() {
+    public ElectricSolenoid[] GetActiveSolenoids() {
         return activeSolenoids.ToArray();
     }
 
@@ -146,12 +146,12 @@ public class SimulationPanel : MonoBehaviour {
             activeSensors.Remove(sensor);
     }
 
-    public void AddSolenoid(Solenoid solenoid) {
+    public void AddSolenoid(ElectricSolenoid solenoid) {
         if (!activeSolenoids.Contains(solenoid))
             activeSolenoids.Add(solenoid);
     }
 
-    public void RemoveSolenoid(Solenoid solenoid) {
+    public void RemoveSolenoid(ElectricSolenoid solenoid) {
         if (activeSolenoids.Contains(solenoid))
             activeSolenoids.Remove(solenoid);
     }
@@ -194,7 +194,7 @@ public class SimulationPanel : MonoBehaviour {
         activeWires = new List<Wire>();
         activeCoils = new List<Coil>();
         activeSensors = new List<Sensor>();
-        activeSolenoids = new List<Solenoid>();
+        activeSolenoids = new List<ElectricSolenoid>();
 
         activeSelectables = new List<ISelectable>();
         activeDraggables = new List<IDraggable>();

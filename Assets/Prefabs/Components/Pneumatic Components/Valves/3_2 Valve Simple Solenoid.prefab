@@ -34,8 +34,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4130337168782952}
-  - component: {fileID: 114063078474486724}
+  - component: {fileID: 114417438556352144}
   - component: {fileID: 212440706323748158}
+  - component: {fileID: 61401096035017158}
   m_Layer: 0
   m_Name: Solenoid
   m_TagString: Untagged
@@ -280,6 +281,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &61401096035017158
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1237963074153146}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.48, y: 0.26}
+    newSize: {x: 0.48, y: 0.26}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.48, y: 0.26}
+  m_EdgeRadius: 0
 --- !u!61 &61424203643631294
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -289,10 +315,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.065, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -303,21 +329,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.81, y: 0.5}
+  m_Size: {x: 0.98, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &114063078474486724
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1237963074153146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2f7ba6117aa3ca49ba291d12c1ddfb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameText: {fileID: 114793620956606760}
-  activated: 0
 --- !u!114 &114252110552492422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -345,6 +358,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114417438556352144
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1237963074153146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab224a7e5299ad2439acf01153245581, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameText: {fileID: 114793620956606760}
+  configWindowPrefab: {fileID: 1870433042061384, guid: 49decf7a8682a4f4882e92d6a983ccdd,
+    type: 2}
+  correlatedSolenoid: {fileID: 0}
 --- !u!114 &114470482286152372
 MonoBehaviour:
   m_ObjectHideFlags: 1
