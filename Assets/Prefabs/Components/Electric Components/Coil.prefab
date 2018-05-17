@@ -228,6 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 114614544823351212}
+  correlatedObjects: []
 --- !u!114 &114370049780178738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -359,6 +360,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07cc909cdd3a04488471d42646ff22f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
+  contacts: []
 --- !u!212 &212031915038869796
 SpriteRenderer:
   m_ObjectHideFlags: 1
