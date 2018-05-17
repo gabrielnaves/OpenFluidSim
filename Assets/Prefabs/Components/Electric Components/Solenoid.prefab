@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114685591753652414}
   - component: {fileID: 114225159310410136}
   - component: {fileID: 114908628634803600}
+  - component: {fileID: 114394444646294832}
   - component: {fileID: 212503177431360866}
   - component: {fileID: 61404073758035894}
   - component: {fileID: 50527246558096002}
@@ -249,6 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectorList: []
   contactList: []
+  solenoidList: []
 --- !u!114 &114279946597909782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -265,6 +267,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114394444646294832
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1048923335371640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8491489a8c9c1014cb25d030706c426f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114424785311242470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -347,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 114662912055018158}
-  activated: 0
+  correlatedObjects: []
 --- !u!212 &212503177431360866
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -1,4 +1,10 @@
-﻿public class PneumaticSolenoid : CorrelatedObject {
+﻿using UnityEngine;
+
+public class PneumaticSolenoid : CorrelatedObject {
+
+    [ViewOnly] public bool active;
+
+    SpriteRenderer spriteRenderer;
 
     protected override CorrelationTarget[] GetCorrelationTargets() {
         return SimulationPanel.instance.GetActiveSolenoids();
@@ -10,5 +16,16 @@
 
     void Start() {
         GetComponentInParent<ComponentReferences>().AddPneumaticSolenoid(this);
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    public void Activate() {
+        spriteRenderer.color = Color.magenta;
+        active = true;
+    }
+
+    public void Deactivate() {
+        spriteRenderer.color = Color.white;
+        active = false;
     }
 }

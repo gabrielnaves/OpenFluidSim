@@ -8,19 +8,18 @@ public class ContactSimulation : ElectricComponent {
     [ViewOnly] public Contact.State state;
 
     Contact contact;
-    ComponentReferences connections;
+    ComponentReferences componentReferences;
     SpriteRenderer spriteRenderer;
     float receivedSignal = 0;
     bool simulating;
 
     void Awake() {
         contact = GetComponent<Contact>();
-        connections = GetComponent<ComponentReferences>();
+        componentReferences = GetComponent<ComponentReferences>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public override void Setup() {
-        contact.correlationTarget.GetComponent<CoilSimulation>().contacts.Add(this);
         state = contact.state;
         simulating = true;
     }
@@ -32,15 +31,15 @@ public class ContactSimulation : ElectricComponent {
         activatedMarker.gameObject.SetActive(false);
     }
 
-    public override void RespondToSignal(Connector connector, float signal) {
+    public override void RespondToSignal(Connector sourceConnector, float signal) {
         if (state == Contact.State.closed) {
             receivedSignal = signal;
-            foreach (var con in connections.connectorList)
+            foreach (var con in componentReferences.connectorList)
                 ElectricSimulationEngine.instance.SpreadSignal(con, signal);
         }
     }
 
-    public void CoilActivated() {
+    public void SourceActivated() {
         activatedMarker.gameObject.SetActive(true);
         if (contact.state == Contact.State.closed)
             state = Contact.State.open;
@@ -48,7 +47,7 @@ public class ContactSimulation : ElectricComponent {
             state = Contact.State.closed;
     }
 
-    public void CoilDeactivated() {
+    public void SourceDeactivated() {
         activatedMarker.gameObject.SetActive(false);
         state = contact.state;
     }

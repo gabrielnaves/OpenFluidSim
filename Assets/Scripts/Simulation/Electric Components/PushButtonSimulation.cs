@@ -32,7 +32,7 @@ public class PushButtonSimulation : ElectricComponent {
         simulating = false;
     }
 
-    public override void RespondToSignal(Connector source, float signal) {
+    public override void RespondToSignal(Connector sourceConnector, float signal) {
         if (state == Contact.State.closed) {
             foreach (var connector in connections.connectorList)
                 ElectricSimulationEngine.instance.SpreadSignal(connector, signal);

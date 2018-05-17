@@ -1,4 +1,4 @@
 ﻿public class PowerSupplySimulation : ElectricComponent {
 
-    public override void RespondToSignal(Connector connector, float signal) {}
+    public override void RespondToSignal(Connector sourceConnector, float signal) {}
 }

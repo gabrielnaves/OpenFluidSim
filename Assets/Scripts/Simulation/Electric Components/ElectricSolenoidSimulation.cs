@@ -1,15 +1,19 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CoilSimulation : ElectricComponent {
+public class ElectricSolenoidSimulation : ElectricComponent {
 
-    [ViewOnly] public bool active;
-
-    Coil editingCoil;
+    ElectricSolenoid electricSolenoid;
     ComponentReferences componentReferences;
     SpriteRenderer spriteRenderer;
-    bool gotSignal;
     bool simulating;
+    bool active;
+    bool gotSignal;
+
+    void Awake() {
+        electricSolenoid = GetComponent<ElectricSolenoid>();
+        componentReferences = GetComponent<ComponentReferences>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     public override void Setup() {
         simulating = true;
@@ -17,6 +21,8 @@ public class CoilSimulation : ElectricComponent {
 
     public override void Stop() {
         simulating = false;
+        spriteRenderer.color = Color.black;
+        Deactivate();
     }
 
     public override void RespondToSignal(Connector sourceConnector, float signal) {
@@ -26,12 +32,6 @@ public class CoilSimulation : ElectricComponent {
                     gotSignal = true;
             }
         }
-    }
-
-    void Awake() {
-        editingCoil = GetComponent<Coil>();
-        componentReferences = GetComponent<ComponentReferences>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void LateUpdate() {
@@ -47,14 +47,14 @@ public class CoilSimulation : ElectricComponent {
     void Activate() {
         active = true;
         spriteRenderer.color = Color.magenta;
-        foreach (var contact in editingCoil.correlatedObjects)
-            contact.GetComponent<ContactSimulation>().SourceActivated();
+        foreach (var solenoid in electricSolenoid.correlatedObjects)
+            (solenoid as PneumaticSolenoid).Activate();
     }
 
     void Deactivate() {
         active = false;
-        spriteRenderer.color = Color.white;
-        foreach (var contact in editingCoil.correlatedObjects)
-            contact.GetComponent<ContactSimulation>().SourceDeactivated();
+        spriteRenderer.color = Color.black;
+        foreach (var solenoid in electricSolenoid.correlatedObjects)
+            (solenoid as PneumaticSolenoid).Deactivate();
     }
 }
