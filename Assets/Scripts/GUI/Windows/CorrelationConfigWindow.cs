@@ -17,18 +17,18 @@ public class CorrelationConfigWindow : MonoBehaviour {
         correlatedObject.correlationTarget = target;
         target.AddCorrelatedObject(correlatedObject);
 
-        SimulationInput.instance.gameObject.SetActive(true);
+        EditorInput.instance.gameObject.SetActive(true);
         Destroy(gameObject);
     }
 
     public void CancelOperation() {
-        SimulationInput.instance.gameObject.SetActive(true);
+        EditorInput.instance.gameObject.SetActive(true);
         Destroy(gameObject);
     }
 
     void Start() {
         SelectedObjects.instance.ClearSelection();
-        SimulationInput.instance.gameObject.SetActive(false);
+        EditorInput.instance.gameObject.SetActive(false);
         GenerateButtons();
     }
 

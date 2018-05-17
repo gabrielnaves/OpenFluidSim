@@ -11,8 +11,8 @@ public abstract class CorrelatedObject : MonoBehaviour, IConfigurable {
     new protected Collider2D collider;
 
     public bool RequestedConfig() {
-        return SimulationInput.instance.doubleClick &&
-            collider.OverlapPoint(SimulationInput.instance.mousePosition);
+        return EditorInput.instance.doubleClick &&
+            collider.OverlapPoint(EditorInput.instance.mousePosition);
     }
 
     public void OpenConfigWindow() {

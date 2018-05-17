@@ -14,7 +14,7 @@ public class EvaluationEngine : MonoBehaviour {
     public void EvaluateCurrentSimulation() {
         isSimulationOk = false;
         try {
-            SimulationInput.instance.gameObject.SetActive(false);
+            EditorInput.instance.gameObject.SetActive(false);
             activeComponents = SimulationPanel.instance.GetActiveComponents();
             CheckComponentAmount();
             CheckConnectors();
@@ -28,7 +28,7 @@ public class EvaluationEngine : MonoBehaviour {
         }
         catch (Exception exception) {
             Debug.Log(exception.Message);
-            SimulationInput.instance.gameObject.SetActive(true);
+            EditorInput.instance.gameObject.SetActive(true);
         }
     }
 

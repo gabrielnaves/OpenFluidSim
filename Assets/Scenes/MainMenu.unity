@@ -3207,7 +3207,7 @@ GameObject:
   - component: {fileID: 1852640855}
   - component: {fileID: 1852640856}
   m_Layer: 0
-  m_Name: Simulation Input
+  m_Name: Editor Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

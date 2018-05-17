@@ -22,7 +22,7 @@ public class Wire : MonoBehaviour, ISelectable {
 
     bool ISelectable.RequestedSelect() {
         foreach (var collider in clickColliders)
-            if (collider.OverlapPoint(SimulationInput.instance.mousePosition))
+            if (collider.OverlapPoint(EditorInput.instance.mousePosition))
                 return true;
         return false;
     }

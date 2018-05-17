@@ -23,8 +23,8 @@ public class Connector : MonoBehaviour, IDraggable {
     SpriteRenderer spriteRenderer;
 
     bool IDraggable.RequestedDrag() {
-        return SimulationInput.instance.mouseDragStart &&
-            connectorCollider.OverlapPoint(SimulationInput.instance.startingDragPoint);
+        return EditorInput.instance.mouseDragStart &&
+            connectorCollider.OverlapPoint(EditorInput.instance.startingDragPoint);
     }
 
     void IDraggable.StartDragging() {
@@ -75,7 +75,7 @@ public class Connector : MonoBehaviour, IDraggable {
     void RespondToStopDrag(Connector[] activeConnectors) {
         foreach (var connector in activeConnectors)
             if (connector != this)
-                if (connector.GetComponent<Collider2D>().OverlapPoint(SimulationInput.instance.mousePosition))
+                if (connector.GetComponent<Collider2D>().OverlapPoint(EditorInput.instance.mousePosition))
                     CreateConnection(connector);
     }
 

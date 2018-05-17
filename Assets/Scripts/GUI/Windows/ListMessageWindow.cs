@@ -18,14 +18,14 @@ public class ListMessageWindow : MonoBehaviour {
 
     void Start() {
         SelectedObjects.instance.ClearSelection();
-        SimulationInput.instance.gameObject.SetActive(false);
+        EditorInput.instance.gameObject.SetActive(false);
         GenerateListEntries();
         title.text = windowTitle;
     }
 
     void OnDestroy() {
-        if (SimulationInput.instance)
-            SimulationInput.instance.gameObject.SetActive(true);
+        if (EditorInput.instance)
+            EditorInput.instance.gameObject.SetActive(true);
     }
 
     void GenerateListEntries() {

@@ -4,7 +4,7 @@
 /// Makes the simulation input game object follow the camera position
 /// and scale with camera's orthographic size.
 /// </summary>
-public class SimulationInputCameraFollow : MonoBehaviour {
+public class EditorInputCameraFollow : MonoBehaviour {
 
     /// <summary>
     /// Multiplier to use when converting camera's orthographic size to transform local scale.

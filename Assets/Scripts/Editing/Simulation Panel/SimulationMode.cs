@@ -16,7 +16,7 @@ public class SimulationMode : MonoBehaviour {
     }
 
     public void ChangeToEditorMode() {
-        SimulationInput.instance.gameObject.SetActive(true);
+        EditorInput.instance.gameObject.SetActive(true);
         ElectricSimulationEngine.instance.Stop();
         foreach (var wire in SimulationPanel.instance.GetActiveWires())
             wire.UpdateColor(Color.black);
@@ -27,7 +27,7 @@ public class SimulationMode : MonoBehaviour {
         evaluationEngine.EvaluateCurrentSimulation();
         if (evaluationEngine.isSimulationOk) {
             SelectedObjects.instance.ClearSelection();
-            SimulationInput.instance.gameObject.SetActive(false);
+            EditorInput.instance.gameObject.SetActive(false);
             ElectricSimulationEngine.instance.Setup();
             mode = Mode.simulation;
         }

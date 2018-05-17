@@ -13,7 +13,7 @@ public class EditorMouseInputHandler : MonoBehaviour {
     }
 
     void ProcessMouseInput() {
-        SimulationInput input = SimulationInput.instance;
+        EditorInput input = EditorInput.instance;
         SimulationPanel simPanel = SimulationPanel.instance;
         if (input.mouseButtonDown && FloatingSelection.instance.HasFloatingComponent()) {
             FloatingSelection.instance.PlaceFloatingComponent();

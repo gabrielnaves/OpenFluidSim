@@ -17,7 +17,7 @@ public class BoxSelection : MonoBehaviour {
         isSelecting = true;
         additiveSelection = Input.GetKey(KeyCode.LeftShift);
         selectionBox.SetActive(true);
-        startingPosition = SimulationInput.instance.startingDragPoint;
+        startingPosition = EditorInput.instance.startingDragPoint;
         ResizeSelectionBox();
     }
 
@@ -40,7 +40,7 @@ public class BoxSelection : MonoBehaviour {
 	}
 
     void ResizeSelectionBox() {
-        var mousePosition = SimulationInput.instance.mousePosition;
+        var mousePosition = EditorInput.instance.mousePosition;
         selectionBox.transform.position = Vector3.Lerp(startingPosition, mousePosition, 0.5f);
         selectionBox.transform.localScale = new Vector3(
             Mathf.Abs(mousePosition.x - startingPosition.x),

@@ -32,15 +32,15 @@ public class CameraControls : MonoBehaviour {
     }
 
     private void UpdateCameraPosition() {
-        if (SimulationInput.instance.middleMouseButtonDown) {
+        if (EditorInput.instance.middleMouseButtonDown) {
             movingCamera = true;
-            initialMousePos = SimulationInput.instance.rawMousePosition;
+            initialMousePos = EditorInput.instance.rawMousePosition;
             initialTransformPos = transform.position;
         }
-        else if (SimulationInput.instance.middleMouseButtonUp)
+        else if (EditorInput.instance.middleMouseButtonUp)
             movingCamera = false;
         if (movingCamera) {
-            Vector3 offset = SimulationInput.instance.rawMousePosition - initialMousePos;
+            Vector3 offset = EditorInput.instance.rawMousePosition - initialMousePos;
             transform.position = initialTransformPos - offset * offsetScaling;
         }
     }

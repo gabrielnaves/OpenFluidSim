@@ -30,7 +30,7 @@ public class WireCreator : MonoBehaviour {
     public void StartGeneration(Connector start) {
         this.start = start;
         dummyWire.points = new List<Vector3>() {
-            start.transform.position, SimulationInput.instance.mousePosition
+            start.transform.position, EditorInput.instance.mousePosition
         };
         dummyWire.gameObject.SetActive(true);
         running = true;
@@ -53,7 +53,7 @@ public class WireCreator : MonoBehaviour {
 
     void LateUpdate() {
         if (running)
-            dummyWire.points[1] = SimulationGrid.FitToGrid(SimulationInput.instance.mousePosition);
+            dummyWire.points[1] = SimulationGrid.FitToGrid(EditorInput.instance.mousePosition);
     }
 
     public Wire MakeWire(Connector start, Connector end) {

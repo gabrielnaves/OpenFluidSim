@@ -14,7 +14,7 @@ public class BaseComponent : MonoBehaviour, ISelectable, IDraggable {
     Color originalColor;
 
     public bool RequestedSelect() {
-        return SimulationInput.instance.singleClick && collider.OverlapPoint(SimulationInput.instance.mousePosition);
+        return EditorInput.instance.singleClick && collider.OverlapPoint(EditorInput.instance.mousePosition);
     }
 
     public bool IsInsideSelectionBox(Collider2D selectionBox) {
@@ -30,7 +30,7 @@ public class BaseComponent : MonoBehaviour, ISelectable, IDraggable {
     }
 
     public bool RequestedDrag() {
-        return SimulationInput.instance.mouseDragStart && collider.OverlapPoint(SimulationInput.instance.startingDragPoint);
+        return EditorInput.instance.mouseDragStart && collider.OverlapPoint(EditorInput.instance.startingDragPoint);
     }
 
     public void StartDragging() {

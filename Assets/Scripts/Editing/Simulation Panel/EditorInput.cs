@@ -6,9 +6,9 @@
 /// This class extends MouseInputArea's functionality via inheritance.
 /// Unlike the base class, this one is inteded to be unique on scene,
 /// and is a singleton.
-public class SimulationInput : MouseInputArea {
+public class EditorInput : MouseInputArea {
 
-    static public SimulationInput instance { get; private set; }
+    static public EditorInput instance { get; private set; }
 
     public float holdDistance = 0.1f;
     public float doubleClickTime = 0.2f;
@@ -21,7 +21,7 @@ public class SimulationInput : MouseInputArea {
     public Vector2 startingDragPoint { get; private set; }
 
     void Awake() {
-        instance = (SimulationInput)Singleton.Setup(this, instance);
+        instance = (EditorInput)Singleton.Setup(this, instance);
         collider = GetComponent<Collider2D>();
     }
 

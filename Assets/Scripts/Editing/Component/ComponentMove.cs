@@ -36,7 +36,7 @@ public class ComponentMove {
     }
 
     void MoveSelectedComponentsWithMouse() {
-        Vector2 offset = SimulationInput.instance.mousePosition - SimulationInput.instance.startingDragPoint;
+        Vector2 offset = EditorInput.instance.mousePosition - EditorInput.instance.startingDragPoint;
         for (int i = 0; i < selectedComponents.Count; ++i)
             selectedComponents[i].transform.position = SimulationGrid.FitToGrid(initialPositions[i] + offset);
     }
