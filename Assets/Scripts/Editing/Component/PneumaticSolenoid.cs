@@ -20,7 +20,7 @@ public class PneumaticSolenoid : CorrelatedObject {
     }
 
     public void Activate() {
-        spriteRenderer.color = Color.magenta;
+        spriteRenderer.color = Color.green;
         active = true;
     }
 
