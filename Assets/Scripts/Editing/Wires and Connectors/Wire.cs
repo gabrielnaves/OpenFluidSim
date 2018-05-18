@@ -72,14 +72,26 @@ public class Wire : MonoBehaviour, ISelectable {
         if (ReferencesMoved())
             UpdateLineRenderer();
         if (SimulationMode.instance.mode == SimulationMode.Mode.simulation) {
-            if (start.signal > 0 && end.signal > 0)
-                UpdateColor(Color.magenta);
-            else if (start.signal < 0 && end.signal < 0)
-                UpdateColor(Color.green);
-            else if (start.signal == 0 && end.signal == 0)
-                UpdateColor(Color.black);
-            else
-                UpdateColor(Color.red);
+            if (start.type == Connector.ConnectorType.electric) {
+                if (start.signal > 0 && end.signal > 0)
+                    UpdateColor(Color.magenta);
+                else if (start.signal < 0 && end.signal < 0)
+                    UpdateColor(Color.green);
+                else if (start.signal == 0 && end.signal == 0)
+                    UpdateColor(Color.black);
+                else
+                    UpdateColor(Color.red);
+            }
+            else {
+                if (start.signal > 0 && end.signal > 0)
+                    UpdateColor(Color.red);
+                else if (start.signal < 0 && end.signal < 0)
+                    UpdateColor(Color.blue);
+                else if (start.signal == 0 && end.signal == 0)
+                    UpdateColor(Color.black);
+                else
+                    UpdateColor(Color.yellow);
+            }
         }
     }
 

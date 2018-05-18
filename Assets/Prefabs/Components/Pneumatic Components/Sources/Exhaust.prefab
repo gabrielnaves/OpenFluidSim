@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 4214049790934854}
   - component: {fileID: 114091641056648796}
   - component: {fileID: 114142862244776370}
+  - component: {fileID: 114988189265157648}
   - component: {fileID: 212486082452085402}
   - component: {fileID: 61022992598458714}
   - component: {fileID: 50439599831865332}
@@ -172,6 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectorList: []
   contactList: []
+  solenoidList: []
 --- !u!114 &114305626561736466
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -185,6 +187,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPrefab: {fileID: 1726225566437832, guid: 8171f81fb4f37524f8c9e7f827fb953f,
     type: 2}
+--- !u!114 &114988189265157648
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1968449142307530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6983f5917c60f348b7b8e3dde2a374f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212486082452085402
 SpriteRenderer:
   m_ObjectHideFlags: 1

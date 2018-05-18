@@ -7,6 +7,7 @@ public class PneumaticSimulationEngine : MonoBehaviour {
 
     [ViewOnly] public Connector[] connectors;
     [ViewOnly] public List<Connector> pressureSources = new List<Connector>();
+    [ViewOnly] public List<Connector> exhausts = new List<Connector>();
 
     bool simulating;
 
@@ -19,6 +20,8 @@ public class PneumaticSimulationEngine : MonoBehaviour {
         foreach (var connector in connectors) {
             var pressureSource = connector.GetComponentInParent<PressureSourceSimulation>();
             if (pressureSource) pressureSources.Add(connector);
+            var exhaust = connector.GetComponentInParent<ExhaustSimulation>();
+            if (exhaust) exhausts.Add(connector);
         }
         foreach (var component in SimulationPanel.instance.GetActivePneumaticComponents()) {
             var pneumaticComponent = component.GetComponent<PneumaticComponentSimulation>();
@@ -35,6 +38,7 @@ public class PneumaticSimulationEngine : MonoBehaviour {
         }
         connectors = null;
         pressureSources.Clear();
+        exhausts.Clear();
         simulating = false;
     }
 
@@ -43,6 +47,8 @@ public class PneumaticSimulationEngine : MonoBehaviour {
             ClearSignals();
             foreach (var source in pressureSources)
                 SpreadSignal(source, 1f);
+            foreach (var exhaust in exhausts)
+                SpreadSignal(exhaust, -1f);
         }
     }
 
