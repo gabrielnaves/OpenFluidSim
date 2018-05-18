@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ElectricSimulationEngine : MonoBehaviour {
@@ -9,6 +8,8 @@ public class ElectricSimulationEngine : MonoBehaviour {
     [ViewOnly] public Connector[] connectors;
     [ViewOnly] public List<Connector> sourceConnectors = new List<Connector>();
     [ViewOnly] public List<Connector> commonConnectors = new List<Connector>();
+
+    bool simulating;
 
     void Awake() {
         instance = (ElectricSimulationEngine)Singleton.Setup(this, instance);
@@ -25,30 +26,33 @@ public class ElectricSimulationEngine : MonoBehaviour {
         foreach (var component in SimulationPanel.instance.GetActiveElectricComponents())
             if (component.GetComponent<ElectricComponent>())
                 component.GetComponent<ElectricComponent>().Setup();
+        simulating = true;
     }
 
     public void Stop() {
+        ClearSignals();
         foreach (var component in SimulationPanel.instance.GetActiveElectricComponents())
             if (component.GetComponent<ElectricComponent>())
                 component.GetComponent<ElectricComponent>().Stop();
         connectors = null;
         sourceConnectors.Clear();
         commonConnectors.Clear();
+        simulating = false;
     }
 
     void Update() {
-        ClearSignals();
-        foreach (var common in commonConnectors)
-            SpreadSignal(common, -1f);
-        foreach (var source in sourceConnectors)
-            SpreadSignal(source, 1f);
+        if (simulating) {
+            ClearSignals();
+            foreach (var common in commonConnectors)
+                SpreadSignal(common, -1f);
+            foreach (var source in sourceConnectors)
+                SpreadSignal(source, 1f);
+        }
     }
 
     void ClearSignals() {
-        if (SimulationMode.instance.mode == SimulationMode.Mode.simulation) {
-            foreach (var connector in connectors)
-                connector.signal = 0;
-        }
+        foreach (var connector in connectors)
+            connector.signal = 0;
     }
 
     public void SpreadSignal(Connector source, float signal) {

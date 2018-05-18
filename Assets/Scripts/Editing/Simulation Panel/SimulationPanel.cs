@@ -49,10 +49,12 @@ public class SimulationPanel : MonoBehaviour {
     }
 
     public Connector[] GetActivePneumaticConnectors() {
+        Debug.Log("pneumatic");
         return activePneumaticConnectors.ToArray();
     }
 
     public Connector[] GetActiveElectricConnectors() {
+        Debug.Log("electric");
         return activeElectricConnectors.ToArray();
     }
 
