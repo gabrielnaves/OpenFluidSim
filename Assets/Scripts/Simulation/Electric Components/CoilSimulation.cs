@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CoilSimulation : ElectricComponent {
 
@@ -17,6 +16,7 @@ public class CoilSimulation : ElectricComponent {
 
     public override void Stop() {
         simulating = false;
+        Deactivate();
     }
 
     public override void RespondToSignal(Connector sourceConnector, float signal) {
