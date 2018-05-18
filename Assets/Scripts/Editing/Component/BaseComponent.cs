@@ -9,31 +9,33 @@
 public class BaseComponent : MonoBehaviour, ISelectable, IDraggable {
 
     new Collider2D collider;
-    SpriteRenderer spriteRenderer;
     ComponentMove componentMove;
-    Color originalColor;
+    SpriteRenderer[] spritesInHierarchy;
+    Color[] originalColors;
 
-    public bool RequestedSelect() {
+    bool ISelectable.RequestedSelect() {
         return EditorInput.instance.singleClick && collider.OverlapPoint(EditorInput.instance.mousePosition);
     }
 
-    public bool IsInsideSelectionBox(Collider2D selectionBox) {
+    bool ISelectable.IsInsideSelectionBox(Collider2D selectionBox) {
         return selectionBox.IsTouching(collider);
     }
 
-    public void OnSelect() {
-        spriteRenderer.color = new Color32(191, 186, 255, 255);
+    void ISelectable.OnSelect() {
+        foreach (var sprite in spritesInHierarchy)
+            sprite.color = new Color32(191, 186, 255, 255);
     }
 
-    public void OnDeselect() {
-        spriteRenderer.color = originalColor;
+    void ISelectable.OnDeselect() {
+        for (int i = 0; i < spritesInHierarchy.Length; ++i)
+            spritesInHierarchy[i].color = originalColors[i];
     }
 
-    public bool RequestedDrag() {
+    bool IDraggable.RequestedDrag() {
         return EditorInput.instance.mouseDragStart && collider.OverlapPoint(EditorInput.instance.startingDragPoint);
     }
 
-    public void StartDragging() {
+    void IDraggable.StartDragging() {
         if (!SelectedObjects.instance.IsSelected(this)) {
             SelectedObjects.instance.ClearSelection();
             SelectedObjects.instance.SelectObject(this);
@@ -41,15 +43,18 @@ public class BaseComponent : MonoBehaviour, ISelectable, IDraggable {
         componentMove.StartMoving();
     }
 
-    public void StopDragging() {
+    void IDraggable.StopDragging() {
         componentMove.StopMoving();
     }
 
     void Awake() {
         collider = GetComponent<Collider2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         componentMove = new ComponentMove();
-        originalColor = spriteRenderer.color;
+        spritesInHierarchy = GetComponentsInChildren<SpriteRenderer>();
+
+        originalColors = new Color[spritesInHierarchy.Length];
+        for (int i = 0; i < spritesInHierarchy.Length; ++i)
+            originalColors[i] = spritesInHierarchy[i].color;
     }
     
     void Update() {

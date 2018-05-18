@@ -409,7 +409,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -492,6 +492,7 @@ MonoBehaviour:
   configWindowPrefab: {fileID: 1414779451249630, guid: 50ffd0790d8f56b45a145aeef801806b,
     type: 2}
   correlationTarget: {fileID: 0}
+  active: 0
 --- !u!114 &114470482286152372
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -598,6 +599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectorList: []
   contactList: []
+  solenoidList: []
 --- !u!212 &212070899775612798
 SpriteRenderer:
   m_ObjectHideFlags: 1
