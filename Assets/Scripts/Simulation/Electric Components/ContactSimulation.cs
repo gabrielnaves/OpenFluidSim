@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ContactSimulation : ElectricComponent {
 
-    public SpriteRenderer activatedMarker;
+    public Sprite inactiveSprite;
+    public Sprite activeSprite;
     [ViewOnly] public Contact.State state;
 
     Contact contact;
@@ -27,8 +28,7 @@ public class ContactSimulation : ElectricComponent {
     public override void Stop() {
         simulating = false;
         spriteRenderer.color = Color.black;
-        activatedMarker.color = Color.black;
-        activatedMarker.gameObject.SetActive(false);
+        spriteRenderer.sprite = inactiveSprite;
     }
 
     public override void RespondToSignal(Connector sourceConnector, float signal) {
@@ -40,7 +40,7 @@ public class ContactSimulation : ElectricComponent {
     }
 
     public void SourceActivated() {
-        activatedMarker.gameObject.SetActive(true);
+        spriteRenderer.sprite = activeSprite;
         if (contact.state == Contact.State.closed)
             state = Contact.State.open;
         else if (contact.state == Contact.State.open)
@@ -48,24 +48,18 @@ public class ContactSimulation : ElectricComponent {
     }
 
     public void SourceDeactivated() {
-        activatedMarker.gameObject.SetActive(false);
+        spriteRenderer.sprite = inactiveSprite;
         state = contact.state;
     }
 
     void LateUpdate() {
         if (simulating) {
-            if (receivedSignal > 0) {
+            if (receivedSignal > 0)
                 spriteRenderer.color = Color.magenta;
-                activatedMarker.color = Color.magenta;
-            }
-            else if (receivedSignal < 0) {
+            else if (receivedSignal < 0)
                 spriteRenderer.color = Color.green;
-                activatedMarker.color = Color.green;
-            }
-            else {
+            else
                 spriteRenderer.color = Color.black;
-                activatedMarker.color = Color.black;
-            }
             receivedSignal = 0;
         } 
     }

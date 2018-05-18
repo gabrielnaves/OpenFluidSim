@@ -9,7 +9,6 @@ public class DoubleActingCylinderSimulation : PneumaticComponentSimulation {
     public float maxDisplacement;
     public GameObject configWindow;
 
-    new Collider2D collider;
     ComponentReferences componentReferences;
     Vector3[] originalPositions;
     float displacement;
@@ -18,7 +17,6 @@ public class DoubleActingCylinderSimulation : PneumaticComponentSimulation {
 
     void Awake() {
         componentReferences = GetComponent<ComponentReferences>();
-        collider = GetComponent<Collider2D>();
     }
 
     public override void Setup() {
