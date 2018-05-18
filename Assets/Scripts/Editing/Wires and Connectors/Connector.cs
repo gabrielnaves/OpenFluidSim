@@ -12,12 +12,14 @@ public class Connector : MonoBehaviour, IDraggable {
     public enum ConnectorType { pneumatic, electric }
     public ConnectorType type;
 
-    public List<Connector> connectedObjects = new List<Connector>();
+    public Sprite openSprite;
+    public Sprite connectedSprite;
 
+    [ViewOnly] public List<Connector> connectedObjects = new List<Connector>();
     [ViewOnly] public float signal;
 
     Color openColor = Color.red;
-    Color connectedColor = Color.clear;
+    Color connectedColor = Color.black;
 
     Collider2D connectorCollider;
     SpriteRenderer spriteRenderer;
@@ -86,13 +88,17 @@ public class Connector : MonoBehaviour, IDraggable {
     }
 
     void Update() {
-        UpdateColor();
+        UpdateSprite();
     }
 
-    void UpdateColor() {
-        if (connectedObjects.Count > 0)
+    void UpdateSprite() {
+        if (connectedObjects.Count > 0 && spriteRenderer.color != connectedColor) {
+            spriteRenderer.sprite = connectedSprite;
             spriteRenderer.color = connectedColor;
-        else
+        }
+        else if (connectedObjects.Count == 0 && spriteRenderer.color != openColor) {
+            spriteRenderer.sprite = openSprite;
             spriteRenderer.color = openColor;
+        }
     }
 }
