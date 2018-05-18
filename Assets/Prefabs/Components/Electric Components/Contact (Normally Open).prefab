@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inactiveSprite: {fileID: 21300000, guid: 54ce3fb9acf02a449bd0ddf966936ca7, type: 3}
-  activeSprite: {fileID: 21300000, guid: 675729ff4d9b44f46bbcb3905013f05c, type: 3}
+  activeSprite: {fileID: 21300000, guid: 9b40b95407f4cea4dbb7d5b44c3bd53a, type: 3}
   state: 0
 --- !u!114 &114685591753652414
 MonoBehaviour:
