@@ -16,6 +16,10 @@ public class EditorKeyboardInputHandler : MonoBehaviour {
             if (SimulationPanel.instance.activeComponents.Count > 0)
                 SaveUtility.instance.SaveToFile();
         }
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Z))
+            ActionStack.instance.UndoAction();
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Y))
+            ActionStack.instance.RedoAction();
     }
 
     void RotateCommand(bool clockwise) {

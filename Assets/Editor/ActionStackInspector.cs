@@ -18,9 +18,9 @@ public class ActionStackInspector : Editor {
         base.OnInspectorGUI();
         if (Application.isPlaying) {
             EditorGUILayout.Space();
-            DrawActionStack("Action stack", actionStack.GetActionStack());
+            DrawActionStack("Action stack", actionStack.actionStack.ToArray());
             EditorGUILayout.Space();
-            DrawActionStack("Redo stack", actionStack.GetRedoStack());
+            DrawActionStack("Redo stack", actionStack.redoStack.ToArray());
         }
     }
 

@@ -17,6 +17,26 @@ public class ActionStack : MonoBehaviour {
     public Stack<IAction> actionStack;
     public Stack<IAction> redoStack;
 
+    public int actionStackSize {
+        get {
+            if (actionStack != null) return actionStack.Count;
+            return 0;
+        }
+    }
+
+    public int redoStackSize {
+        get {
+            if (redoStack != null) return redoStack.Count;
+            return 0;
+        }
+    }
+
+    void Awake() {
+        instance = (ActionStack)Singleton.Setup(this, instance);
+        actionStack = new Stack<IAction>();
+        redoStack = new Stack<IAction>();
+    }
+
     public void PushAction(IAction action) {
         action.DoAction();
         actionStack.Push(action);
@@ -24,13 +44,17 @@ public class ActionStack : MonoBehaviour {
     }
 
     public void UndoAction() {
-        actionStack.Peek().UndoAction();
-        redoStack.Push(actionStack.Pop());
+        if (actionStackSize > 0) {
+            actionStack.Peek().UndoAction();
+            redoStack.Push(actionStack.Pop());
+        }
     }
 
     public void RedoAction() {
-        redoStack.Peek().RedoAction();
-        actionStack.Push(redoStack.Pop());
+        if (redoStackSize > 0) {
+            redoStack.Peek().RedoAction();
+            actionStack.Push(redoStack.Pop());
+        }
     }
 
     /// <summary>
@@ -41,39 +65,9 @@ public class ActionStack : MonoBehaviour {
         actionStack.Clear();
     }
 
-    public int ActionStackSize() {
-        if (actionStack == null)
-            return 0;
-        return actionStack.Count;
-    }
-
-    public int RedoStackSize() {
-        if (actionStack == null)
-            return 0;
-        return redoStack.Count;
-    }
-
-    void Awake() {
-        instance = (ActionStack)Singleton.Setup(this, instance);
-        actionStack = new Stack<IAction>();
-        redoStack = new Stack<IAction>();
-    }
-
     void ClearRedoStack() {
         foreach (var act in redoStack)
             act.OnDestroy();
         redoStack.Clear();
-    }
-
-    public IAction[] GetActionStack() {
-        if (actionStack != null)
-            return actionStack.ToArray();
-        return new IAction[0];
-    }
-
-    public IAction[] GetRedoStack() {
-        if (redoStack != null)
-            return redoStack.ToArray();
-        return new IAction[0];
     }
 }

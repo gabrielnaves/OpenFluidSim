@@ -1071,7 +1071,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11504ae0ad59d0e4f9bc19e9ad571eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetMode: 1
 --- !u!1001 &425265899
 Prefab:
   m_ObjectHideFlags: 0
@@ -1979,10 +1978,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1122056585}
+  - component: {fileID: 1122056589}
   - component: {fileID: 1122056588}
   - component: {fileID: 1122056587}
   - component: {fileID: 1122056586}
-  - component: {fileID: 1122056589}
   - component: {fileID: 1122056590}
   m_Layer: 5
   m_Name: Redo Button
@@ -2135,6 +2134,7 @@ GameObject:
   - component: {fileID: 1169283246}
   - component: {fileID: 1169283245}
   - component: {fileID: 1169283244}
+  - component: {fileID: 1169283248}
   m_Layer: 5
   m_Name: Taskbar
   m_TagString: Untagged
@@ -2219,6 +2219,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1169283248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1169283243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa258cf44fb91f1469f2a7d9c37cfaa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  editorButtons:
+  - {fileID: 2044717720}
+  - {fileID: 1122056586}
+  - {fileID: 2136864195}
+  - {fileID: 1406814466}
+  - {fileID: 231388880}
+  - {fileID: 1901199939}
+  simulationButtons:
+  - {fileID: 422982746}
 --- !u!1001 &1186974339
 Prefab:
   m_ObjectHideFlags: 0
@@ -3699,10 +3719,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2044717719}
+  - component: {fileID: 2044717723}
   - component: {fileID: 2044717722}
   - component: {fileID: 2044717721}
   - component: {fileID: 2044717720}
-  - component: {fileID: 2044717723}
   - component: {fileID: 2044717724}
   m_Layer: 5
   m_Name: Undo Button
@@ -4017,7 +4037,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11504ae0ad59d0e4f9bc19e9ad571eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetMode: 0
 --- !u!114 &2136864195
 MonoBehaviour:
   m_ObjectHideFlags: 0
