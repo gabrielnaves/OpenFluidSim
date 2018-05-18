@@ -92,13 +92,18 @@ public class Connector : MonoBehaviour, IDraggable {
     }
 
     void UpdateSprite() {
-        if (connectedObjects.Count > 0 && spriteRenderer.color != connectedColor) {
-            spriteRenderer.sprite = connectedSprite;
-            spriteRenderer.color = connectedColor;
+        if (SimulationMode.instance.mode == SimulationMode.Mode.editor) {
+            if (connectedObjects.Count > 0 && spriteRenderer.color != connectedColor) {
+                spriteRenderer.sprite = connectedSprite;
+                spriteRenderer.color = connectedColor;
+            }
+            else if (connectedObjects.Count == 0 && spriteRenderer.color != openColor) {
+                spriteRenderer.sprite = openSprite;
+                spriteRenderer.color = openColor;
+            }
         }
-        else if (connectedObjects.Count == 0 && spriteRenderer.color != openColor) {
-            spriteRenderer.sprite = openSprite;
-            spriteRenderer.color = openColor;
+        else {
+            spriteRenderer.color = Color.clear;
         }
     }
 }
