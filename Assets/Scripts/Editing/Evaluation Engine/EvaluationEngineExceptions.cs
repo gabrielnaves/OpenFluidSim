@@ -18,8 +18,8 @@ namespace EvaluationExceptions {
         public override string Message {
             get {
                 if (components.Length == 1)
-                    return "Componente não conectado:";
-                else return "Componentes não conectados:";
+                    return "Unconnected component:";
+                else return "Unconnected components:";
             }
         }
 
@@ -41,8 +41,8 @@ namespace EvaluationExceptions {
         public override string Message {
             get {
                 if (contacts.Length == 1)
-                    return "Contato não configurado:";
-                else return "Contatos não configurados:";
+                    return "Unassigned contact:";
+                else return "Unassigned contacts:";
             }
         }
 
