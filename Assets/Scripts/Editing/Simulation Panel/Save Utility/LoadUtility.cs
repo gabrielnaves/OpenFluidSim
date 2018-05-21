@@ -100,7 +100,7 @@ public class LoadUtility : MonoBehaviour {
         MakeSolenoidCorrelations();
         MakeContactCorrelations();
         loading = false;
-        MessageSystem.instance.GenerateMessage("File loaded successfully");
+        MessageSystem.instance.GenerateMessage("Simulation loaded successfully");
     }
 
     void BuildConnectorDictionary() {
