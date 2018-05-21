@@ -47,7 +47,7 @@ public class DoubleActingCylinderSimulation : PneumaticComponentSimulation {
                 displacement += movementSpeed * Time.fixedDeltaTime;
                 displacement = Mathf.Clamp(displacement, 0, maxDisplacement);
                 for (int i = 0; i < cylinderParts.Length; ++i)
-                    cylinderParts[i].position = originalPositions[i] + transform.right * displacement;
+                    cylinderParts[i].localPosition = originalPositions[i] + transform.right * displacement;
             }
         }
     }

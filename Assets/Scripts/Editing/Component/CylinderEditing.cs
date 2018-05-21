@@ -25,7 +25,7 @@ public class CylinderEditing : MonoBehaviour, IConfigurable {
 
     public void UpdateSprites() {
         for (int i = 0; i < cylinderParts.Length; ++i)
-            cylinderParts[i].position = originalPositions[i] +
+            cylinderParts[i].localPosition = originalPositions[i] +
                 transform.right * (startingPercentage * GetMaxDisplacement());
     }
 
@@ -50,7 +50,7 @@ public class CylinderEditing : MonoBehaviour, IConfigurable {
     void Start() {
         originalPositions = new Vector3[cylinderParts.Length];
         for (int i = 0; i < cylinderParts.Length; ++i)
-            originalPositions[i] = cylinderParts[i].position;
+            originalPositions[i] = cylinderParts[i].localPosition;
         UpdateSprites();
     }
 
