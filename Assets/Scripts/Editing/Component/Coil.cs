@@ -12,4 +12,8 @@
         int indexOnCoilList = SimulationPanel.instance.activeCoils.IndexOf(this);
         nameText.text = "K" + (indexOnCoilList + 1);
     }
+
+    public override string TypeString() {
+        return "Coil";
+    }
 }

@@ -12,4 +12,8 @@
         int indexOnCoilList = SimulationPanel.instance.activeSolenoids.IndexOf(this);
         nameText.text = "Sol " + (indexOnCoilList + 1);
     }
+
+    public override string TypeString() {
+        return "Solenoid";
+    }
 }

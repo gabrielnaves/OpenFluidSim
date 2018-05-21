@@ -31,6 +31,6 @@
     public void OnDestroy() {}
 
     public string Name() {
-        return "New correlation: " + correlatedObject.name;
+        return "New correlation: " + correlationTarget.TypeString();
     }
 }

@@ -45,6 +45,7 @@ public class ActionStack : MonoBehaviour {
 
     public void UndoAction() {
         if (actionStackSize > 0) {
+            MessageSystem.instance.GenerateMessage("Undo " + actionStack.Peek().Name());
             actionStack.Peek().UndoAction();
             redoStack.Push(actionStack.Pop());
         }
@@ -52,6 +53,7 @@ public class ActionStack : MonoBehaviour {
 
     public void RedoAction() {
         if (redoStackSize > 0) {
+            MessageSystem.instance.GenerateMessage("Redo " + redoStack.Peek().Name());
             redoStack.Peek().RedoAction();
             actionStack.Push(redoStack.Pop());
         }

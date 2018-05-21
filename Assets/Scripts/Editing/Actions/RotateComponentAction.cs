@@ -46,7 +46,7 @@ public class RotateComponentAction : IAction {
 
     public string Name() {
         if (referencedComponents.Count == 1)
-            return "Rotate " + (clockwise ? "clockwise " : "counter-clockwise ") + referencedComponents[0];
+            return "Rotate " + (clockwise ? "clockwise " : "counter-clockwise ");
         return "Rotate multiple " + (clockwise ? "clockwise" : "counter-clockwise");
     }
 }

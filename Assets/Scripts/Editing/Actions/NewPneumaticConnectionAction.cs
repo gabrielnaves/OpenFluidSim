@@ -37,6 +37,8 @@ public class NewPneumaticConnectionAction : IAction {
     }
 
     public string Name() {
-        return "New pneumatic connection";
+        if (start.type == Connector.ConnectorType.pneumatic)
+            return "New pneumatic connection";
+        return "New electric connection";
     }
 }

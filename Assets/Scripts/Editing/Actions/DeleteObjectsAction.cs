@@ -47,7 +47,7 @@ public class DeleteObjectsAction : IAction {
     public void OnDestroy() {}
 
     public string Name() {
-        return "Delete Objects";
+        return "Delete objects";
     }
 
     void FindAllWiresThatWillBeDeleted() {

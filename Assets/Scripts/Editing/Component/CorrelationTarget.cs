@@ -23,4 +23,6 @@ public abstract class CorrelationTarget : MonoBehaviour {
         if (correlatedObjects.Contains(obj))
             correlatedObjects.Remove(obj);
     }
+
+    public abstract string TypeString();
 }

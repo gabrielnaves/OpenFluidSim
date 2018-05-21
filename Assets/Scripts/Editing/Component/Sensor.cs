@@ -12,4 +12,8 @@
         int indexOnSensorList = SimulationPanel.instance.activeSensors.IndexOf(this);
         nameText.text = "Sensor " + (indexOnSensorList + 1);
     }
+
+    public override string TypeString() {
+        return "Sensor";
+    }
 }

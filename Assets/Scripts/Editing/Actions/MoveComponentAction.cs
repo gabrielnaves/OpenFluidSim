@@ -33,7 +33,7 @@ public class MoveComponentAction : IAction {
 
     public string Name() {
         if (referencedComponents.Length == 1)
-            return "Move component " + referencedComponents[0];
+            return "Move component";
         return "Move components";
     }
 }
