@@ -26,6 +26,9 @@ public class LoadUtility : MonoBehaviour {
                 VerifyDataIntegrity();
                 ClearCurrentSimulation();
                 InstantiateComponents();
+#if UNITY_WEBGL && !UNITY_EDITOR
+                MessageSystem.instance.GenerateMessage("Loaded simulation from clipboard");
+#endif
             }
             catch (FileNotFoundException) {
                 MessageSystem.instance.GenerateMessage("File " + fileLocation+fileName + " could not be found.");

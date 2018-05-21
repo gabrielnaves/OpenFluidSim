@@ -19,6 +19,7 @@ public class SaveUtility : MonoBehaviour {
         CreateSavedData();
 #if UNITY_WEBGL && !UNITY_EDITOR
         Clipboard.SetClipboard(JsonUtility.ToJson(data, true));
+        MessageSystem.instance.GenerateMessage("Saved simulation to clipboard");
 #else
         WriteDataToFile();
 #endif
