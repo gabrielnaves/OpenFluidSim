@@ -53,6 +53,7 @@ public class SaveUtility : MonoBehaviour {
         }
 
         FillContactCorrelationInfo(componentData, baseComponent.GetComponent<Contact>());
+        FillCylinderInfo(componentData, baseComponent.GetComponent<CylinderEditing>());
     }
 
     void CreateSavedConnectorData(SavedConnectorData connectorData, Connector connector) {
@@ -79,6 +80,15 @@ public class SaveUtility : MonoBehaviour {
                 componentData.isContact = true;
                 componentData.contactTargetId = contact.correlationTarget.gameObject.GetInstanceID();
             }
+        }
+    }
+
+    void FillCylinderInfo(SavedComponentData componentData, CylinderEditing cylinderEditing) {
+        if (cylinderEditing) {
+            componentData.cylinderData = new SavedCylinderData() {
+                startingPercentage = cylinderEditing.startingPercentage,
+                movementTime = cylinderEditing.movementTime
+            };
         }
     }
 

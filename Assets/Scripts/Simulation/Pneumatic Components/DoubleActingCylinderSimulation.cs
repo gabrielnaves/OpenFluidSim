@@ -2,11 +2,12 @@
 
 public class DoubleActingCylinderSimulation : PneumaticComponentSimulation {
 
-    public Transform[] cylinderParts;
-
     CylinderEditing cylinderEditing;
     ComponentReferences componentReferences;
+
+    Transform[] cylinderParts;
     Vector3[] originalPositions;
+
     float movementSpeed;
     float maxDisplacement;
     float displacement;
@@ -18,13 +19,9 @@ public class DoubleActingCylinderSimulation : PneumaticComponentSimulation {
         cylinderEditing = GetComponent<CylinderEditing>();
     }
 
-    void Start() {
-        originalPositions = new Vector3[cylinderParts.Length];
-        for (int i = 0; i < cylinderParts.Length; ++i)
-            originalPositions[i] = cylinderParts[i].position;
-    }
-
     public override void Setup() {
+        cylinderParts = cylinderEditing.cylinderParts;
+        originalPositions = cylinderEditing.originalPositions;
         maxDisplacement = cylinderEditing.GetMaxDisplacement();
         movementSpeed = maxDisplacement / cylinderEditing.movementTime;
         displacement = cylinderEditing.startingPercentage * maxDisplacement;

@@ -10,7 +10,7 @@ public class CylinderEditing : MonoBehaviour, IConfigurable {
     [ViewOnly] public float movementTime = 1f;
     [ViewOnly] public int cylinderLength = 1;
 
-    Vector3[] originalPositions;
+    [ViewOnly] public Vector3[] originalPositions;
 
     new Collider2D collider;
     Dictionary<int, float> lengthToMaxDisplacement = new Dictionary<int, float>() {
@@ -51,6 +51,7 @@ public class CylinderEditing : MonoBehaviour, IConfigurable {
         originalPositions = new Vector3[cylinderParts.Length];
         for (int i = 0; i < cylinderParts.Length; ++i)
             originalPositions[i] = cylinderParts[i].position;
+        UpdateSprites();
     }
 
     void OnEnable() {

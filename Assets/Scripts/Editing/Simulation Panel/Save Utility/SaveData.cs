@@ -15,6 +15,7 @@ public class SavedComponentData {
     public SavedSolenoidData[] solenoids;
     public bool isContact;
     public int contactTargetId;
+    public SavedCylinderData cylinderData;
 }
 
 [Serializable]
@@ -27,4 +28,10 @@ public class SavedConnectorData {
 public class SavedSolenoidData {
     public bool configured;
     public int solenoidTargetId;
+}
+
+[Serializable]
+public class SavedCylinderData {
+    public float startingPercentage;
+    public float movementTime;
 }
