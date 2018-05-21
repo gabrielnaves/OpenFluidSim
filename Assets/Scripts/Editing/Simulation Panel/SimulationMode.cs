@@ -20,6 +20,7 @@ public class SimulationMode : MonoBehaviour {
         ElectricSimulationEngine.instance.Stop();
         PneumaticSimulationEngine.instance.Stop();
         Taskbar.instance.StoppedSimulation();
+        ComponentListBar.instance.Enable();
         foreach (var wire in SimulationPanel.instance.GetActiveWires())
             wire.UpdateColor(Color.black);
         mode = Mode.editor;
@@ -33,6 +34,7 @@ public class SimulationMode : MonoBehaviour {
             ElectricSimulationEngine.instance.Setup();
             PneumaticSimulationEngine.instance.Setup();
             Taskbar.instance.StartedSimulation();
+            ComponentListBar.instance.Disable();
             mode = Mode.simulation;
         }
     }

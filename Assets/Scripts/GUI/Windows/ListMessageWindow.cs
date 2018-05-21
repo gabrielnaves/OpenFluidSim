@@ -19,6 +19,8 @@ public class ListMessageWindow : MonoBehaviour {
     void Start() {
         SelectedObjects.instance.ClearSelection();
         EditorInput.instance.gameObject.SetActive(false);
+        ComponentListBar.instance.Disable();
+        Taskbar.instance.Disable();
         GenerateListEntries();
         title.text = windowTitle;
     }
@@ -26,6 +28,8 @@ public class ListMessageWindow : MonoBehaviour {
     void OnDestroy() {
         if (EditorInput.instance)
             EditorInput.instance.gameObject.SetActive(true);
+        ComponentListBar.instance.Enable();
+        Taskbar.instance.Enable();
     }
 
     void GenerateListEntries() {

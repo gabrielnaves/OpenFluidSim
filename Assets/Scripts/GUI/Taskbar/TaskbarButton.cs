@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class TaskbarButton : MonoBehaviour {
+public class TaskbarButton : MonoBehaviour {
 
     Button button;
 
@@ -10,13 +10,13 @@ public abstract class TaskbarButton : MonoBehaviour {
     }
 
     void Update() {
-        if (ShouldShowButton())
+        if (ShouldShowButton() && Taskbar.instance.taskbarEnabled)
             ShowButton();
         else
             HideButton();
     }
 
-    protected abstract bool ShouldShowButton();
+    protected virtual bool ShouldShowButton() { return true; }
 
     void ShowButton() {
         button.interactable = true;

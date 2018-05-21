@@ -13,18 +13,18 @@ public class CorrelationConfigWindow : MonoBehaviour {
     public void CloseContactWindow(CorrelationTarget target) {
         if (correlatedObject.correlationTarget != target)
             ActionStack.instance.PushAction(new NewCorrelationAction(correlatedObject, target));
-        EditorInput.instance.gameObject.SetActive(true);
         Destroy(gameObject);
     }
 
     public void CancelOperation() {
-        EditorInput.instance.gameObject.SetActive(true);
         Destroy(gameObject);
     }
 
     void Start() {
         SelectedObjects.instance.ClearSelection();
         EditorInput.instance.gameObject.SetActive(false);
+        ComponentListBar.instance.Disable();
+        Taskbar.instance.Disable();
         GenerateButtons();
     }
 
@@ -43,5 +43,11 @@ public class CorrelationConfigWindow : MonoBehaviour {
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape))
             CancelOperation();
+    }
+
+    void OnDestroy() {
+        EditorInput.instance.gameObject.SetActive(true);
+        ComponentListBar.instance.Enable();
+        Taskbar.instance.Enable();
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Taskbar : MonoBehaviour {
@@ -9,6 +7,8 @@ public class Taskbar : MonoBehaviour {
 
     public Button[] editorButtons;
     public Button[] simulationButtons;
+
+    [ViewOnly] public bool taskbarEnabled;
 
     public void StartedSimulation() {
         foreach (var button in editorButtons)
@@ -29,6 +29,7 @@ public class Taskbar : MonoBehaviour {
     }
 
     void Start() {
+        taskbarEnabled = true;
         foreach (var button in simulationButtons)
             DeactivateButton(button);
     }
@@ -39,5 +40,13 @@ public class Taskbar : MonoBehaviour {
 
     void ActivateButton(Button button) {
         button.gameObject.SetActive(true);
+    }
+
+    public void Disable() {
+        taskbarEnabled = false;
+    }
+
+    public void Enable() {
+        taskbarEnabled = true;
     }
 }

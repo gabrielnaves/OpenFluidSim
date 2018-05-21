@@ -11,9 +11,8 @@ public class CylinderConfigWindow : MonoBehaviour {
     [ViewOnly] public CylinderEditing cylinderEditing;
 
     public void CloseWindow() {
-        EditorInput.instance.gameObject.SetActive(true);
-        Destroy(gameObject);
         cylinderEditing.UpdateSprites();
+        Destroy(gameObject);
     }
 
     public void UpdatePercentage(string valueStr) {
@@ -65,6 +64,8 @@ public class CylinderConfigWindow : MonoBehaviour {
     void Start() {
         SelectedObjects.instance.ClearSelection();
         EditorInput.instance.gameObject.SetActive(false);
+        ComponentListBar.instance.Disable();
+        Taskbar.instance.Disable();
         SetupInitialValues();
     }
 
@@ -80,5 +81,11 @@ public class CylinderConfigWindow : MonoBehaviour {
         cylinderEditing.UpdateSprites();
         if (Input.GetKeyDown(KeyCode.Escape))
             CloseWindow();
+    }
+
+    void OnDestroy() {
+        EditorInput.instance.gameObject.SetActive(true);
+        ComponentListBar.instance.Enable();
+        Taskbar.instance.Enable();
     }
 }

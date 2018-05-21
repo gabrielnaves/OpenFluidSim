@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Manages the "contents" game object inside the component list hierarchy
@@ -12,7 +13,7 @@ using UnityEngine;
 /// Every "GUI component" is a Unity Button with a ComponentRef. 
 public class ComponentListContents : MonoBehaviour {
 
-    List<GameObject> guiComponents = new List<GameObject>();
+    [ViewOnly] public List<GameObject> guiComponents = new List<GameObject>();
     RectTransform rectTransform;
 
     public void AddGUIComponent(GameObject component) {
@@ -21,11 +22,23 @@ public class ComponentListContents : MonoBehaviour {
         UpdateWidth();
     }
 
+    public void DisableAllButtons() {
+        foreach (var component in guiComponents)
+            component.GetComponent<Button>().interactable = false;
+    }
+
+    public void EnableAllButtons() {
+        foreach (var component in guiComponents)
+            component.GetComponent<Button>().interactable = true;
+    }
+
     void Awake() {
         rectTransform = GetComponent<RectTransform>();
     }
 
     void Start() {
+        foreach (RectTransform component in rectTransform)
+            guiComponents.Add(component.gameObject);
         UpdateWidth();
     }
 
