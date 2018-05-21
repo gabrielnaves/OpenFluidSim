@@ -3,11 +3,9 @@ using UnityEngine.UI;
 
 public abstract class TaskbarButton : MonoBehaviour {
 
-    Image image;
     Button button;
 
     void Awake() {
-        image = GetComponent<Image>();
         button = GetComponent<Button>();
     }
 
@@ -21,12 +19,10 @@ public abstract class TaskbarButton : MonoBehaviour {
     protected abstract bool ShouldShowButton();
 
     void ShowButton() {
-        image.color = Color.white;
-        button.enabled = true;
+        button.interactable = true;
     }
 
     void HideButton() {
-        image.color = Color.clear;
-        button.enabled = false;
+        button.interactable = false;
     }
 }

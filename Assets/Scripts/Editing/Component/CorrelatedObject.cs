@@ -10,12 +10,12 @@ public abstract class CorrelatedObject : MonoBehaviour, IConfigurable {
 
     new protected Collider2D collider;
 
-    public bool RequestedConfig() {
+    bool IConfigurable.RequestedConfig() {
         return EditorInput.instance.doubleClick &&
             collider.OverlapPoint(EditorInput.instance.mousePosition);
     }
 
-    public void OpenConfigWindow() {
+    void IConfigurable.OpenConfigWindow() {
         CorrelationTarget[] targets = GetCorrelationTargets();
         if (targets.Length > 0) {
             GameObject configWindowObj = Instantiate(configWindowPrefab);
@@ -30,7 +30,7 @@ public abstract class CorrelatedObject : MonoBehaviour, IConfigurable {
 
     protected abstract string CreateConfigWindowTitle();
 
-    public bool IsConfigured() {
+    bool IConfigurable.IsConfigured() {
         if (correlationTarget != null)
             if (correlationTarget.gameObject.activeInHierarchy)
                 return true;

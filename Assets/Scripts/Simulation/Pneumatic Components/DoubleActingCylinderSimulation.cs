@@ -1,36 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DoubleActingCylinderSimulation : PneumaticComponentSimulation {
 
     public Transform[] cylinderParts;
-    public float movementSpeed;
-    public float maxDisplacement;
-    public GameObject configWindow;
 
+    CylinderEditing cylinderEditing;
     ComponentReferences componentReferences;
     Vector3[] originalPositions;
+    float movementSpeed;
+    float maxDisplacement;
     float displacement;
     float[] signals = new float[2];
     bool simulating;
 
     void Awake() {
         componentReferences = GetComponent<ComponentReferences>();
+        cylinderEditing = GetComponent<CylinderEditing>();
     }
 
-    public override void Setup() {
-        displacement = 0;
+    void Start() {
         originalPositions = new Vector3[cylinderParts.Length];
         for (int i = 0; i < cylinderParts.Length; ++i)
             originalPositions[i] = cylinderParts[i].position;
+    }
+
+    public override void Setup() {
+        maxDisplacement = cylinderEditing.GetMaxDisplacement();
+        movementSpeed = maxDisplacement / cylinderEditing.movementTime;
+        displacement = cylinderEditing.startingPercentage * maxDisplacement;
         simulating = true;
     }
 
     public override void Stop() {
-        for (int i = 0; i < cylinderParts.Length; ++i)
-            cylinderParts[i].position = originalPositions[i];
-        originalPositions = null;
+        cylinderEditing.UpdateSprites();
         simulating = false;
     }
 

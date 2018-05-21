@@ -11,7 +11,7 @@ public class PneumaticSolenoid : CorrelatedObject {
     }
 
     protected override string CreateConfigWindowTitle() {
-        return "Selecione um Solenoide abaixo:";
+        return "Select a Solenoid:";
     }
 
     void Start() {

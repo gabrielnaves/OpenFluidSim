@@ -65,7 +65,7 @@ public class SaveUtility : MonoBehaviour {
     void CreateSavedSolenoidData(SavedSolenoidData solenoidData, PneumaticSolenoid solenoid) {
         solenoidData.configured = false;
         solenoidData.solenoidTargetId = 0;
-        if (solenoid.IsConfigured()) {
+        if ((solenoid as IConfigurable).IsConfigured()) {
             solenoidData.configured = true;
             solenoidData.solenoidTargetId = solenoid.correlationTarget.gameObject.GetInstanceID();
         }
@@ -75,7 +75,7 @@ public class SaveUtility : MonoBehaviour {
         componentData.isContact = false;
         componentData.contactTargetId = 0;
         if (contact != null) {
-            if (contact.IsConfigured()) {
+            if ((contact as IConfigurable).IsConfigured()) {
                 componentData.isContact = true;
                 componentData.contactTargetId = contact.correlationTarget.gameObject.GetInstanceID();
             }
