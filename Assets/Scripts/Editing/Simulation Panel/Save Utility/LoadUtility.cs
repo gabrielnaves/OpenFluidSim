@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -22,19 +23,34 @@ public class LoadUtility : MonoBehaviour {
         if (!loading) {
             try {
                 ReadDataContainer();
+                VerifyDataIntegrity();
                 ClearCurrentSimulation();
                 InstantiateComponents();
             }
             catch (FileNotFoundException) {
-                Debug.LogError("File " + fileLocation+fileName + " could not be found.");
+                MessageSystem.instance.GenerateMessage("File " + fileLocation+fileName + " could not be found.");
+            }
+            catch (Exception exception) {
+                MessageSystem.instance.GenerateMessage(exception.Message);
             }
         }
     }
 
     void ReadDataContainer() {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        data = JsonUtility.FromJson<SavedData>(Clipboard.GetClipboard());
+#else
         StreamReader file = new StreamReader(fileLocation + fileName, System.Text.Encoding.UTF8);
         data = JsonUtility.FromJson<SavedData>(file.ReadToEnd());
         file.Close();
+#endif
+    }
+
+    void VerifyDataIntegrity() {
+        if (data == null)
+            throw new Exception("Failed to read any data.");
+        if (data.components.Length == 0)
+            throw new Exception("Could not read any component data.");
     }
 
     void ClearCurrentSimulation() {

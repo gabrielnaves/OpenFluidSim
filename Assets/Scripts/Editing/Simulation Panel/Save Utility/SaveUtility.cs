@@ -17,7 +17,11 @@ public class SaveUtility : MonoBehaviour {
 
     public void SaveToFile() {
         CreateSavedData();
+#if UNITY_WEBGL && !UNITY_EDITOR
+        Clipboard.SetClipboard(JsonUtility.ToJson(data, true));
+#else
         WriteDataToFile();
+#endif
     }
 
     void CreateSavedData() {
