@@ -9,31 +9,35 @@ public class SaveUtility : MonoBehaviour {
     public string fileName = "savedFile.json";
     public string fileLocation = "SavedFiles/";
 
-    SavedData data;
-
     void Awake() {
         instance = (SaveUtility)Singleton.Setup(this, instance);
     }
 
-    public void SaveToFile() {
-        CreateSavedData();
-#if UNITY_WEBGL && !UNITY_EDITOR
-        Clipboard.SetClipboard(JsonUtility.ToJson(data, true));
-        MessageSystem.instance.GenerateMessage("Saved simulation to clipboard");
-#else
-        WriteDataToFile();
-#endif
+    public void SaveSimulationToFile() {
+        var data = CreateSavedData(SimulationPanel.instance.GetActiveComponents());
+        WriteDataToFile(data);
+        MessageSystem.instance.GenerateMessage("Saved simulation to file");
     }
 
-    void CreateSavedData() {
-        var activeComponents = SimulationPanel.instance.GetActiveComponents();
-        data = new SavedData() {
-            components = new SavedComponentData[activeComponents.Length]
+    public string GetSimulationSaveString() {
+        var data = CreateSavedData(SimulationPanel.instance.GetActiveComponents());
+        return JsonUtility.ToJson(data);
+    }
+
+    public string GetSelectedComponentsSaveString() {
+        var data = CreateSavedData(SelectedObjects.instance.GetSelectedComponents().ToArray());
+        return JsonUtility.ToJson(data);
+    }
+
+    SavedData CreateSavedData(BaseComponent[] componentsToSave) {
+        var data = new SavedData() {
+            components = new SavedComponentData[componentsToSave.Length]
         };
-        for (int i = 0; i < activeComponents.Length; ++i) {
+        for (int i = 0; i < componentsToSave.Length; ++i) {
             data.components[i] = new SavedComponentData();
-            CreateSavedComponentData(data.components[i], activeComponents[i]);
+            CreateSavedComponentData(data.components[i], componentsToSave[i]);
         }
+        return data;
     }
 
     void CreateSavedComponentData(SavedComponentData componentData, BaseComponent baseComponent) {
@@ -97,7 +101,7 @@ public class SaveUtility : MonoBehaviour {
         }
     }
 
-    void WriteDataToFile() {
+    void WriteDataToFile(SavedData data) {
         StreamWriter file = new StreamWriter(fileLocation + fileName, false, System.Text.Encoding.UTF8);
         file.Write(JsonUtility.ToJson(data, true));
         file.Close();

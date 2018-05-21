@@ -419,8 +419,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 600118927}
-        m_MethodName: LoadFromFile
+      - m_Target: {fileID: 231388883}
+        m_MethodName: LoadSimulation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -473,7 +473,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 231388877}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f252ad87500d379499732edbc29a31de, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a28021be3d2ced42ae9a4ecb73e03cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &260927441
@@ -2983,8 +2983,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 600118926}
-        m_MethodName: SaveToFile
+      - m_Target: {fileID: 1406814469}
+        m_MethodName: SaveSimulation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

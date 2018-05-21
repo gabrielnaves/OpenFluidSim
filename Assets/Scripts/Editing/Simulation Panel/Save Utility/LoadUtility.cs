@@ -20,18 +20,32 @@ public class LoadUtility : MonoBehaviour {
     }
 
     public void LoadFromFile() {
+        Load(clearSimulation: true, loadFromFile: true);
+    }
+
+    public void AddFromFile() {
+        Load(clearSimulation: false, loadFromFile: true);
+    }
+
+    public void LoadFromClipboard() {
+        Load(clearSimulation: true, loadFromFile: false);
+    }
+
+    public void AddFromClipboard() {
+        Load(clearSimulation: false, loadFromFile: false);
+    }
+
+    void Load(bool clearSimulation, bool loadFromFile) {
         if (!loading) {
             try {
-                ReadDataContainer();
+                ReadDataContainer(loadFromFile);
                 VerifyDataIntegrity();
-                ClearCurrentSimulation();
+                if (clearSimulation)
+                    ClearCurrentSimulation();
                 InstantiateComponents();
-#if UNITY_WEBGL && !UNITY_EDITOR
-                MessageSystem.instance.GenerateMessage("Loaded simulation from clipboard");
-#endif
             }
             catch (FileNotFoundException) {
-                MessageSystem.instance.GenerateMessage("File " + fileLocation+fileName + " could not be found.");
+                MessageSystem.instance.GenerateMessage("File " + fileLocation + fileName + " could not be found.");
             }
             catch (Exception exception) {
                 MessageSystem.instance.GenerateMessage(exception.Message);
@@ -39,14 +53,14 @@ public class LoadUtility : MonoBehaviour {
         }
     }
 
-    void ReadDataContainer() {
-#if UNITY_WEBGL && !UNITY_EDITOR
-        data = JsonUtility.FromJson<SavedData>(Clipboard.GetClipboard());
-#else
-        StreamReader file = new StreamReader(fileLocation + fileName, System.Text.Encoding.UTF8);
-        data = JsonUtility.FromJson<SavedData>(file.ReadToEnd());
-        file.Close();
-#endif
+    void ReadDataContainer(bool loadFromFile) {
+        if (loadFromFile) {
+            StreamReader file = new StreamReader(fileLocation + fileName, System.Text.Encoding.UTF8);
+            data = JsonUtility.FromJson<SavedData>(file.ReadToEnd());
+            file.Close();
+        }
+        else
+            data = JsonUtility.FromJson<SavedData>(Clipboard.GetClipboard());
     }
 
     void VerifyDataIntegrity() {
@@ -86,6 +100,7 @@ public class LoadUtility : MonoBehaviour {
         MakeSolenoidCorrelations();
         MakeContactCorrelations();
         loading = false;
+        MessageSystem.instance.GenerateMessage("File loaded successfully");
     }
 
     void BuildConnectorDictionary() {

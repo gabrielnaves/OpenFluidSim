@@ -14,7 +14,7 @@ public class EditorKeyboardInputHandler : MonoBehaviour {
             DeleteCommand();
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S)) {
             if (SimulationPanel.instance.activeComponents.Count > 0)
-                SaveUtility.instance.SaveToFile();
+                SaveUtility.instance.SaveSimulationToFile();
         }
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Z))
             ActionStack.instance.UndoAction();
