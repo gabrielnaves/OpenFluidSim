@@ -229,6 +229,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 114614544823351212}
   correlatedObjects: []
+  coilConfigWindowPrefab: {fileID: 1512091894280968, guid: 09744bf03b3e3844ca0d2a1165b55d29,
+    type: 2}
+  normalCoilSprite: {fileID: 21300000, guid: 8f474dedac384744ea4d33d8c6a1ffa6, type: 3}
+  onDelaySprite: {fileID: 21300000, guid: 6a37cb120531df84c9f4051f6f8e6cdb, type: 3}
+  offDelaySprite: {fileID: 21300000, guid: 4ac247c403b767d4d88e326f13a31cb9, type: 3}
+  type: 0
+  delay: 1
 --- !u!114 &114370049780178738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -255,6 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectorList: []
   contactList: []
+  solenoidList: []
 --- !u!114 &114505727418902784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -361,7 +369,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 0
-  contacts: []
 --- !u!212 &212031915038869796
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -375,6 +382,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -394,7 +402,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 432333911
-  m_SortingLayer: 2
+  m_SortingLayer: -8
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8f474dedac384744ea4d33d8c6a1ffa6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
