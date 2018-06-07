@@ -2,6 +2,7 @@
 
 public class CoilSimulation : ElectricComponent {
 
+    [ViewOnly] public bool energized;
     [ViewOnly] public bool active;
 
     Coil editingCoil;
@@ -9,6 +10,7 @@ public class CoilSimulation : ElectricComponent {
     SpriteRenderer spriteRenderer;
     bool gotSignal;
     bool simulating;
+    float elapsedTime;
 
     public override void Setup() {
         simulating = true;
@@ -16,7 +18,7 @@ public class CoilSimulation : ElectricComponent {
 
     public override void Stop() {
         simulating = false;
-        Deactivate();
+        Deenergize();
     }
 
     public override void RespondToSignal(Connector sourceConnector, float signal) {
@@ -36,11 +38,47 @@ public class CoilSimulation : ElectricComponent {
 
     void LateUpdate() {
         if (simulating) {
-            if (!active && gotSignal)
-                Activate();
-            if (active && !gotSignal)
-                Deactivate();
+            if (!energized && gotSignal)
+                Energize();
+            if (energized && !gotSignal)
+                Deenergize();
             gotSignal = false;
+
+            elapsedTime += Time.deltaTime;
+            if (editingCoil.type == Coil.Type.on_delay && energized && !active) {
+                if (elapsedTime > editingCoil.delay)
+                    Activate();
+            }
+            if (editingCoil.type == Coil.Type.off_delay && !energized && active) {
+                if (elapsedTime > editingCoil.delay)
+                    Deactivate();
+            }
+        }
+    }
+
+    void Energize() {
+        energized = true;
+        elapsedTime = 0;
+        switch (editingCoil.type) {
+            case Coil.Type.normal:
+            case Coil.Type.off_delay:
+                Activate();
+                break;
+            default:
+                break;
+        }
+    }
+
+    void Deenergize() {
+        energized = false;
+        elapsedTime = 0;
+        switch (editingCoil.type) {
+            case Coil.Type.normal:
+            case Coil.Type.on_delay:
+                Deactivate();
+                break;
+            default:
+                break;
         }
     }
 
