@@ -19,6 +19,7 @@ public class CoilSimulation : ElectricComponent {
     public override void Stop() {
         simulating = false;
         Deenergize();
+        Deactivate();
     }
 
     public override void RespondToSignal(Connector sourceConnector, float signal) {
