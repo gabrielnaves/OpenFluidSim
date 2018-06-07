@@ -16,6 +16,7 @@ public class SavedComponentData {
     public bool isContact;
     public int contactTargetId;
     public SavedCylinderData cylinderData;
+    public SavedCoilData coilData;
 }
 
 [Serializable]
@@ -35,3 +36,10 @@ public class SavedCylinderData {
     public float startingPercentage;
     public float movementTime;
 }
+
+[Serializable]
+public class SavedCoilData {
+    public int coilType;
+    public float delay;
+}
+

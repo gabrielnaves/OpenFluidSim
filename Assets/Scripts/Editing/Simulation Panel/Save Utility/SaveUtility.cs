@@ -63,6 +63,7 @@ public class SaveUtility : MonoBehaviour {
 
         FillContactCorrelationInfo(componentData, baseComponent.GetComponent<Contact>());
         FillCylinderInfo(componentData, baseComponent.GetComponent<CylinderEditing>());
+        FillCoilInfo(componentData, baseComponent.GetComponent<Coil>());
     }
 
     void CreateSavedConnectorData(SavedConnectorData connectorData, Connector connector) {
@@ -97,6 +98,15 @@ public class SaveUtility : MonoBehaviour {
             componentData.cylinderData = new SavedCylinderData() {
                 startingPercentage = cylinderEditing.startingPercentage,
                 movementTime = cylinderEditing.movementTime
+            };
+        }
+    }
+
+    void FillCoilInfo(SavedComponentData componentData, Coil coil) {
+        if (coil) {
+            componentData.coilData = new SavedCoilData() {
+                coilType = (int)coil.type,
+                delay = coil.delay
             };
         }
     }

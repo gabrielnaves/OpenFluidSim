@@ -83,6 +83,7 @@ public class LoadUtility : MonoBehaviour {
             newComponent.name = newComponent.name.Replace("(Clone)", "");
             idToComponent[component.componentId]= newComponent.GetComponent<BaseComponent>();
             LoadCylinderData(component.cylinderData, newComponent.GetComponent<CylinderEditing>());
+            LoadCoilData(component.coilData, newComponent.GetComponent<Coil>());
         }
         Invoke("CreateConnections", 0.1f);
     }
@@ -91,6 +92,13 @@ public class LoadUtility : MonoBehaviour {
         if (cylinderEditing) {
             cylinderEditing.startingPercentage = savedCylinderData.startingPercentage;
             cylinderEditing.movementTime = savedCylinderData.movementTime;
+        }
+    }
+
+    void LoadCoilData(SavedCoilData savedCoilData, Coil coil) {
+        if (coil) {
+            coil.UpdateType((Coil.Type)savedCoilData.coilType);
+            coil.UpdateDelay(savedCoilData.delay);
         }
     }
 
