@@ -5,7 +5,9 @@ public class ComponentLibrary : MonoBehaviour {
 
     static public ComponentLibrary instance { get; private set; }
 
-    public GameObject[] componentPrefabs;
+    public GameObject[] electricPrefabs;
+    public GameObject[] pneumaticPrefabs;
+    public GameObject[] hydraulicPrefabs;
     public Dictionary<string, GameObject> nameToPrefab { get; private set; }
 
     void Awake() {
@@ -15,7 +17,15 @@ public class ComponentLibrary : MonoBehaviour {
 
     void BuildComponentTable() {
         nameToPrefab = new Dictionary<string, GameObject>();
-        foreach (var prefab in componentPrefabs)
-            nameToPrefab[prefab.name] = prefab;
+        AddComponentsFrom(electricPrefabs);
+        AddComponentsFrom(pneumaticPrefabs);
+        AddComponentsFrom(hydraulicPrefabs);
+    }
+
+    void AddComponentsFrom(GameObject[] prefabList) {
+        foreach (var prefab in prefabList) {
+            if (!nameToPrefab.ContainsKey(prefab.name))
+                nameToPrefab[prefab.name] = prefab;
+        }
     }
 }
