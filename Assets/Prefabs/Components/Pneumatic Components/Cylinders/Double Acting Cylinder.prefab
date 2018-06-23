@@ -362,6 +362,7 @@ MonoBehaviour:
   startingPercentage: 0
   movementTime: 1
   cylinderLength: 1
+  originalPositions: []
 --- !u!114 &114272320206823402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -373,9 +374,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d92056947d294458bc2e6f4ba968c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cylinderParts:
-  - {fileID: 4207744912104724}
-  - {fileID: 4785614742842972}
 --- !u!114 &114515111199050442
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -466,6 +464,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -485,7 +484,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 432333911
-  m_SortingLayer: 2
+  m_SortingLayer: -8
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c453ba3a6c3c6204395be6cae8c1cb30, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -510,6 +509,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -529,14 +529,14 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 432333911
-  m_SortingLayer: 2
+  m_SortingLayer: -8
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 06846fa1b140cc24a84a1d25a7acff36, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.14, y: 0.46}
+  m_Size: {x: 0.96, y: 0.14}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -554,6 +554,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -573,7 +574,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 432333911
-  m_SortingLayer: 2
+  m_SortingLayer: -8
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: cad0cd1fed38f964884f62a816f0c900, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

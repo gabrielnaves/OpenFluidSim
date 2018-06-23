@@ -2516,21 +2516,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375545d5942b07944b3cedf7263e7a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  componentNames:
-  - Pneumatic Pressure Source
-  - Exhaust
-  - 5_2 Valve Simple Solenoid
-  - Double Acting Cylinder
-  - Proximity Sensor
-  - Common (0V)
-  - Power Supply (24V)
-  - Coil
-  - Contact (Normally Open)
-  - Contact (Normally Closed)
-  - Solenoid
-  - Push Button
-  - Sensor (Normally Open)
-  - Sensor (Normally Closed)
   componentPrefabs:
   - {fileID: 1304852347586600, guid: 585b7f4fd387964478af74ade9ad7e1d, type: 2}
   - {fileID: 1968449142307530, guid: 2d4d2155b02aeb14b95c867ff8c0e751, type: 2}
@@ -2692,7 +2677,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.00000883346, y: 0}
+  m_AnchoredPosition: {x: -0.000025945443, y: 0}
   m_SizeDelta: {x: 704, y: 101}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1304781193
@@ -2763,7 +2748,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.07928125}
-  m_AnchoredPosition: {x: 0, y: -0.00012207031}
+  m_AnchoredPosition: {x: 0, y: -0.00024414062}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1365768872
