@@ -18,14 +18,14 @@ public class ComponentListBar : MonoBehaviour {
     }
 
     public void Disable() {
-        for (int i = 0; i < 0; ++i) {
+        for (int i = 0; i < buttons.Length; ++i) {
             originalState[i] = buttons[i].interactable;
             buttons[i].interactable = false;
         }
     }
 
     public void Enable() {
-        for (int i = 0; i < 0; ++i)
+        for (int i = 0; i < buttons.Length; ++i)
             buttons[i].interactable = originalState[i];
     }
 }
