@@ -11,6 +11,7 @@ public class LoadUtility : MonoBehaviour {
     public string fileLocation = "SavedFiles/";
 
     bool loading = false;
+    bool addingToSimulation = false;
     SavedData data;
     Dictionary<int, BaseComponent> idToComponent = new Dictionary<int, BaseComponent>();
     Dictionary<int, Connector> idToConnector;
@@ -40,8 +41,14 @@ public class LoadUtility : MonoBehaviour {
             try {
                 ReadDataContainer(loadFromFile);
                 VerifyDataIntegrity();
-                if (clearSimulation)
+                if (clearSimulation) {
                     ClearCurrentSimulation();
+                    addingToSimulation = false;
+                }
+                else {
+                    SelectedObjects.instance.ClearSelection();
+                    addingToSimulation = true;
+                }
                 InstantiateComponents();
             }
             catch (FileNotFoundException) {
@@ -85,6 +92,8 @@ public class LoadUtility : MonoBehaviour {
             LoadCylinderData(component.cylinderData, newComponent.GetComponent<CylinderEditing>());
             LoadCoilData(component.coilData, newComponent.GetComponent<Coil>());
         }
+        if (addingToSimulation)
+            PositionInstantiatedObjectsAroundMousePosition();
         Invoke("CreateConnections", 0.1f);
     }
 
@@ -102,13 +111,27 @@ public class LoadUtility : MonoBehaviour {
         }
     }
 
+    void PositionInstantiatedObjectsAroundMousePosition() {
+        Vector3 mousePosition = SimulationGrid.FitToGrid(EditorInput.instance.mousePosition);
+        Vector3 componentCenter = Vector3.zero;
+        foreach (var component in idToComponent)
+            componentCenter += component.Value.transform.position;
+        componentCenter /= idToComponent.Count;
+        Vector3 offset = mousePosition - componentCenter;
+        foreach (var component in idToComponent)
+            component.Value.transform.position = component.Value.transform.position + offset;
+    }
+
     void CreateConnections() {
         BuildConnectorDictionary();
         ConnectConnectors();
         MakeSolenoidCorrelations();
         MakeContactCorrelations();
+        if (addingToSimulation)
+            SelectAllNewComponents();
+        else
+            MessageSystem.instance.GenerateMessage("Simulation loaded successfully");
         loading = false;
-        MessageSystem.instance.GenerateMessage("Simulation loaded successfully");
     }
 
     void BuildConnectorDictionary() {
@@ -127,10 +150,12 @@ public class LoadUtility : MonoBehaviour {
             foreach (var connector in component.connectors) {
                 Connector thisConnector = idToConnector[connector.connectorId];
                 foreach (var other in connector.otherConnectorIds) {
-                    Connector otherConnector = idToConnector[other];
-                    thisConnector.AddConnection(otherConnector);
-                    otherConnector.AddConnection(thisConnector);
-                    WireCreator.instance.MakeWire(thisConnector, otherConnector);
+                    if (idToConnector.ContainsKey(other)) {
+                        Connector otherConnector = idToConnector[other];
+                        thisConnector.AddConnection(otherConnector);
+                        otherConnector.AddConnection(thisConnector);
+                        WireCreator.instance.MakeWire(thisConnector, otherConnector);
+                    }
                 }
             }
         }
@@ -142,7 +167,7 @@ public class LoadUtility : MonoBehaviour {
                 continue;
             var componentReferences = idToComponent[component.componentId].GetComponent<ComponentReferences>();
             for (int i = 0; i < component.solenoids.Length; ++i) {
-                if (component.solenoids[i].configured) {
+                if (component.solenoids[i].configured && idToComponent.ContainsKey(component.solenoids[i].solenoidTargetId)) {
                     componentReferences.solenoidList[i].correlationTarget =
                         idToComponent[component.solenoids[i].solenoidTargetId].GetComponent<CorrelationTarget>();
                     componentReferences.solenoidList[i].correlationTarget.AddCorrelatedObject(componentReferences.solenoidList[i]);
@@ -154,10 +179,17 @@ public class LoadUtility : MonoBehaviour {
     void MakeContactCorrelations() {
         foreach (var component in data.components) {
             if (component.isContact) {
-                Contact contact = idToComponent[component.componentId].GetComponent<Contact>();
-                contact.correlationTarget = idToComponent[component.contactTargetId].GetComponent<CorrelationTarget>();
-                contact.correlationTarget.AddCorrelatedObject(contact);
+                if (idToComponent.ContainsKey(component.contactTargetId)) {
+                    Contact contact = idToComponent[component.componentId].GetComponent<Contact>();
+                    contact.correlationTarget = idToComponent[component.contactTargetId].GetComponent<CorrelationTarget>();
+                    contact.correlationTarget.AddCorrelatedObject(contact);
+                }
             }
         }
+    }
+
+    void SelectAllNewComponents() {
+        foreach (var component in idToComponent)
+            SelectedObjects.instance.SelectObject(component.Value);
     }
 }

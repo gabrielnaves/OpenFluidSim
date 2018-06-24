@@ -6,20 +6,24 @@ public class EditorKeyboardInputHandler : MonoBehaviour {
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape))
             SelectedObjects.instance.ClearSelection();
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.R))
-            RotateCommand(clockwise:false);
+        else if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.R))
+            RotateCommand(clockwise: false);
         else if (Input.GetKeyDown(KeyCode.R))
-            RotateCommand(clockwise:true);
-        if (Input.GetKeyDown(KeyCode.Delete))
+            RotateCommand(clockwise: true);
+        else if (Input.GetKeyDown(KeyCode.Delete))
             DeleteCommand();
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S)) {
+        else if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S)) {
             if (SimulationPanel.instance.activeComponents.Count > 0)
                 SaveUtility.instance.SaveSimulationToFile();
         }
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Z))
+        else if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Z))
             ActionStack.instance.UndoAction();
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Y))
+        else if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Y))
             ActionStack.instance.RedoAction();
+        else if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.C))
+            CopyCommand();
+        else if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.V))
+            PasteCommand();
     }
 
     void RotateCommand(bool clockwise) {
@@ -36,5 +40,14 @@ public class EditorKeyboardInputHandler : MonoBehaviour {
         List<Wire> wiresToDelete = SelectedObjects.instance.GetSelectedWires();
         if (componentsToDelete.Count > 0 || wiresToDelete.Count > 0)
             ActionStack.instance.PushAction(new DeleteObjectsAction(componentsToDelete, wiresToDelete));
+    }
+
+    void CopyCommand() {
+        Clipboard.SetClipboard(SaveUtility.instance.GetSelectedComponentsSaveString());
+    }
+
+    void PasteCommand() {
+        if (!Clipboard.IsEmpty())
+            LoadUtility.instance.AddFromClipboard();
     }
 }

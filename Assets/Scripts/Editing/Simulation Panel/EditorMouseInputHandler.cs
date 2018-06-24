@@ -5,7 +5,6 @@
 /// </summary>
 public class EditorMouseInputHandler : MonoBehaviour {
 
-    bool justPlacedFloatingComponent;
     IDraggable currentDraggable;
 
     void Update() {
@@ -15,49 +14,49 @@ public class EditorMouseInputHandler : MonoBehaviour {
     void ProcessMouseInput() {
         EditorInput input = EditorInput.instance;
         SimulationPanel simPanel = SimulationPanel.instance;
-        if (input.mouseButtonDown && FloatingSelection.instance.HasFloatingComponent()) {
-            FloatingSelection.instance.PlaceFloatingComponent();
-            justPlacedFloatingComponent = true;
+        if (FloatingSelection.instance.HasFloatingComponent()) {
+            if (input.singleClick)
+                FloatingSelection.instance.PlaceFloatingComponent();
         }
-        if (input.singleClick && !justPlacedFloatingComponent) {
-            if (!Input.GetKey(KeyCode.LeftShift))
-                SelectedObjects.instance.ClearSelection();
-            foreach (var selectable in simPanel.GetActiveSelectables()) {
-                if (selectable.RequestedSelect()) {
-                    SelectedObjects.instance.SelectObject(selectable);
-                    break;
-                }
-            }
-        }
-        if (input.doubleClick) {
-            foreach (var configurable in simPanel.GetActiveConfigurables()) {
-                if (configurable.RequestedConfig()) {
+        else {
+            if (input.singleClick) {
+                if (!Input.GetKey(KeyCode.LeftShift))
                     SelectedObjects.instance.ClearSelection();
-                    configurable.OpenConfigWindow();
-                    break;
+                foreach (var selectable in simPanel.GetActiveSelectables()) {
+                    if (selectable.RequestedSelect()) {
+                        SelectedObjects.instance.SelectObject(selectable);
+                        break;
+                    }
                 }
             }
-        }
-        if (input.mouseDragStart && !justPlacedFloatingComponent) {
-            foreach (var draggable in simPanel.GetActiveDraggables()) {
-                if (draggable.RequestedDrag()) {
-                    draggable.StartDragging();
-                    currentDraggable = draggable;
-                    break;
+            if (input.doubleClick) {
+                foreach (var configurable in simPanel.GetActiveConfigurables()) {
+                    if (configurable.RequestedConfig()) {
+                        SelectedObjects.instance.ClearSelection();
+                        configurable.OpenConfigWindow();
+                        break;
+                    }
                 }
             }
-            if (currentDraggable == null)
-                BoxSelection.instance.StartSelecting();
-        }
-        if (input.mouseDragEnd) {
-            if (currentDraggable != null) {
-                currentDraggable.StopDragging();
-                currentDraggable = null;
+            if (input.mouseDragStart) {
+                foreach (var draggable in simPanel.GetActiveDraggables()) {
+                    if (draggable.RequestedDrag()) {
+                        draggable.StartDragging();
+                        currentDraggable = draggable;
+                        break;
+                    }
+                }
+                if (currentDraggable == null)
+                    BoxSelection.instance.StartSelecting();
             }
-            else
-                BoxSelection.instance.StopSelecting();
+            if (input.mouseDragEnd) {
+                if (currentDraggable != null) {
+                    currentDraggable.StopDragging();
+                    currentDraggable = null;
+                }
+                else
+                    BoxSelection.instance.StopSelecting();
+            }
         }
-        if (input.mouseButtonUp)
-            justPlacedFloatingComponent = false;
     }
 }

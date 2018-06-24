@@ -1,6 +1,6 @@
 ﻿public static class Clipboard {
 
-    static string clipboard;
+    static string clipboard = "";
 
     public static string GetClipboard() {
         return clipboard;
@@ -12,5 +12,9 @@
 
     public static void EmptyClipboard() {
         clipboard = "";
+    }
+
+    public static bool IsEmpty() {
+        return clipboard.Length == 0;
     }
 }
