@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ComponentListBar : MonoBehaviour {
 
@@ -39,6 +38,7 @@ public class ComponentListBar : MonoBehaviour {
             SelectedObjects.instance.ClearSelection();
             EditorInput.instance.gameObject.SetActive(false);
             Taskbar.instance.Disable();
+            FloatingSelection.instance.RemoveCurrentComponent();
         }
     }
 

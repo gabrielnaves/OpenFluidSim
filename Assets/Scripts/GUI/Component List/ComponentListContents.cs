@@ -13,39 +13,57 @@ using UnityEngine.UI;
 /// Every "GUI component" is a Unity Button with a ComponentRef. 
 public class ComponentListContents : MonoBehaviour {
 
-    [ViewOnly] public List<GameObject> guiComponents = new List<GameObject>();
+    public GameObject[] electricGUIPrefabs;
+    public GameObject[] pneumaticGUIPrefabs;
+    public GameObject[] hydraulicGUIPrefabs;
+
+    List<GameObject> electric = new List<GameObject>();
+    List<GameObject> pneumatic = new List<GameObject>();
+    List<GameObject> hydraulic = new List<GameObject>();
+
     RectTransform rectTransform;
-
-    public void AddGUIComponent(GameObject component) {
-        guiComponents.Add(component);
-        component.GetComponent<RectTransform>().SetParent(rectTransform);
-        UpdateWidth();
-    }
-
-    public void DisableAllButtons() {
-        foreach (var component in guiComponents)
-            component.GetComponent<Button>().interactable = false;
-    }
-
-    public void EnableAllButtons() {
-        foreach (var component in guiComponents)
-            component.GetComponent<Button>().interactable = true;
-    }
 
     void Awake() {
         rectTransform = GetComponent<RectTransform>();
     }
 
     void Start() {
-        foreach (RectTransform component in rectTransform)
-            guiComponents.Add(component.gameObject);
-        UpdateWidth();
+        InstantiateGUIComponents(electricGUIPrefabs, electric);
+        InstantiateGUIComponents(pneumaticGUIPrefabs, pneumatic);
+        InstantiateGUIComponents(hydraulicGUIPrefabs, hydraulic);
     }
 
-    void UpdateWidth() {
-        float width = 20;
-        foreach (RectTransform component in rectTransform)
-            width += 20 + component.rect.width;
-        rectTransform.sizeDelta = new Vector2(width, rectTransform.sizeDelta.y);
+    void InstantiateGUIComponents(GameObject[] prefabs, List<GameObject> targetList) {
+        foreach (var prefab in prefabs) {
+            var component = Instantiate(prefab);
+            component.GetComponent<RectTransform>().SetParent(rectTransform);
+            component.GetComponent<RectTransform>().localScale = Vector3.one;
+            component.GetComponent<RectTransform>().position = Vector3.zero;
+            component.SetActive(false);
+            targetList.Add(component);
+        }
+    }
+
+    public void ShowElectricComponents() {
+        ToggleComponents(electric, true);
+        ToggleComponents(pneumatic, false);
+        ToggleComponents(hydraulic, false);
+    }
+
+    public void ShowPneumaticComponents() {
+        ToggleComponents(electric, false);
+        ToggleComponents(pneumatic, true);
+        ToggleComponents(hydraulic, false);
+    }
+
+    public void ShowHydraulicComponents() {
+        ToggleComponents(electric, false);
+        ToggleComponents(pneumatic, false);
+        ToggleComponents(hydraulic, true);
+    }
+
+    void ToggleComponents(List<GameObject> components, bool state) {
+        foreach (var component in components)
+            component.SetActive(state);
     }
 }

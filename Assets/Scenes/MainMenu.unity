@@ -1993,6 +1993,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 663411418}
+  - component: {fileID: 663411419}
+  - component: {fileID: 663411420}
+  - component: {fileID: 663411421}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -2016,8 +2019,72 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 1000}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &663411419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 663411417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b258184225f40944084a0e623511066e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  electricGUIPrefabs:
+  - {fileID: 1284220320178292, guid: b8c1d9a40fb281d48bcdc346cf5f3c68, type: 2}
+  - {fileID: 1723158664576960, guid: de8b93075b839854a9711504558736fb, type: 2}
+  - {fileID: 1240522309175310, guid: 61f4d5f937bc27c428476230d1c49a45, type: 2}
+  - {fileID: 1935703527310694, guid: 34b1533217e83af4bab4f1b283beb1fd, type: 2}
+  - {fileID: 1240522309175310, guid: 4d503e00c6fd97b42b93fb496d358624, type: 2}
+  - {fileID: 1463611937809596, guid: ab1230ed580e7174dbeb9b593ba295d3, type: 2}
+  - {fileID: 1240522309175310, guid: d39020f8aabfd0c4da622d29eed2fe50, type: 2}
+  - {fileID: 1240522309175310, guid: e93d8d2feba25a640bd540a5b8d1cd5e, type: 2}
+  - {fileID: 1067413768521754, guid: 09e1d4b663266fb40867815ce8d9275d, type: 2}
+  pneumaticGUIPrefabs:
+  - {fileID: 1787597573606712, guid: d57479c6beecbb047be29fc75d4fb259, type: 2}
+  - {fileID: 1676557090630052, guid: b8cdb85b375812e45ab561d6c7dc4233, type: 2}
+  - {fileID: 1041261666718206, guid: a88681acf621d9442a6e0d993914658a, type: 2}
+  - {fileID: 1014615677614070, guid: 2f445fc76a6be144c870942dd87278e9, type: 2}
+  - {fileID: 1144032122124880, guid: 3273eb8ee27baf144b96394cc0ca060b, type: 2}
+  hydraulicGUIPrefabs: []
+--- !u!114 &663411420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 663411417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 20
+    m_Right: 20
+    m_Top: 20
+    m_Bottom: 20
+  m_ChildAlignment: 1
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 200, y: 200}
+  m_Spacing: {x: 20, y: 20}
+  m_Constraint: 0
+  m_ConstraintCount: 2
+--- !u!114 &663411421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 663411417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &696657678
 GameObject:
   m_ObjectHideFlags: 0
@@ -2635,6 +2702,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 663411419}
+        m_MethodName: ShowElectricComponents
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &926493575
@@ -2768,6 +2846,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1727521265}
         m_MethodName: OpenComponentList
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 663411419}
+        m_MethodName: ShowPneumaticComponents
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3001,8 +3090,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1920653754}
   m_HandleRect: {fileID: 1920653753}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.64962405
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3827,7 +3916,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b258184225f40944084a0e623511066e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guiComponents: []
+  electricGUIPrefabs: []
+  pneumaticGUIPrefabs: []
+  hydraulicGUIPrefabs: []
 --- !u!1 &1365768870
 GameObject:
   m_ObjectHideFlags: 0
@@ -4340,6 +4431,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 663411419}
+        m_MethodName: ShowHydraulicComponents
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1432559293
@@ -4800,7 +4902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d4f74d4e39a29c4c8fdbbd1199fc493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openingTime: 0.8
+  openingTime: 0.5
   barHeight: 101
   reverseTopBar: {fileID: 1302069559}
 --- !u!114 &1727521266

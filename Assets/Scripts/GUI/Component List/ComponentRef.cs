@@ -17,5 +17,6 @@ public class ComponentRef : MonoBehaviour {
         newFloatingComponent.transform.position =
             SimulationGrid.FitToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         FloatingSelection.instance.AddComponent(newFloatingComponent);
+        ComponentListBar.instance.CloseComponentList();
     }
 }
