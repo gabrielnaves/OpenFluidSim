@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Action for connecting two pneumatic connectors
+/// Action for connecting two connectors
 /// </summary>
 /// A single wire object is also linked to the connection.
-public class NewPneumaticConnectionAction : IAction {
+public class NewComponentConnectionAction : IAction {
 
     Wire wire;
     Connector start;
     Connector end;
 
-    public NewPneumaticConnectionAction(Wire wire) {
+    public NewComponentConnectionAction(Wire wire) {
         this.wire = wire;
         start = wire.start;
         end = wire.end;

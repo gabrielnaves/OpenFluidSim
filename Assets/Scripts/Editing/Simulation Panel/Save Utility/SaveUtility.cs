@@ -112,8 +112,8 @@ public class SaveUtility : MonoBehaviour {
     }
 
     void WriteDataToFile(SavedData data) {
-        StreamWriter file = new StreamWriter(fileLocation + fileName, false, System.Text.Encoding.UTF8);
-        file.Write(JsonUtility.ToJson(data, true));
-        file.Close();
+        FileInfo file = new FileInfo(fileLocation + fileName);
+        file.Directory.Create();
+        File.WriteAllText(file.FullName, JsonUtility.ToJson(data, true));
     }
 }

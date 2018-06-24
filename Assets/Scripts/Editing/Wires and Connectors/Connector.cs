@@ -82,7 +82,7 @@ public class Connector : MonoBehaviour, IDraggable {
     }
 
     void CreateConnection(Connector otherConnector) {
-        ActionStack.instance.PushAction(new NewPneumaticConnectionAction(
+        ActionStack.instance.PushAction(new NewComponentConnectionAction(
             WireCreator.instance.RetrieveWire(otherConnector)
         ));
     }
