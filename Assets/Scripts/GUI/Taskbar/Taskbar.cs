@@ -8,8 +8,6 @@ public class Taskbar : MonoBehaviour {
     public Button[] editorButtons;
     public Button[] simulationButtons;
 
-    [ViewOnly] public bool taskbarEnabled;
-
     public void StartedSimulation() {
         foreach (var button in editorButtons)
             DeactivateButton(button);
@@ -29,7 +27,6 @@ public class Taskbar : MonoBehaviour {
     }
 
     void Start() {
-        taskbarEnabled = true;
         foreach (var button in simulationButtons)
             DeactivateButton(button);
     }
@@ -43,10 +40,10 @@ public class Taskbar : MonoBehaviour {
     }
 
     public void Disable() {
-        taskbarEnabled = false;
+        GetComponent<CanvasGroup>().interactable = false;
     }
 
     public void Enable() {
-        taskbarEnabled = true;
+        GetComponent<CanvasGroup>().interactable = true;
     }
 }

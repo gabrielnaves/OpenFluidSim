@@ -10,7 +10,7 @@ public class TaskbarButton : MonoBehaviour {
     }
 
     void Update() {
-        if (ShouldShowButton() && Taskbar.instance.taskbarEnabled)
+        if (ShouldShowButton())
             ShowButton();
         else
             HideButton();
