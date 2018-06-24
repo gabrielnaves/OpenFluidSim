@@ -12,6 +12,7 @@ public class DoubleActingCylinderSimulation : PneumaticComponentSimulation {
     float maxDisplacement;
     float displacement;
     float[] signals = new float[2];
+    bool[] gotSignals= new bool[2];
     bool simulating;
 
     void Awake() {
@@ -37,11 +38,15 @@ public class DoubleActingCylinderSimulation : PneumaticComponentSimulation {
         var connectorList = componentReferences.connectorList;
         int sourceConnectorIndex = connectorList.IndexOf(sourceConnector);
         signals[sourceConnectorIndex] = signal;
+        gotSignals[sourceConnectorIndex] = true;
     }
 
     void FixedUpdate() {
         if (simulating) {
-            bool move = signals[0] != signals[1];
+            if (!gotSignals[0]) signals[0] = 0;
+            if (!gotSignals[1]) signals[1] = 0;
+
+            bool move = signals[0] != signals[1] && (signals[0] > 0 || signals[1] > 0);
             movementSpeed = Mathf.Abs(movementSpeed) * (signals[0] > signals[1] ? 1f : -1f);
             if (move) {
                 displacement += movementSpeed * Time.fixedDeltaTime;
@@ -49,6 +54,8 @@ public class DoubleActingCylinderSimulation : PneumaticComponentSimulation {
                 for (int i = 0; i < cylinderParts.Length; ++i)
                     cylinderParts[i].localPosition = originalPositions[i] + transform.right * displacement;
             }
+
+            gotSignals[0] = gotSignals[1] = false;
         }
     }
 }

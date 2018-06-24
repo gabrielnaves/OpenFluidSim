@@ -2045,6 +2045,7 @@ MonoBehaviour:
   pneumaticGUIPrefabs:
   - {fileID: 1787597573606712, guid: d57479c6beecbb047be29fc75d4fb259, type: 2}
   - {fileID: 1676557090630052, guid: b8cdb85b375812e45ab561d6c7dc4233, type: 2}
+  - {fileID: 1077853025112580, guid: cffd9ff3a7fddf5428ffb25d1a506c3f, type: 2}
   - {fileID: 1077853025112580, guid: 8d516d3df2fa7c74d957fa1bcebe8162, type: 2}
   - {fileID: 1041261666718206, guid: a88681acf621d9442a6e0d993914658a, type: 2}
   - {fileID: 1014615677614070, guid: 900996089ee8c6c44b69afa0ca072c60, type: 2}
@@ -4938,6 +4939,7 @@ MonoBehaviour:
   - {fileID: 1304852347586600, guid: 585b7f4fd387964478af74ade9ad7e1d, type: 2}
   - {fileID: 1314985671537490, guid: 19b93be596c63274fb081754176ee036, type: 2}
   - {fileID: 1954862927556124, guid: 0b6301a20a36e014fab63b482abadc45, type: 2}
+  - {fileID: 1786239775899258, guid: 2123a2f184e0c22428d0bf9de690c521, type: 2}
   hydraulicPrefabs: []
 --- !u!225 &1727521267
 CanvasGroup:

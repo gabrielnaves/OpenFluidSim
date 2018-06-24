@@ -11,6 +11,7 @@ public class SingleActingCylinderSimulation : PneumaticComponentSimulation {
     float maxDisplacement;
     float displacement;
     float signal;
+    bool gotSignal;
     bool simulating;
 
     void Awake() {
@@ -33,10 +34,12 @@ public class SingleActingCylinderSimulation : PneumaticComponentSimulation {
 
     public override void RespondToSignal(Connector sourceConnector, float signal) {
         this.signal = signal;
+        gotSignal = true;
     }
 
     void FixedUpdate() {
         if (simulating) {
+            if (!gotSignal) signal = 0;
             bool move = signal > 0;
             movementSpeed = Mathf.Abs(movementSpeed);
             if (move) {
@@ -45,6 +48,7 @@ public class SingleActingCylinderSimulation : PneumaticComponentSimulation {
                 for (int i = 0; i < cylinderParts.Length; ++i)
                     cylinderParts[i].localPosition = originalPositions[i] + transform.right * displacement;
             }
+            gotSignal = false;
         }
     }
 }

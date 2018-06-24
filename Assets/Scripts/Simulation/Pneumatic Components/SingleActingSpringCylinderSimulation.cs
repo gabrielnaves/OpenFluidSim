@@ -11,6 +11,7 @@ public class SingleActingSpringCylinderSimulation : PneumaticComponentSimulation
     float maxDisplacement;
     float displacement;
     float signal;
+    bool gotSignal;
     bool simulating;
 
     void Awake() {
@@ -33,10 +34,12 @@ public class SingleActingSpringCylinderSimulation : PneumaticComponentSimulation
 
     public override void RespondToSignal(Connector sourceConnector, float signal) {
         this.signal = signal;
+        gotSignal = true;
     }
 
     void FixedUpdate() {
         if (simulating) {
+            if (!gotSignal) signal = 0;
             movementSpeed = Mathf.Abs(movementSpeed) * (signal > 0 ? 1f : -1f);
             displacement += movementSpeed * Time.fixedDeltaTime;
             displacement = Mathf.Clamp(displacement, 0, maxDisplacement);
@@ -46,6 +49,7 @@ public class SingleActingSpringCylinderSimulation : PneumaticComponentSimulation
             var scale = cylinderEditing.springSprite.localScale;
             scale.x = Mathf.Lerp(1, 0.155f, displacement/maxDisplacement);
             cylinderEditing.springSprite.localScale = scale;
+            gotSignal = false;
         }
     }
 }
