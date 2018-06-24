@@ -5,6 +5,7 @@ public class CylinderEditing : MonoBehaviour, IConfigurable {
 
     public Transform[] cylinderParts;
     public GameObject configWindowPrefab;
+    public Transform springSprite;
 
     [ViewOnly] public float startingPercentage = 0f;
     [ViewOnly] public float movementTime = 1f;
@@ -27,6 +28,11 @@ public class CylinderEditing : MonoBehaviour, IConfigurable {
         for (int i = 0; i < cylinderParts.Length; ++i)
             cylinderParts[i].localPosition = originalPositions[i] +
                 transform.right * (startingPercentage * GetMaxDisplacement());
+        if (springSprite != null) {
+            var scale = springSprite.localScale;
+            scale.x = Mathf.Lerp(1, 0.155f, startingPercentage);
+            springSprite.localScale = scale;
+        }
     }
 
     bool IConfigurable.RequestedConfig() {
