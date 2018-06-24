@@ -19,8 +19,11 @@ public class Wire : MonoBehaviour, ISelectable {
     ObjectPooler clickColliderPooler;
     Vector3[] points = new Vector3[2];
     List<BoxCollider2D> clickColliders = new List<BoxCollider2D>();
+    bool selected;
 
     bool ISelectable.RequestedSelect() {
+        if (DeactivatedReferences())
+            return false;
         foreach (var collider in clickColliders)
             if (collider.OverlapPoint(EditorInput.instance.mousePosition))
                 return true;
@@ -28,6 +31,8 @@ public class Wire : MonoBehaviour, ISelectable {
     }
 
     bool ISelectable.IsInsideSelectionBox(Collider2D selectionBox) {
+        if (DeactivatedReferences())
+            return false;
         foreach (var collider in clickColliders)
             if (selectionBox.IsTouching(collider))
                 return true;
@@ -36,10 +41,12 @@ public class Wire : MonoBehaviour, ISelectable {
 
     void ISelectable.OnSelect() {
         UpdateColor(Color.green);
+        selected = true;
     }
 
     void ISelectable.OnDeselect() {
         UpdateColor(Color.black);
+        selected = false;
     }
 
     public void UpdateColor(Color color) {
@@ -74,33 +81,37 @@ public class Wire : MonoBehaviour, ISelectable {
                 DestroyImmediate(gameObject);
                 return;
             }
-            if (DeactivatedReferences())
-                UpdateColor(Color.clear);
-            else
-                UpdateColor(Color.black);
+            if (!selected) {
+                if (DeactivatedReferences())
+                    UpdateColor(Color.clear);
+                else
+                    UpdateColor(Color.black);
+            }
             if (ReferencesMoved())
                 UpdateLineRenderer();
         }
         else if (SimulationMode.instance.mode == SimulationMode.Mode.simulation) {
-            if (start.type == Connector.ConnectorType.electric) {
-                if (start.signal > 0 && end.signal > 0)
-                    UpdateColor(Color.magenta);
-                else if (start.signal < 0 && end.signal < 0)
-                    UpdateColor(Color.green);
-                else if (start.signal == 0 && end.signal == 0)
-                    UpdateColor(Color.black);
-                else
-                    UpdateColor(Color.red);
-            }
-            else {
-                if (start.signal > 0 && end.signal > 0)
-                    UpdateColor(Color.red);
-                else if (start.signal < 0 && end.signal < 0)
-                    UpdateColor(Color.blue);
-                else if (start.signal == 0 && end.signal == 0)
-                    UpdateColor(Color.black);
-                else
-                    UpdateColor(Color.yellow);
+            if (!DeactivatedReferences()) {
+                if (start.type == Connector.ConnectorType.electric) {
+                    if (start.signal > 0 && end.signal > 0)
+                        UpdateColor(Color.magenta);
+                    else if (start.signal < 0 && end.signal < 0)
+                        UpdateColor(Color.green);
+                    else if (start.signal == 0 && end.signal == 0)
+                        UpdateColor(Color.black);
+                    else
+                        UpdateColor(Color.red);
+                }
+                else {
+                    if (start.signal > 0 && end.signal > 0)
+                        UpdateColor(Color.red);
+                    else if (start.signal < 0 && end.signal < 0)
+                        UpdateColor(Color.blue);
+                    else if (start.signal == 0 && end.signal == 0)
+                        UpdateColor(Color.black);
+                    else
+                        UpdateColor(Color.yellow);
+                }
             }
         }
     }
