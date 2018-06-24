@@ -127,8 +127,10 @@ public class LoadUtility : MonoBehaviour {
         ConnectConnectors();
         MakeSolenoidCorrelations();
         MakeContactCorrelations();
-        if (addingToSimulation)
+        if (addingToSimulation) {
             SelectAllNewComponents();
+            CreatePasteAction();
+        }
         else
             MessageSystem.instance.GenerateMessage("Simulation loaded successfully");
         loading = false;
@@ -191,5 +193,12 @@ public class LoadUtility : MonoBehaviour {
     void SelectAllNewComponents() {
         foreach (var component in idToComponent)
             SelectedObjects.instance.SelectObject(component.Value);
+    }
+
+    void CreatePasteAction() {
+        List<BaseComponent> components = new List<BaseComponent>();
+        foreach (var component in idToComponent)
+            components.Add(component.Value);
+        ActionStack.instance.PushAction(new PasteComponentsAction(components));
     }
 }

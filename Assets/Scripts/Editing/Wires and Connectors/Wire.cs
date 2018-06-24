@@ -69,9 +69,19 @@ public class Wire : MonoBehaviour, ISelectable {
     }
 
     void LateUpdate() {
-        if (ReferencesMoved())
-            UpdateLineRenderer();
-        if (SimulationMode.instance.mode == SimulationMode.Mode.simulation) {
+        if (SimulationMode.instance.mode == SimulationMode.Mode.editor) {
+            if (ReferencesWereDestroyed()) {
+                DestroyImmediate(gameObject);
+                return;
+            }
+            if (DeactivatedReferences())
+                UpdateColor(Color.clear);
+            else
+                UpdateColor(Color.black);
+            if (ReferencesMoved())
+                UpdateLineRenderer();
+        }
+        else if (SimulationMode.instance.mode == SimulationMode.Mode.simulation) {
             if (start.type == Connector.ConnectorType.electric) {
                 if (start.signal > 0 && end.signal > 0)
                     UpdateColor(Color.magenta);
@@ -93,6 +103,14 @@ public class Wire : MonoBehaviour, ISelectable {
                     UpdateColor(Color.yellow);
             }
         }
+    }
+
+    bool ReferencesWereDestroyed() {
+        return start == null || end == null;
+    }
+
+    bool DeactivatedReferences() {
+        return !start.isActiveAndEnabled || !end.isActiveAndEnabled;
     }
 
     bool ReferencesMoved() {

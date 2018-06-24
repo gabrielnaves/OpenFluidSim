@@ -3,7 +3,6 @@
 /// <summary>
 /// Action for creating a new component on the simulation pane
 /// </summary>
-/// The newly-instantiated game object is then added to the SimulationPane.
 public class NewComponentAction : IAction {
 
     GameObject componentPrefab;
