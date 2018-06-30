@@ -3,7 +3,6 @@
 /// <summary>
 /// Controls the camera's position and size
 /// </summary>
-/// TODO: Camera position control is a bit clunky in this implementation
 public class CameraControls : MonoBehaviour {
 
     public float maxCameraSize = 7f;
@@ -12,12 +11,14 @@ public class CameraControls : MonoBehaviour {
     public float offsetScaling = 0.01f;
 
     private Camera mainCamera;
+    private Transform cameraTransform;
     private bool movingCamera;
     private Vector3 initialMousePos;
     private Vector3 initialTransformPos;
 
     void Start() {
-        mainCamera = GetComponent<Camera>();
+        mainCamera = Camera.main;
+        cameraTransform = mainCamera.transform;
     }
 
 	void Update() {
@@ -35,14 +36,18 @@ public class CameraControls : MonoBehaviour {
         if (EditorInput.instance.middleMouseButtonDown) {
             movingCamera = true;
             initialMousePos = EditorInput.instance.rawMousePosition;
-            initialTransformPos = transform.position;
+            initialTransformPos = cameraTransform.position;
         }
         else if (EditorInput.instance.middleMouseButtonUp)
             movingCamera = false;
         if (movingCamera) {
             Vector3 offset = EditorInput.instance.rawMousePosition - initialMousePos;
-            transform.position = initialTransformPos - offset * offsetScaling;
+            cameraTransform.position = initialTransformPos - offset * offsetScaling;
         }
+    }
+
+    public void UpdateCameraZoom(float value) {
+        mainCamera.orthographicSize = Mathf.Clamp(value, minCameraSize, maxCameraSize);
     }
 }
  

@@ -39,6 +39,7 @@ public class ComponentListBar : MonoBehaviour {
             EditorInput.instance.gameObject.SetActive(false);
             Taskbar.instance.Disable();
             FloatingSelection.instance.RemoveCurrentComponent();
+            CameraControlsGUI.instance.Disable();
         }
     }
 
@@ -48,6 +49,7 @@ public class ComponentListBar : MonoBehaviour {
             StartCoroutine(Close());
             EditorInput.instance.gameObject.SetActive(true);
             Taskbar.instance.Enable();
+            CameraControlsGUI.instance.Enable();
         }
     }
 

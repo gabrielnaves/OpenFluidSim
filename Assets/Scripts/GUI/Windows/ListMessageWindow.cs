@@ -21,6 +21,7 @@ public class ListMessageWindow : MonoBehaviour {
         EditorInput.instance.gameObject.SetActive(false);
         ComponentListBar.instance.Disable();
         Taskbar.instance.Disable();
+        CameraControlsGUI.instance.Disable();
         GenerateListEntries();
         title.text = windowTitle;
     }
@@ -30,6 +31,7 @@ public class ListMessageWindow : MonoBehaviour {
             EditorInput.instance.gameObject.SetActive(true);
         ComponentListBar.instance.Enable();
         Taskbar.instance.Enable();
+        CameraControlsGUI.instance.Enable();
     }
 
     void GenerateListEntries() {

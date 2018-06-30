@@ -18,6 +18,7 @@ public class SaveSimulationWindow : MonoBehaviour {
         EditorInput.instance.gameObject.SetActive(false);
         ComponentListBar.instance.Disable();
         Taskbar.instance.Disable();
+        CameraControlsGUI.instance.Disable();
 
         inputField.text = SaveUtility.instance.GetSimulationSaveString();
     }
@@ -31,5 +32,6 @@ public class SaveSimulationWindow : MonoBehaviour {
         EditorInput.instance.gameObject.SetActive(true);
         ComponentListBar.instance.Enable();
         Taskbar.instance.Enable();
+        CameraControlsGUI.instance.Enable();
     }
 }

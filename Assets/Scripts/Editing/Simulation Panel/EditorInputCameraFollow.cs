@@ -11,7 +11,7 @@ public class EditorInputCameraFollow : MonoBehaviour {
     /// </summary>
     public float camSizeToScale = 0.33f;
 
-    void FixedUpdate() {
+    void Update() {
         ScaleWithCameraSize();
         FollowCameraPosition();
 	}

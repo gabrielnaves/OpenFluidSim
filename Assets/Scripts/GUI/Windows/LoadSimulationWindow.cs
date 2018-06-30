@@ -20,6 +20,7 @@ public class LoadSimulationWindow : MonoBehaviour {
         EditorInput.instance.gameObject.SetActive(false);
         ComponentListBar.instance.Disable();
         Taskbar.instance.Disable();
+        CameraControlsGUI.instance.Disable();
     }
 
     void Update() {
@@ -31,5 +32,6 @@ public class LoadSimulationWindow : MonoBehaviour {
         EditorInput.instance.gameObject.SetActive(true);
         ComponentListBar.instance.Enable();
         Taskbar.instance.Enable();
+        CameraControlsGUI.instance.Enable();
     }
 }
