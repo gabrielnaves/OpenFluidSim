@@ -202,6 +202,7 @@ public class SimulationPanel : MonoBehaviour {
     }
 
     public void ClearEntireSimulation() {
+        Camera.main.transform.position = new Vector3(0, 0, Camera.main.transform.position.z);
         SelectedObjects.instance.ClearSelection();
         ActionStack.instance.WipeStacks();
         CreateNewComponentsContainer();
