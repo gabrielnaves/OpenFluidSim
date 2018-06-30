@@ -112,7 +112,11 @@ public class SaveUtility : MonoBehaviour {
     }
 
     void WriteDataToFile(SavedData data) {
-        FileInfo file = new FileInfo(fileLocation + fileName);
+        string completePath = fileLocation + fileName;
+#if !UNITY_WINDOWS && !UNITY_EDITOR
+            completePath = Application.persistentDataPath + completePath;
+#endif
+        FileInfo file = new FileInfo(completePath);
         file.Directory.Create();
         File.WriteAllText(file.FullName, JsonUtility.ToJson(data, true));
     }

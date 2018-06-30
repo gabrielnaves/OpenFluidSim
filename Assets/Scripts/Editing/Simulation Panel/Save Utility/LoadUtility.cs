@@ -62,7 +62,11 @@ public class LoadUtility : MonoBehaviour {
 
     void ReadDataContainer(bool loadFromFile) {
         if (loadFromFile) {
-            StreamReader file = new StreamReader(fileLocation + fileName, System.Text.Encoding.UTF8);
+            string completePath = fileLocation + fileName;
+#if !UNITY_WINDOWS && !UNITY_EDITOR
+            completePath = Application.persistentDataPath + completePath;
+#endif
+            StreamReader file = new StreamReader(completePath, System.Text.Encoding.UTF8);
             data = JsonUtility.FromJson<SavedData>(file.ReadToEnd());
             file.Close();
         }
