@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c647324f9653ac74a96ff24034946925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   openSprite: {fileID: 21300000, guid: e09258c21cdb90548a57d3d0c87fee60, type: 3}
   connectedSprite: {fileID: 21300000, guid: 9a410956aa69af747846da5f4526fb12, type: 3}
   connectedObjects: []

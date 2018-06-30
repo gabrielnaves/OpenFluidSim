@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DoubleActingCylinderSimulation : PneumaticComponentSimulation {
+public class DoubleActingCylinderSimulation : FluidComponentSimulation {
 
     CylinderEditing cylinderEditing;
     ComponentReferences componentReferences;

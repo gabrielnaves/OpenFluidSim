@@ -18,7 +18,7 @@ public class SimulationMode : MonoBehaviour {
     public void ChangeToEditorMode() {
         EditorInput.instance.gameObject.SetActive(true);
         ElectricSimulationEngine.instance.Stop();
-        PneumaticSimulationEngine.instance.Stop();
+        FluidSimulationEngine.instance.Stop();
         Taskbar.instance.StoppedSimulation();
         ComponentListBar.instance.Enable();
         foreach (var wire in SimulationPanel.instance.GetActiveWires())
@@ -32,7 +32,7 @@ public class SimulationMode : MonoBehaviour {
             SelectedObjects.instance.ClearSelection();
             EditorInput.instance.gameObject.SetActive(false);
             ElectricSimulationEngine.instance.Setup();
-            PneumaticSimulationEngine.instance.Setup();
+            FluidSimulationEngine.instance.Setup();
             Taskbar.instance.StartedSimulation();
             ComponentListBar.instance.Disable();
             mode = Mode.simulation;

@@ -9,7 +9,7 @@ using UnityEngine;
 /// This script also activates the WireCreator when a connection is requested.
 public class Connector : MonoBehaviour, IDraggable {
 
-    public enum ConnectorType { pneumatic, electric }
+    public enum ConnectorType { hydraulic, pneumatic, electric }
     public ConnectorType type;
 
     public Sprite openSprite;
@@ -34,10 +34,10 @@ public class Connector : MonoBehaviour, IDraggable {
     }
 
     void IDraggable.StopDragging() {
-        if (type == ConnectorType.pneumatic)
-            RespondToStopDrag(SimulationPanel.instance.GetActivePneumaticConnectors());
-        else
+        if (type == ConnectorType.electric)
             RespondToStopDrag(SimulationPanel.instance.GetActiveElectricConnectors());
+        else
+            RespondToStopDrag(SimulationPanel.instance.GetActiveFluidConnectors());
         WireCreator.instance.StopGeneration();
     }
 
@@ -55,28 +55,28 @@ public class Connector : MonoBehaviour, IDraggable {
         connectorCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.color = openColor;
-        GetComponentInParent<ComponentReferences>().AddPneumaticConnector(this);
+        GetComponentInParent<ComponentReferences>().AddConnector(this);
     }
 
     void OnEnable() {
-        if (type == ConnectorType.pneumatic)
-            SimulationPanel.instance.AddPneumaticConnector(this);
-        else
+        if (type == ConnectorType.electric)
             SimulationPanel.instance.AddElectricConnector(this);
+        else
+            SimulationPanel.instance.AddFluidConnector(this);
         SimulationPanel.instance.AddDraggable(this);
     }
 
     void OnDisable() {
-        if (type == ConnectorType.pneumatic)
-            SimulationPanel.instance.RemovePneumaticConnector(this);
-        else
+        if (type == ConnectorType.electric)
             SimulationPanel.instance.RemoveElectricConnector(this);
+        else
+            SimulationPanel.instance.RemoveFluidConnector(this);
         SimulationPanel.instance.RemoveDraggable(this);
     }
 
     void RespondToStopDrag(Connector[] activeConnectors) {
         foreach (var connector in activeConnectors)
-            if (connector != this)
+            if (connector != this && connector.type == type)
                 if (connector.GetComponent<Collider2D>().OverlapPoint(EditorInput.instance.mousePosition))
                     CreateConnection(connector);
     }

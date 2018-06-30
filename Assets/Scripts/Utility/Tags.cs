@@ -12,6 +12,6 @@ public static class Tags {
 
     // Other tags, in order
     public static readonly string ElectricComponent = "ElectricComponent";
-    public static readonly string PneumaticComponent = "PneumaticComponent";
+    public static readonly string FluidComponent = "PneumaticComponent";
     public static readonly string HydraulicComponent = "HydraulicComponent";
 }

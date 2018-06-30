@@ -1,44 +1,48 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PneumaticSimulationEngine : MonoBehaviour {
+public class FluidSimulationEngine : MonoBehaviour {
 
-    public static PneumaticSimulationEngine instance { get; private set; }
+    public static FluidSimulationEngine instance { get; private set; }
 
     [ViewOnly] public Connector[] connectors;
     [ViewOnly] public List<Connector> pressureSources = new List<Connector>();
     [ViewOnly] public List<Connector> exhausts = new List<Connector>();
+    [ViewOnly] public List<Connector> reservoirs = new List<Connector>();
 
     bool simulating;
 
     void Awake() {
-        instance = (PneumaticSimulationEngine)Singleton.Setup(this, instance);
+        instance = (FluidSimulationEngine)Singleton.Setup(this, instance);
     }
 
     public void Setup() {
-        connectors = SimulationPanel.instance.GetActivePneumaticConnectors();
+        connectors = SimulationPanel.instance.GetActiveFluidConnectors();
         foreach (var connector in connectors) {
             var pressureSource = connector.GetComponentInParent<PressureSourceSimulation>();
             if (pressureSource) pressureSources.Add(connector);
             var exhaust = connector.GetComponentInParent<ExhaustSimulation>();
             if (exhaust) exhausts.Add(connector);
+            var reservoir = connector.GetComponentInParent<ReservoirSimulation>();
+            if (reservoir) reservoirs.Add(connector);
         }
-        foreach (var component in SimulationPanel.instance.GetActivePneumaticComponents()) {
-            var pneumaticComponent = component.GetComponent<PneumaticComponentSimulation>();
-            if (pneumaticComponent) pneumaticComponent.Setup();
+        foreach (var component in SimulationPanel.instance.GetActiveFluidComponents()) {
+            var fluidComponent = component.GetComponent<FluidComponentSimulation>();
+            if (fluidComponent) fluidComponent.Setup();
         }
         simulating = true;
     }
 
     public void Stop() {
         ClearSignals();
-        foreach (var component in SimulationPanel.instance.GetActivePneumaticComponents()) {
-            var pneumaticComponent = component.GetComponent<PneumaticComponentSimulation>();
-            if (pneumaticComponent) pneumaticComponent.Stop();
+        foreach (var component in SimulationPanel.instance.GetActiveFluidComponents()) {
+            var fluidComponent = component.GetComponent<FluidComponentSimulation>();
+            if (fluidComponent) fluidComponent.Stop();
         }
         connectors = null;
         pressureSources.Clear();
         exhausts.Clear();
+        reservoirs.Clear();
         simulating = false;
     }
 
@@ -49,6 +53,8 @@ public class PneumaticSimulationEngine : MonoBehaviour {
                 SpreadSignal(source, 1f);
             foreach (var exhaust in exhausts)
                 SpreadSignal(exhaust, -1f);
+            foreach (var reservoir in reservoirs)
+                SpreadSignal(reservoir, -1f);
         }
     }
 
@@ -61,8 +67,8 @@ public class PneumaticSimulationEngine : MonoBehaviour {
         if (source.signal == 0) {
             source.signal = signal;
 
-            var pneumaticComponent = source.GetComponentInParent<PneumaticComponentSimulation>();
-            if (pneumaticComponent) pneumaticComponent.RespondToSignal(source, signal);
+            var fluidComponent = source.GetComponentInParent<FluidComponentSimulation>();
+            if (fluidComponent) fluidComponent.RespondToSignal(source, signal);
 
             foreach (var other in source.connectedObjects)
                 if (other.signal == 0)

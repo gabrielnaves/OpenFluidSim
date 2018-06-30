@@ -16,7 +16,7 @@ public class ComponentReferences : MonoBehaviour {
         solenoidList = new List<PneumaticSolenoid>();
     }
 
-    public void AddPneumaticConnector(Connector connector) {
+    public void AddConnector(Connector connector) {
         connectorList.Add(connector);
     }
 

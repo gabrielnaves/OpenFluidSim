@@ -17,7 +17,7 @@ public class SimulationPanel : MonoBehaviour {
     public Transform wiresContainer;
 
     [ViewOnly] public List<BaseComponent> activeComponents;
-    [ViewOnly] public List<Connector> activePneumaticConnectors;
+    [ViewOnly] public List<Connector> activeFluidConnectors;
     [ViewOnly] public List<Connector> activeElectricConnectors;
     [ViewOnly] public List<Wire> activeWires;
     [ViewOnly] public List<Coil> activeCoils;
@@ -32,10 +32,10 @@ public class SimulationPanel : MonoBehaviour {
         return activeComponents.ToArray();
     }
 
-    public BaseComponent[] GetActivePneumaticComponents() {
+    public BaseComponent[] GetActiveFluidComponents() {
         List<BaseComponent> components = new List<BaseComponent>(activeComponents);
         for (int i = 0; i < components.Count; ++i)
-            if (!components[i].CompareTag(Tags.PneumaticComponent))
+            if (!components[i].CompareTag(Tags.FluidComponent))
                 components.RemoveAt(i--);
         return components.ToArray();
     }
@@ -48,8 +48,8 @@ public class SimulationPanel : MonoBehaviour {
         return components.ToArray();
     }
 
-    public Connector[] GetActivePneumaticConnectors() {
-        return activePneumaticConnectors.ToArray();
+    public Connector[] GetActiveFluidConnectors() {
+        return activeFluidConnectors.ToArray();
     }
 
     public Connector[] GetActiveElectricConnectors() {
@@ -95,14 +95,14 @@ public class SimulationPanel : MonoBehaviour {
             activeComponents.Remove(component);
     }
 
-    public void AddPneumaticConnector(Connector connector) {
-        if (!activePneumaticConnectors.Contains(connector))
-            activePneumaticConnectors.Add(connector);
+    public void AddFluidConnector(Connector connector) {
+        if (!activeFluidConnectors.Contains(connector))
+            activeFluidConnectors.Add(connector);
     }
 
-    public void RemovePneumaticConnector(Connector connector) {
-        if (activePneumaticConnectors.Contains(connector))
-            activePneumaticConnectors.Remove(connector);
+    public void RemoveFluidConnector(Connector connector) {
+        if (activeFluidConnectors.Contains(connector))
+            activeFluidConnectors.Remove(connector);
     }
 
     public void AddElectricConnector(Connector connector) {
@@ -189,7 +189,7 @@ public class SimulationPanel : MonoBehaviour {
     void Awake() {
         instance = (SimulationPanel)Singleton.Setup(this, instance);
         activeComponents = new List<BaseComponent>();
-        activePneumaticConnectors = new List<Connector>();
+        activeFluidConnectors = new List<Connector>();
         activeElectricConnectors = new List<Connector>();
         activeWires = new List<Wire>();
         activeCoils = new List<Coil>();
