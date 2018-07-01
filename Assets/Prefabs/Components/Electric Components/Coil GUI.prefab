@@ -210,7 +210,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Coil
+  m_Text: Contactor
 --- !u!114 &114421583311135226
 MonoBehaviour:
   m_ObjectHideFlags: 1

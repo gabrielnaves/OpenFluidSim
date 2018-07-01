@@ -49,10 +49,10 @@ public class FluidSimulationEngine : MonoBehaviour {
     void Update() {
         if (simulating) {
             ClearSignals();
-            foreach (var source in pressureSources)
-                SpreadSignal(source, 1f);
             foreach (var exhaust in exhausts)
                 SpreadSignal(exhaust, -1f);
+            foreach (var source in pressureSources)
+                SpreadSignal(source, 1f);
             foreach (var reservoir in reservoirs)
                 SpreadSignal(reservoir, -1f);
         }

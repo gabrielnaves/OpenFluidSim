@@ -46,7 +46,7 @@ public class DoubleActingCylinderSimulation : FluidComponentSimulation {
             if (!gotSignals[0]) signals[0] = 0;
             if (!gotSignals[1]) signals[1] = 0;
 
-            bool move = signals[0] != signals[1] && (signals[0] > 0 || signals[1] > 0);
+            bool move = (signals[0] > 0 && signals[1] < 0) || (signals[0] < 0 && signals[1] > 0);
             movementSpeed = Mathf.Abs(movementSpeed) * (signals[0] > signals[1] ? 1f : -1f);
             if (move) {
                 displacement += movementSpeed * Time.fixedDeltaTime;

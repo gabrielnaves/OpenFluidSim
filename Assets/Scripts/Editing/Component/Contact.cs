@@ -15,7 +15,7 @@
 
     protected override string CreateConfigWindowTitle() {
         if (type == Type.coil)
-            return "Select a coil:";
+            return "Select a contactor:";
         else
             return "Select a sensor:";
     }
