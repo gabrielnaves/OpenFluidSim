@@ -36,9 +36,10 @@ public class CameraControlsGUI : MonoBehaviour {
 
     void DisableCameraControls() {
         cameraControlsEnabled = false;
-        EditorInput.instance.gameObject.SetActive(true);
-        Invoke("ForceBoxSelectionToStop", 0.1f);
-        ComponentListBar.instance.Enable();
+        if (SimulationMode.instance.mode == SimulationMode.Mode.editor) {
+            ComponentListBar.instance.Enable();
+            EditorInput.instance.gameObject.SetActive(true);
+        }
         Taskbar.instance.Enable();
         SelectedObjects.instance.ClearSelection();
         foreach (var obj in controlObjects)
@@ -55,9 +56,5 @@ public class CameraControlsGUI : MonoBehaviour {
         SelectedObjects.instance.ClearSelection();
         foreach (var obj in controlObjects)
             obj.SetActive(true);
-    }
-
-    void ForceBoxSelectionToStop() {
-        BoxSelection.instance.StopSelecting();
     }
 }

@@ -86,4 +86,22 @@ public class EditorInput : MouseInputArea {
     bool Equal(Vector2 a, Vector2 b) {
         return Mathf.Approximately(a.x, b.x) && Mathf.Approximately(a.y, b.y);
     }
+
+    void OnDisable() {
+        ResetAllFlags();
+    }
+
+    void OnEnable() {
+        ResetAllFlags();
+    }
+
+    void ResetAllFlags() {
+        singleClick = false;
+        doubleClick = false;
+        mouseDrag = false;
+        mouseDragStart = false;
+        mouseDragEnd = false;
+        clicked = false;
+        waitingSecondClick = false;
+    }
 }
