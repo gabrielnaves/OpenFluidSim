@@ -12,6 +12,7 @@ public class LoadUtility : MonoBehaviour {
 
     bool loading = false;
     bool addingToSimulation = false;
+    bool centerComponentsAroundMouse = false;
     SavedData data;
     Dictionary<int, BaseComponent> idToComponent = new Dictionary<int, BaseComponent>();
     Dictionary<int, Connector> idToConnector;
@@ -21,18 +22,23 @@ public class LoadUtility : MonoBehaviour {
     }
 
     public void LoadFromFile() {
+        addingToSimulation = false;
         Load(clearSimulation: true, loadFromFile: true);
     }
 
     public void AddFromFile() {
+        addingToSimulation = true;
         Load(clearSimulation: false, loadFromFile: true);
     }
 
     public void LoadFromClipboard() {
+        addingToSimulation = false;
         Load(clearSimulation: true, loadFromFile: false);
     }
 
-    public void AddFromClipboard() {
+    public void AddFromClipboard(bool centerAroundMouse=true) {
+        addingToSimulation = true;
+        centerComponentsAroundMouse = centerAroundMouse;
         Load(clearSimulation: false, loadFromFile: false);
     }
 
@@ -41,14 +47,9 @@ public class LoadUtility : MonoBehaviour {
             try {
                 ReadDataContainer(loadFromFile);
                 VerifyDataIntegrity();
-                if (clearSimulation) {
+                SelectedObjects.instance.ClearSelection();
+                if (clearSimulation)
                     ClearCurrentSimulation();
-                    addingToSimulation = false;
-                }
-                else {
-                    SelectedObjects.instance.ClearSelection();
-                    addingToSimulation = true;
-                }
                 InstantiateComponents();
             }
             catch (FileNotFoundException) {
@@ -97,7 +98,7 @@ public class LoadUtility : MonoBehaviour {
             LoadCoilData(component.coilData, newComponent.GetComponent<Coil>());
         }
         if (addingToSimulation)
-            PositionInstantiatedObjectsAroundMousePosition();
+            RepositionInstantiatedObjects();
         Invoke("CreateConnections", 0.1f);
     }
 
@@ -115,15 +116,19 @@ public class LoadUtility : MonoBehaviour {
         }
     }
 
-    void PositionInstantiatedObjectsAroundMousePosition() {
-        Vector3 mousePosition = SimulationGrid.FitToGrid(EditorInput.instance.mousePosition);
+    void RepositionInstantiatedObjects() {
+        Vector2 mousePosition = SimulationGrid.FitToGrid(EditorInput.instance.mousePosition);
         Vector3 componentCenter = Vector3.zero;
         foreach (var component in idToComponent)
             componentCenter += component.Value.transform.position;
         componentCenter /= idToComponent.Count;
-        Vector3 offset = mousePosition - componentCenter;
+        Vector2 offset =  componentCenter;
+        if (centerComponentsAroundMouse)
+            offset = mousePosition - offset;
+        else
+            offset = (Vector2)Camera.main.transform.position - offset;
         foreach (var component in idToComponent)
-            component.Value.transform.position = component.Value.transform.position + offset;
+            component.Value.transform.position = component.Value.transform.position + (Vector3)offset;
     }
 
     void CreateConnections() {
