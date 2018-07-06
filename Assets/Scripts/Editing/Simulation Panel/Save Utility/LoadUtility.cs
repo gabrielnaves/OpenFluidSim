@@ -92,6 +92,7 @@ public class LoadUtility : MonoBehaviour {
         foreach (var component in data.components) {
             GameObject newComponent = Instantiate(ComponentLibrary.instance.nameToPrefab[component.name]);
             newComponent.transform.position = component.position;
+            newComponent.transform.rotation = Quaternion.Euler(0, 0, component.rotation);
             newComponent.name = newComponent.name.Replace("(Clone)", "");
             idToComponent[component.componentId]= newComponent.GetComponent<BaseComponent>();
             LoadCylinderData(component.cylinderData, newComponent.GetComponent<CylinderEditing>());

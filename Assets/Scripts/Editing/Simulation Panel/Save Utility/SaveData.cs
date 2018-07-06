@@ -11,6 +11,7 @@ public class SavedComponentData {
     public string name;
     public int componentId;
     public Vector3 position;
+    public float rotation;
     public SavedConnectorData[] connectors;
     public SavedSolenoidData[] solenoids;
     public bool isContact;

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraControlsGUI : MonoBehaviour {
 
@@ -8,10 +6,12 @@ public class CameraControlsGUI : MonoBehaviour {
 
     public GameObject[] controlObjects;
 
+    CanvasGroup guiObject;
     bool cameraControlsEnabled = false;
 
     void Awake() {
         instance = (CameraControlsGUI)Singleton.Setup(this, instance);
+        guiObject = GetComponentInChildren<CanvasGroup>();
     }
 
     void Start() {
@@ -20,11 +20,11 @@ public class CameraControlsGUI : MonoBehaviour {
     }
 
     public void Enable() {
-        gameObject.SetActive(true);
+        guiObject.interactable = true;
     }
 
     public void Disable() {
-        gameObject.SetActive(false);
+        guiObject.interactable = false;
     }
 
 	public void ToggleCameraControls() {

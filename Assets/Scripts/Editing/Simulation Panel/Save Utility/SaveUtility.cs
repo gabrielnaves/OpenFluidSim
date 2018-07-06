@@ -44,6 +44,7 @@ public class SaveUtility : MonoBehaviour {
         componentData.name = baseComponent.name;
         componentData.componentId = baseComponent.gameObject.GetInstanceID();
         componentData.position = baseComponent.transform.position;
+        componentData.rotation = baseComponent.transform.rotation.eulerAngles.z;
 
         ComponentReferences componentReferences = baseComponent.GetComponent<ComponentReferences>();
 
