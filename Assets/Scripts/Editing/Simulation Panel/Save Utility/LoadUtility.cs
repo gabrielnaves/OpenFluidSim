@@ -7,8 +7,7 @@ public class LoadUtility : MonoBehaviour {
 
     static public LoadUtility instance { get; private set; }
 
-    public string fileName = "savedFile.json";
-    public string fileLocation = "SavedFiles/";
+    [ViewOnly] public string fileName;
 
     bool loading = false;
     bool addingToSimulation = false;
@@ -53,7 +52,7 @@ public class LoadUtility : MonoBehaviour {
                 InstantiateComponents();
             }
             catch (FileNotFoundException) {
-                MessageSystem.instance.GenerateMessage("File " + fileLocation + fileName + " could not be found.");
+                MessageSystem.instance.GenerateMessage("File " + FolderPath.GetFolder() + fileName + " could not be found.");
             }
             catch (Exception exception) {
                 MessageSystem.instance.GenerateMessage(exception.Message);
@@ -63,11 +62,7 @@ public class LoadUtility : MonoBehaviour {
 
     void ReadDataContainer(bool loadFromFile) {
         if (loadFromFile) {
-            string completePath = fileLocation + fileName;
-#if !UNITY_WINDOWS && !UNITY_EDITOR
-            completePath = Application.persistentDataPath + completePath;
-#endif
-            StreamReader file = new StreamReader(completePath, System.Text.Encoding.UTF8);
+            StreamReader file = new StreamReader(FolderPath.GetFolder() + fileName, System.Text.Encoding.UTF8);
             data = JsonUtility.FromJson<SavedData>(file.ReadToEnd());
             file.Close();
         }

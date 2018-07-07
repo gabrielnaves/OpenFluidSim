@@ -2,7 +2,8 @@
 
 public class SaveButton : TaskbarButton {
 
-    public GameObject saveWindowPrefab;
+    public GameObject saveWindow;
+    public GameObject webSaveWindow;
 
     protected override bool ShouldShowButton() {
         return SimulationPanel.instance.activeComponents.Count > 0;
@@ -10,9 +11,20 @@ public class SaveButton : TaskbarButton {
 
     public void SaveSimulation() {
 #if UNITY_WEBGL && !UNITY_EDITOR
-        Instantiate(saveWindowPrefab);
+        Instantiate(webSaveWindow);
 #else
-        SaveUtility.instance.SaveSimulationToFile();
+        if (SaveUtility.instance.fileName != "")
+            SaveUtility.instance.SaveSimulationToFile();
+        else
+            Instantiate(saveWindow);
+#endif
+    }
+
+    public void SaveSimulationAs() {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        Instantiate(webSaveWindow);
+#else
+        Instantiate(saveWindow);
 #endif
     }
 }

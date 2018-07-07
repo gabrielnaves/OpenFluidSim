@@ -6,8 +6,7 @@ public class SaveUtility : MonoBehaviour {
 
     static public SaveUtility instance { get; private set; }
 
-    public string fileName = "savedFile.json";
-    public string fileLocation = "SavedFiles/";
+    [ViewOnly] public string fileName;
 
     void Awake() {
         instance = (SaveUtility)Singleton.Setup(this, instance);
@@ -16,7 +15,7 @@ public class SaveUtility : MonoBehaviour {
     public void SaveSimulationToFile() {
         var data = CreateSavedData(SimulationPanel.instance.GetActiveComponents());
         WriteDataToFile(data);
-        MessageSystem.instance.GenerateMessage("Saved simulation to file");
+        MessageSystem.instance.GenerateMessage("Saved simulation to " + fileName);
     }
 
     public string GetSimulationSaveString() {
@@ -113,11 +112,7 @@ public class SaveUtility : MonoBehaviour {
     }
 
     void WriteDataToFile(SavedData data) {
-        string completePath = fileLocation + fileName;
-#if !UNITY_WINDOWS && !UNITY_EDITOR
-            completePath = Application.persistentDataPath + completePath;
-#endif
-        FileInfo file = new FileInfo(completePath);
+        FileInfo file = new FileInfo(FolderPath.GetFolder() + fileName);
         file.Directory.Create();
         File.WriteAllText(file.FullName, JsonUtility.ToJson(data, true));
     }

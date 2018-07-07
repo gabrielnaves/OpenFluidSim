@@ -2,13 +2,14 @@
 
 public class LoadButton : TaskbarButton {
 
-    public GameObject loadWindowPrefab;
+    public GameObject loadWindow;
+    public GameObject webLoadWindow;
 
     public void LoadSimulation() {
 #if UNITY_WEBGL && !UNITY_EDITOR
-        Instantiate(loadWindowPrefab);
+        Instantiate(webLoadWindow);
 #else
-        LoadUtility.instance.LoadFromFile();
+        Instantiate(loadWindow);
 #endif
     }
 }

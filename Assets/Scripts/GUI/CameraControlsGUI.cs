@@ -21,13 +21,15 @@ public class CameraControlsGUI : MonoBehaviour {
 
     public void Enable() {
         guiObject.interactable = true;
+        GetComponent<CameraControls>().enabled = true;
     }
 
     public void Disable() {
         guiObject.interactable = false;
+        GetComponent<CameraControls>().enabled = false;
     }
 
-	public void ToggleCameraControls() {
+    public void ToggleCameraControls() {
         if (cameraControlsEnabled)
             DisableCameraControls();
         else
