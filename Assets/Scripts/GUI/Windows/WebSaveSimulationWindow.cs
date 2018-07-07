@@ -1,18 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class LoadSimulationWindow : MonoBehaviour {
+public class WebSaveSimulationWindow : MonoBehaviour {
 
     public InputField inputField;
 
-    public void LoadSimulation() {
-        Clipboard.SetClipboard(inputField.text);
-        LoadUtility.instance.LoadFromClipboard();
+    public void CloseWindow() {
         Destroy(gameObject);
     }
 
-    public void CloseWindow() {
-        Destroy(gameObject);
+    public void SelectAll() {
+        inputField.Select();
     }
 
     void Start() {
@@ -21,6 +19,8 @@ public class LoadSimulationWindow : MonoBehaviour {
         ComponentListBar.instance.Disable();
         Taskbar.instance.Disable();
         CameraControlsGUI.instance.Disable();
+
+        inputField.text = SaveUtility.instance.GetSimulationSaveString();
     }
 
     void Update() {
