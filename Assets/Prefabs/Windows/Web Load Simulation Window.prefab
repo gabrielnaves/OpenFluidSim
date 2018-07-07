@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 114938492802346720}
   - component: {fileID: 114671437717034074}
   m_Layer: 5
-  m_Name: Load Simulation Window
+  m_Name: Web Load Simulation Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

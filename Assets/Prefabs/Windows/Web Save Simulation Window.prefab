@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 114601766276975088}
   - component: {fileID: 114181371651491934}
   m_Layer: 5
-  m_Name: Save Simulation Window
+  m_Name: Web Save Simulation Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
