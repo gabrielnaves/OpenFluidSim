@@ -38,7 +38,7 @@ public class ComponentListContents : MonoBehaviour {
             var component = Instantiate(prefab);
             component.GetComponent<RectTransform>().SetParent(rectTransform);
             component.GetComponent<RectTransform>().localScale = Vector3.one;
-            component.GetComponent<RectTransform>().position = Vector3.zero;
+            component.GetComponent<RectTransform>().localPosition = Vector3.zero;
             component.SetActive(false);
             targetList.Add(component);
         }
